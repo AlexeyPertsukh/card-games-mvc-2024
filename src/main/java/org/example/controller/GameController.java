@@ -1,12 +1,14 @@
 package org.example.controller;
 
+import org.example.controller.command.Command;
+import org.example.controller.command.TakeCardCommand;
+import org.example.controller.command.SkipCommand;
 import org.example.model.Deck;
+import org.example.model.card.Card;
 import org.example.model.game.Game;
-import org.example.model.Rules;
 import org.example.model.game.PlayerData;
+import org.example.model.player.Bot;
 import org.example.model.player.Dealer;
-import org.example.model.point_counter.BjPointCounter;
-import org.example.model.point_counter.PointCounter;
 import org.example.model.player.Player;
 import org.example.view.Printer;
 import org.example.view.Reader;
@@ -15,6 +17,7 @@ import org.example.view.card_info_factory.TextCardInfoFactory;
 import org.example.view.dialog_view.DialogView;
 import org.example.view.dialog_view.SelectStringDialogView;
 import org.example.view.views.View;
+import org.example.view.views.card_view.StringsCardView;
 import org.example.view.views.deck_view.StringsDeckView;
 import org.example.view.views.group_player_data_view.TextListPlayerDataView;
 
@@ -28,6 +31,8 @@ public class GameController {
     private final Reader reader;
     private final Game game;
     private final InfoFactory infoFactory = InfoFactory.getInstance();
+    private final GameController controller = this;
+
 
     public GameController(Printer printer, Reader reader, Game game) {
         this.printer = printer;
@@ -42,10 +47,10 @@ public class GameController {
 
         cardsAtBegin();
 
-        while (true) {
+        while (game.hasNextPlayer()) {
             showPlayersData();
-
-            break;
+            Command command = inputCommand();
+            command.execute();
         }
     }
 
@@ -73,7 +78,7 @@ public class GameController {
             String text = String.format("[%s] receives cards", player.getName());
             printer.out(text);
 
-            if(isDealer(player)) {
+            if (isDealer(player)) {
                 game.giveBeginCardToDealer(i);
             } else {
                 game.giveBeginCardToPlayer(i);
@@ -88,10 +93,11 @@ public class GameController {
     }
 
     private boolean isDealer(Player player) {
-        if(player instanceof Dealer) {
-            return true;
-        }
-        return false;
+        return player instanceof Dealer;
+    }
+
+    private boolean isBot(Player player) {
+        return player instanceof Bot;
     }
 
     private DialogView<String> dialogView() {
@@ -111,8 +117,6 @@ public class GameController {
     }
 
 
-
-
     private void showPlayersData() {
         View<List<PlayerData>> view = new TextListPlayerDataView(
                 printer,
@@ -121,5 +125,90 @@ public class GameController {
         view.show(game.getPlayerDataList());
     }
 
+    private Command inputCommand() {
+        int index = game.getIndexCurrentPlayer();
+        PlayerData data = game.get(index);
+        Player player = data.getPlayer();
+
+        String tittle = String.format("[%s] input command: %s - take card, %s - skip",
+                player.getName(),
+                TakeCardCommand.KEY,
+                SkipCommand.KEY
+        );
+
+        if (isBot(player)) {
+            Deck deck = data.getDeck();
+            return inputCommandBot(player, deck, tittle);
+        }
+        return inputCommandPlayer(tittle);
+    }
+
+    public void skip() {
+        game.next();
+    }
+
+    private Command inputCommandPlayer(String tittle) {
+        List<String> keys = commandKeys();
+
+        DialogView<String> dialog = new SelectStringDialogView(
+                printer,
+                reader,
+                tittle,
+                DIALOG_ERROR_MESSAGE,
+                keys
+        );
+        String key = dialog.input();
+        return command(key);
+    }
+
+    private Command inputCommandBot(Player player, Deck deck, String tittle) {
+        printer.out(tittle);
+        Bot<String> bot = (Bot<String>) player;
+        String key = bot.input(
+                deck,
+                TakeCardCommand.KEY,
+                SkipCommand.KEY,
+                game.getCounter()::count
+        );
+        printer.out(key);
+        return command(key);
+    }
+
+
+    public void takeCard() {
+        int index = game.getIndexCurrentPlayer();
+        PlayerData data = game.get(index);
+        List<Card> cards = game.giveOpenCard(index);
+        game.updateData(index);
+
+        String text = String.format("[%s] receives card",
+                data.getPlayer().getName()
+        );
+        printer.out(text);
+
+        View<Card> view = new StringsCardView(
+                printer,
+                SmallStringsCardInfoFactory.getInstance()::create
+        );
+        view.show(cards.get(0));
+    }
+
+    private List<String> commandKeys() {
+        List<String> keys = new ArrayList<>();
+        keys.add(SkipCommand.KEY);
+        keys.add(TakeCardCommand.KEY);
+        return keys;
+    }
+
+    private Command command(String key) {
+        switch (key.toLowerCase()) {
+            case SkipCommand.KEY:
+                return new SkipCommand(this);
+            case TakeCardCommand.KEY:
+                return new TakeCardCommand(this);
+            default:
+                throw new IllegalArgumentException("illegal command: " + key);
+        }
+    }
 
 }

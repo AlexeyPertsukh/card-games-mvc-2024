@@ -47,6 +47,10 @@ public class Game {
         return playerDataList.get(index);
     }
 
+    public PointCounter getCounter() {
+        return counter;
+    }
+
     public boolean hasNextPlayer() {
         return playerDataList.size() > indexCurrentPlayer;
     }
@@ -96,28 +100,40 @@ public class Game {
         }
     }
 
-    public void giveBeginCardToPlayer(int index) {
-        giveOpenCard(index, 2);
+    public List<Card> giveBeginCardToPlayer(int index) {
+        return giveOpenCard(index, 2);
     }
 
-    public void giveBeginCardToDealer(int index) {
-        giveOpenCard(index, 1);
-        giveCloseCard(index, 1);
+    public List<Card> giveBeginCardToDealer(int index) {
+        List<Card> cards = new ArrayList<>();
+        List<Card> first = giveOpenCard(index, 1);
+        List<Card> second = giveCloseCard(index, 1);
+        cards.addAll(first);
+        cards.addAll(second);
+        return cards;
     }
 
+    public List<Card> giveOpenCardToCurrent() {
+        return giveOpenCard(indexCurrentPlayer, 1);
+    }
 
-    public void giveOpenCard(int index, int num) {
+    public List<Card> giveOpenCard(int index, int num) {
         PlayerData data = playerDataList.get(index);
-        giveCard(data, num, CARD_OPEN);
+        return giveCard(data, num, CARD_OPEN);
     }
 
-    public void giveCloseCard(int index, int num) {
+    public List<Card> giveOpenCard(int index) {
+        return giveOpenCard(index, 1);
+    }
+
+    public List<Card> giveCloseCard(int index, int num) {
         PlayerData data = playerDataList.get(index);
-        giveCard(data, num, CARD_CLOSE);
+        return giveCard(data, num, CARD_CLOSE);
     }
 
 
-    private void giveCard(PlayerData data, int num, boolean isOpen) {
+    private List<Card> giveCard(PlayerData data, int num, boolean isOpen) {
+        List<Card> cards = new ArrayList<>();
         Deck deck = data.getDeck();
         for (int i = 0; i < num; i++) {
             Card card = masterDeck.take();
@@ -125,7 +141,9 @@ public class Game {
                 card.open();
             }
             deck.add(card);
+            cards.add(card);
         }
+        return cards;
     }
 
 

@@ -7,25 +7,14 @@ import java.util.function.Function;
 
 public class Bot<T> extends Player{
     private final Ai ai;
-    private final T take;
-    private final T skip;
 
-    public Bot(String name, Ai ai, T take, T skip) {
+    public Bot(String name, Ai ai) {
         super(name);
         this.ai = ai;
-        this.take = take;
-        this.skip = skip;
     }
 
-    public T getTake() {
-        return take;
-    }
 
-    public T getSkip() {
-        return skip;
-    }
-
-    public T input(Deck deck, Function<Deck, Integer> counter) {
+    public T input(Deck deck, T take, T skip, Function<Deck, Integer> counter) {
         int point = counter.apply(deck);
         Ai.Cmd cmd = ai.input(point);
         switch (cmd) {
