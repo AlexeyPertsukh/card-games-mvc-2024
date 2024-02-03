@@ -101,6 +101,15 @@ public class Game {
         }
     }
 
+    public void giveBeginCardToPlayer(int index) {
+        giveOpenCard(index, 2);
+    }
+
+    public void giveBeginCardToDealer(int index) {
+        giveOpenCard(index, 1);
+        giveCloseCard(index, 1);
+    }
+
     public void giveOpenCardCurrent(int num) {
         giveCard(current(), num, CARD_OPEN);
     }

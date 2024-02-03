@@ -80,14 +80,6 @@ public class GameController {
                 SmallStringsCardInfoFactory.getInstance()::create
         );
 
-        DialogView<String> dialog = new SelectStringDialogView(
-                printer,
-                reader,
-                "Press 'y' to continue",
-                "",
-                "y"
-        );
-
         for (int i = 0; i < game.numberPlayers(); i++) {
 
             Player player = game.get(i).getPlayer();
@@ -95,9 +87,9 @@ public class GameController {
             printer.out(text);
 
             if(isDealer(player)) {
-                giveBeginCardToDealer(i);
+                game.giveBeginCardToDealer(i);
             } else {
-                giveBeginCardToPlayer(i);
+                game.giveBeginCardToPlayer(i);
             }
 
             game.updateData(i);
@@ -105,7 +97,6 @@ public class GameController {
             Deck deck = game.get(i).getDeck();
             deckView.show(deck);
 
-//            dialog.input();
         }
     }
 
@@ -115,16 +106,6 @@ public class GameController {
         }
         return false;
     }
-
-    private void giveBeginCardToPlayer(int index) {
-        game.giveOpenCard(index, 2);
-    }
-
-    private void giveBeginCardToDealer(int index) {
-        game.giveOpenCard(index, 1);
-        game.giveCloseCard(index, 1);
-    }
-
 
     private DialogView<String> dialogView() {
         String tittle = "(y/n)";
