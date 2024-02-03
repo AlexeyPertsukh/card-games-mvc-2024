@@ -1,4 +1,4 @@
-package org.example.view;
+package org.example.model.player;
 
 public class Player {
     private final String name;

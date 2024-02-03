@@ -32,4 +32,16 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
+    public void sort() {
+    }
+
+    public boolean isOpen() {
+        for (Card card :                cards) {
+            if(!card.isOpen()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
