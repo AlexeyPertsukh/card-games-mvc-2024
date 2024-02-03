@@ -16,7 +16,8 @@ public class Game {
     private final PointCounter counter;
     private final Deck masterDeck;
     private final Player[] players;
-    private final IteratorPlayerData iterator;
+
+    private int indexCurrentPlayer;
 
     private PlayerData current;
     private final List<PlayerData> playerDataList = new ArrayList<>();
@@ -27,29 +28,27 @@ public class Game {
         this.masterDeck = masterDeck;
         this.players = players;
 
+        masterDeck.shuffle();
+
         for (Player player : players) {
             Deck deck = new Deck();
             PlayerData data = new PlayerData(player, deck);
             playerDataList.add(data);
         }
 
-        this.iterator = new IteratorPlayerData(playerDataList);
 
     }
 
-    public PlayerData current() {
-        if (current == null) {
-            current = playerDataList.get(0);
-        }
-        return current;
+    public int getIndexCurrentPlayer() {
+        return indexCurrentPlayer;
     }
 
     public PlayerData get(int index) {
         return playerDataList.get(index);
     }
 
-    public boolean isLast() {
-        return !iterator.hasNext();
+    public boolean hasNextPlayer() {
+        return playerDataList.size() > indexCurrentPlayer;
     }
 
     public List<PlayerData> getPlayerDataList() {
@@ -57,15 +56,11 @@ public class Game {
     }
 
     public void next() {
-        current = iterator.next();
+        indexCurrentPlayer++;
     }
 
     public int numberPlayers() {
         return playerDataList.size();
-    }
-
-    public void updateCurrentData() {
-        updateData(current());
     }
 
     public void updateData(int index) {
@@ -110,13 +105,6 @@ public class Game {
         giveCloseCard(index, 1);
     }
 
-    public void giveOpenCardCurrent(int num) {
-        giveCard(current(), num, CARD_OPEN);
-    }
-
-    public void giveCloseCardCurrent(int num) {
-        giveCard(current(), num, CARD_CLOSE);
-    }
 
     public void giveOpenCard(int index, int num) {
         PlayerData data = playerDataList.get(index);

@@ -26,30 +26,17 @@ public class GameController {
     private static final String DIALOG_ERROR_MESSAGE = "incorrect input";
     private final Printer printer;
     private final Reader reader;
-    private final Deck masterDeck;
-    private final List<Player> players = new ArrayList<>();
-
-    private final InfoFactory infoFactory = InfoFactory.getInstance();
-    private final PointCounter pointCounter = BjPointCounter.getInstance();
-    private final Rules rules = Rules.getInstance();
-    private final List<PlayerData> playersData = new ArrayList<>();
-
     private final Game game;
+    private final InfoFactory infoFactory = InfoFactory.getInstance();
 
-    public GameController(Printer printer, Reader reader, Deck masterDeck, Player... players) {
+    public GameController(Printer printer, Reader reader, Game game) {
         this.printer = printer;
         this.reader = reader;
-        this.masterDeck = masterDeck;
-        game = new Game(Rules.getInstance(),
-                BjPointCounter.getInstance(),
-                masterDeck,
-                players
-                );
+        this.game = game;
     }
 
     public void go() {
         showTittle();
-        masterDeck.shuffle();
 
         showDialogStart();
 
