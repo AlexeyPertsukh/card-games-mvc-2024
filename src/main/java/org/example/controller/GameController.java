@@ -3,9 +3,8 @@ package org.example.controller;
 import org.example.model.Deck;
 import org.example.model.game.Game;
 import org.example.model.Rules;
-import org.example.model.card.Card;
-import org.example.model.game.PlayerState;
 import org.example.model.game.PlayerData;
+import org.example.model.player.Dealer;
 import org.example.model.point_counter.BjPointCounter;
 import org.example.model.point_counter.PointCounter;
 import org.example.model.player.Player;
@@ -20,7 +19,6 @@ import org.example.view.views.deck_view.StringsDeckView;
 import org.example.view.views.group_player_data_view.TextListPlayerDataView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GameController {
@@ -55,7 +53,7 @@ public class GameController {
 
         showDialogStart();
 
-        dealingCardsAtBegin();
+        cardsAtBegin();
 
         while (true) {
             showPlayersData();
@@ -75,7 +73,7 @@ public class GameController {
         dialog.input();
     }
 
-    private void dealingCardsAtBegin() {
+    private void cardsAtBegin() {
 
         View<Deck> deckView = new StringsDeckView(
                 printer,
@@ -96,7 +94,12 @@ public class GameController {
             String text = String.format("[%s] receives cards", player.getName());
             printer.out(text);
 
-            game.giveOpenCard(i, 2);
+            if(isDealer(player)) {
+                giveBeginCardToDealer(i);
+            } else {
+                giveBeginCardToPlayer(i);
+            }
+
             game.updateData(i);
 
             Deck deck = game.get(i).getDeck();
@@ -104,6 +107,22 @@ public class GameController {
 
 //            dialog.input();
         }
+    }
+
+    private boolean isDealer(Player player) {
+        if(player instanceof Dealer) {
+            return true;
+        }
+        return false;
+    }
+
+    private void giveBeginCardToPlayer(int index) {
+        game.giveOpenCard(index, 2);
+    }
+
+    private void giveBeginCardToDealer(int index) {
+        game.giveOpenCard(index, 1);
+        game.giveCloseCard(index, 1);
     }
 
 
