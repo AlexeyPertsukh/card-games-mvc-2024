@@ -29,5 +29,9 @@ public class DeckStorage {
         return new ArrayList<>(storage.values());
     }
 
+    public int size() {
+        return storage.size();
+    }
+
 
 }

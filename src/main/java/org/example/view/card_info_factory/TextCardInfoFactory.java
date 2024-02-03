@@ -3,7 +3,7 @@ package org.example.view.card_info_factory;
 import org.example.model.card.Card;
 
 public class TextCardInfoFactory implements CardInfoFactory<String>{
-    private final static String BACK = "hidden";
+    private final static String BACK = "<hidden>";
     private static TextCardInfoFactory factory;
 
     public static TextCardInfoFactory getInstance() {

@@ -4,15 +4,15 @@ import org.example.model.Deck;
 import org.example.model.card.Card;
 import org.example.model.card.CardRank;
 
-public class BlackJackPointCounter implements PointCounter {
-    private static BlackJackPointCounter pointCounter;
+public class BjPointCounter implements PointCounter {
+    private static BjPointCounter pointCounter;
 
-    private BlackJackPointCounter() {
+    private BjPointCounter() {
     }
 
-    public static BlackJackPointCounter getInstance() {
+    public static BjPointCounter getInstance() {
         if (pointCounter == null) {
-            pointCounter = new BlackJackPointCounter();
+            pointCounter = new BjPointCounter();
         }
         return pointCounter;
     }

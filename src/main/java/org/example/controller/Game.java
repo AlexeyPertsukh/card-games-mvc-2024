@@ -4,7 +4,7 @@ import org.example.model.Deck;
 import org.example.model.DeckStorage;
 import org.example.model.Rules;
 import org.example.model.card.Card;
-import org.example.model.point_counter.BlackJackPointCounter;
+import org.example.model.point_counter.BjPointCounter;
 import org.example.model.point_counter.PointCounter;
 import org.example.model.result.Result;
 import org.example.model.result.ResultFactory;
@@ -17,8 +17,8 @@ import org.example.view.dialog_view.DialogView;
 import org.example.view.dialog_view.SelectStringDialogView;
 import org.example.view.views.View;
 import org.example.view.views.card_view.StringsCardView;
-import org.example.view.views.card_view.TextCardView;
 import org.example.view.views.deck_view.StringsDeckView;
+import org.example.view.views.group_player_view.BjTextDeckStorageView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public class Game {
 
     private final DeckStorage deckStorage = new DeckStorage();
     private final InfoFactory infoFactory = InfoFactory.getInstance();
-    private final PointCounter pointCounter = BlackJackPointCounter.getInstance();
+    private final PointCounter pointCounter = BjPointCounter.getInstance();
     private final ResultFactory resultFactory = new ResultFactory(Rules.getInstance(), pointCounter);
 
     public Game(Printer printer, Reader reader, Deck deck, Player... players) {
@@ -52,10 +52,7 @@ public class Game {
 
         while (true) {
 
-            for (Player player : players) {
-                showPlayerInfo(player);
-                printer.out("");
-            }
+            showDeckStorage();
 
             List<Result> results = resultFactory.create(deckStorage);
             showPlayersResult(results);
@@ -108,6 +105,7 @@ public class Game {
     }
 
     private void setPlayersDeck() {
+        int n = 0;
         for (Player player : players) {
             Deck playerDeck = new Deck();
 
@@ -116,29 +114,36 @@ public class Game {
                 card.open();
                 playerDeck.add(card);
             }
-
+            if (n == 1) {
+                playerDeck.add(deck.take());
+            }
             deckStorage.put(player, playerDeck);
+            n++;
         }
     }
 
     private void showPlayerInfo(Player player) {
         Deck playerDeck = deckStorage.get(player);
-//        View<Card> cardView = new TextCardView(printer, TextCardInfoFactory.getInstance()::create);
-        View<Card> cardView = new StringsCardView(printer, SmallStringsCardInfoFactory.getInstance()::create);
         int point = pointCounter.count(playerDeck);
         String pointMessage = "Points: " + point;
 
         printer.out(player.getName());
         printer.out("-----");
-//        for (Card card : playerDeck.toList()) {
-//            cardView.show(card);
-//        }
 
         View<Deck> deckView = new StringsDeckView(printer, SmallStringsCardInfoFactory.getInstance()::create);
         deckView.show(playerDeck);
 
         printer.out("-----");
         printer.out(pointMessage);
+    }
+
+    private void showDeckStorage() {
+        View<DeckStorage> storageView = new BjTextDeckStorageView(
+                printer,
+                TextCardInfoFactory.getInstance()::create,
+                BjPointCounter.getInstance()::count
+        );
+        storageView.show(deckStorage);
     }
 
 
