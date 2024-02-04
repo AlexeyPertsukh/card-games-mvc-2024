@@ -3,14 +3,13 @@ package org.example.controller.factory;
 import org.example.model.Deck;
 import org.example.model.card.Card;
 import org.example.model.player.Player;
+import org.example.view.views.table_data_view.TableDataView;
 import org.example.view.views.printer.Printer;
 import org.example.view.card_mapper.CardMapper;
 import org.example.view.info_view.InfoView;
 import org.example.view.info_view.StringsInfoView;
 import org.example.view.info_view.TextInfoView;
 import org.example.view.views.View;
-import org.example.view.views.card_view.StringsCardView;
-import org.example.view.views.group_player_data_view.TextListPlayerDataView;
 
 public class ViewFactory {
     private static final String[] TITTLE = {
@@ -23,18 +22,18 @@ public class ViewFactory {
 
 
     private final Printer printer;
-    private final CardMapper<String> textCardMapper;
     private final CardMapper<String[]> stringsCardMapper;
     private final View<Deck> deckView;
     private final View<Card> cardView;
+    private final TableDataView<?> tableView;
 
 
-    public ViewFactory(Printer printer, CardMapper<String> textCardMapper, CardMapper<String[]> stringsCardMapper, View<Deck> deckView, View<Card> cardView) {
+    public ViewFactory(Printer printer, CardMapper<String[]> stringsCardMapper, View<Deck> deckView, View<Card> cardView, TableDataView<?> tableView) {
         this.printer = printer;
-        this.textCardMapper = textCardMapper;
         this.stringsCardMapper = stringsCardMapper;
         this.deckView = deckView;
         this.cardView = cardView;
+        this.tableView = tableView;
     }
 
 
@@ -86,10 +85,7 @@ public class ViewFactory {
     }
 
     public View tableView() {
-        return new TextListPlayerDataView(
-                printer,
-                textCardMapper
-        );
+        return tableView;
     }
 
 

@@ -1,4 +1,4 @@
-package org.example.view.views.group_player_data_view;
+package org.example.view.views.table_data_view;
 
 import org.example.model.Deck;
 import org.example.model.card.Card;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class TextListPlayerDataView extends ListPlayerDataView<String> {
-    public TextListPlayerDataView(Printer printer, Function<Card, String> map) {
+public class TextTableDataView extends AbstractTableDataView<String> {
+    public TextTableDataView(Printer printer, Function<Card, String> map) {
         super(printer, map);
     }
 
@@ -92,7 +92,7 @@ public class TextListPlayerDataView extends ListPlayerDataView<String> {
         String pointMessage = data.isCardsOpen() ? String.valueOf(point) : "???";
 
         strings.add("Points: " + pointMessage);
-        strings.add(textState(data.getStatus()));
+        strings.add(text(data.getStatus()));
         return strings.toArray(new String[0]);
     }
 
@@ -106,14 +106,5 @@ public class TextListPlayerDataView extends ListPlayerDataView<String> {
         return max;
     }
 
-    private static String textState(PlayerStatus state) {
-        switch (state) {
-            case BLACK_JACK: return "BLACK JACK";
-            case BUST: return "BUST";
-            case LOSE: return "LOSE";
-            case WIN: return "WIN";
-            case IN_GAME: return "in game";
-            default: throw new IllegalArgumentException("illegal game state: " + state);
-        }
-    }
+
 }

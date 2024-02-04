@@ -17,6 +17,7 @@ import org.example.view.card_mapper.SmallStringsCardMapper;
 import org.example.view.card_mapper.TextCardMapper;
 import org.example.view.views.card_view.StringsColorCardView;
 import org.example.view.views.deck_view.StringsColorDeckView;
+import org.example.view.views.table_data_view.TextColorTableDataView;
 import org.example.view.views.printer.ColorConsolePrinter;
 import org.example.view.views.printer.ColorPrinter;
 import org.example.view.views.printer.ConsolePrinter;
@@ -52,11 +53,10 @@ public class MainColorSmalPictureCards {
                 new DialogFactory(printer, reader),
                 new ViewFactory(
                         printer,
-                        TextCardMapper.getInstance(),
                         SmallStringsCardMapper.getInstance(),
                         new StringsColorDeckView(colorPrinter, cardMapper),
-                        new StringsColorCardView(colorPrinter, cardMapper)
-                )
+                        new StringsColorCardView(colorPrinter, cardMapper),
+                        new TextColorTableDataView(colorPrinter, TextCardMapper.getInstance()))
         );
 
         gameController.go();
