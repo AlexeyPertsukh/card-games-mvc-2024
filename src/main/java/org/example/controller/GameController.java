@@ -32,6 +32,7 @@ public class GameController {
     private final Game game;
     private final InfoFactory infoFactory = InfoFactory.getInstance();
     private final GameController controller = this;
+    private State state;
 
 
     public GameController(Printer printer, Reader reader, Game game) {
@@ -43,15 +44,16 @@ public class GameController {
     public void go() {
         showTittle();
 
-        showDialogStart();
+        this.state = new BeginDealCardState();
 
-        cardsAtBegin();
-
-        while (game.hasNextPlayer()) {
-            showPlayersData();
-            Command command = inputCommand();
-            command.execute();
+        while (!isEnd()) {
+            state.execute();
         }
+
+    }
+
+    public boolean isEnd() {
+        return state instanceof EndGameState;
     }
 
     private void showDialogStart() {
@@ -88,7 +90,6 @@ public class GameController {
 
             Deck deck = game.get(i).getDeck();
             deckView.show(deck);
-
         }
     }
 
@@ -209,6 +210,78 @@ public class GameController {
             default:
                 throw new IllegalArgumentException("illegal command: " + key);
         }
+    }
+
+    private abstract class State {
+        public abstract void execute();
+    }
+
+    private class BeginDealCardState extends State {
+        @Override
+        public void execute() {
+            showDialogStart();
+
+            View<Deck> deckView = new StringsDeckView(
+                    printer,
+                    SmallStringsCardInfoFactory.getInstance()::create
+            );
+
+            for (int i = 0; i < game.numberPlayers(); i++) {
+
+                Player player = game.get(i).getPlayer();
+                String text = String.format("[%s] receives cards", player.getName());
+                printer.out(text);
+
+                if (isDealer(player)) {
+                    game.giveBeginCardToDealer(i);
+                } else {
+                    game.giveBeginCardToPlayer(i);
+                }
+
+                game.updateData(i);
+
+                Deck deck = game.get(i).getDeck();
+                deckView.show(deck);
+            }
+            nextState();
+        }
+    }
+
+    private class EndGameState extends State {
+
+        @Override
+        public void execute() {
+
+        }
+    }
+
+    private class PlayerActionsState extends State {
+
+        @Override
+        public void execute() {
+            while (game.hasNextPlayer()) {
+                showPlayersData();
+                Command command = inputCommand();
+                command.execute();
+
+                PlayerData current = game.getCurrent();
+                if(!current.isInGame() && game.hasNextPlayer()) {
+                    game.next();
+                }
+            }
+        }
+    }
+
+    private void nextState() {
+        if(state instanceof BeginDealCardState) {
+            state = new PlayerActionsState();
+            return;
+        }
+        if(state instanceof PlayerActionsState) {
+            state = new EndGameState();
+            return;
+        }
+
     }
 
 }

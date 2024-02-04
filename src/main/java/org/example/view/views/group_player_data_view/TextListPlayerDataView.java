@@ -4,7 +4,7 @@ import org.example.model.Deck;
 import org.example.model.card.Card;
 import org.example.model.player.Bot;
 import org.example.model.player.Player;
-import org.example.model.game.PlayerState;
+import org.example.model.game.PlayerStatus;
 import org.example.model.game.PlayerData;
 import org.example.view.Printer;
 
@@ -63,7 +63,7 @@ public class TextListPlayerDataView extends ListPlayerDataView<String> {
 
         Player player = data.getPlayer();
         Deck deck = data.getDeck();
-        PlayerState state = data.getState();
+        PlayerStatus state = data.getStatus();
         int point = data.getPoint();
 
         List<Card> cards = deck.toList();
@@ -92,7 +92,7 @@ public class TextListPlayerDataView extends ListPlayerDataView<String> {
         String pointMessage = data.isCardsOpen() ? String.valueOf(point) : "???";
 
         strings.add("Points: " + pointMessage);
-        strings.add(textState(data.getState()));
+        strings.add(textState(data.getStatus()));
         return strings.toArray(new String[0]);
     }
 
@@ -106,7 +106,7 @@ public class TextListPlayerDataView extends ListPlayerDataView<String> {
         return max;
     }
 
-    private static String textState(PlayerState state) {
+    private static String textState(PlayerStatus state) {
         switch (state) {
             case BLACK_JACK: return "BLACK JACK";
             case BUST: return "BUST";

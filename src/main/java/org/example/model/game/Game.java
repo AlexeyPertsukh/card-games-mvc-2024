@@ -15,18 +15,16 @@ public class Game {
     private final Rules rules;
     private final PointCounter counter;
     private final Deck masterDeck;
-    private final Player[] players;
 
-    private int indexCurrentPlayer;
-
-    private PlayerData current;
     private final List<PlayerData> playerDataList = new ArrayList<>();
+    private final PlayerDataIterator iterator;
+
+
 
     public Game(Rules rules, PointCounter counter, Deck masterDeck, Player... players) {
         this.rules = rules;
         this.counter = counter;
         this.masterDeck = masterDeck;
-        this.players = players;
 
         masterDeck.shuffle();
 
@@ -36,23 +34,29 @@ public class Game {
             playerDataList.add(data);
         }
 
+        iterator = new PlayerDataIterator(playerDataList);
 
     }
 
     public int getIndexCurrentPlayer() {
-        return indexCurrentPlayer;
+        return iterator.getIndex();
     }
 
     public PlayerData get(int index) {
         return playerDataList.get(index);
     }
 
+    public PlayerData getCurrent() {
+        return playerDataList.get(iterator.getIndex());
+    }
+
+
     public PointCounter getCounter() {
         return counter;
     }
 
     public boolean hasNextPlayer() {
-        return playerDataList.size() > indexCurrentPlayer;
+        return iterator.hasNext();
     }
 
     public List<PlayerData> getPlayerDataList() {
@@ -60,7 +64,7 @@ public class Game {
     }
 
     public void next() {
-        indexCurrentPlayer++;
+        iterator.next();
     }
 
     public int numberPlayers() {
@@ -76,8 +80,8 @@ public class Game {
         Deck deckOnlyOpenCard = deckOnlyOpenCard(data.getDeck());
         int point = counter.count(deckOnlyOpenCard);
         data.setPoint(point);
-        PlayerState state = stateWhenGameRunning(data);
-        data.setState(state);
+        PlayerStatus state = stateWhenGameRunning(data);
+        data.setStatus(state);
     }
 
 
@@ -95,8 +99,8 @@ public class Game {
         int winPoint = rules.winPoint(points);
 
         for (PlayerData data : playerDataList) {
-            PlayerState state = stateWhenCalcResult(data, winPoint);
-            data.setState(state);
+            PlayerStatus state = stateWhenCalcResult(data, winPoint);
+            data.setStatus(state);
         }
     }
 
@@ -114,7 +118,8 @@ public class Game {
     }
 
     public List<Card> giveOpenCardToCurrent() {
-        return giveOpenCard(indexCurrentPlayer, 1);
+
+        return giveOpenCard(iterator.getIndex(), 1);
     }
 
     public List<Card> giveOpenCard(int index, int num) {
@@ -159,34 +164,34 @@ public class Game {
         return out;
     }
 
-    private PlayerState stateWhenGameRunning(PlayerData data) {
+    private PlayerStatus stateWhenGameRunning(PlayerData data) {
         Deck deck = data.getDeck();
         int point = data.getPoint();
         if (rules.isBust(point)) {
-            return PlayerState.BUST;
+            return PlayerStatus.BUST;
         }
 
         if (rules.isBlackJack(deck.size(), point)) {
-            return PlayerState.BLACK_JACK;
+            return PlayerStatus.BLACK_JACK;
         }
 
-        return PlayerState.IN_GAME;
+        return PlayerStatus.IN_GAME;
     }
 
-    private PlayerState stateWhenCalcResult(PlayerData data, int winPoint) {
+    private PlayerStatus stateWhenCalcResult(PlayerData data, int winPoint) {
         Deck deck = data.getDeck();
         int point = data.getPoint();
         if (rules.isBlackJack(deck.size(), point)) {
-            return PlayerState.BLACK_JACK;
+            return PlayerStatus.BLACK_JACK;
         }
         if (rules.isBust(point)) {
-            return PlayerState.BUST;
+            return PlayerStatus.BUST;
         }
         if (rules.isLose(winPoint, point)) {
-            return PlayerState.LOSE;
+            return PlayerStatus.LOSE;
         }
         if (rules.isWin(winPoint, point)) {
-            return PlayerState.WIN;
+            return PlayerStatus.WIN;
         }
 
         throw new IllegalArgumentException();

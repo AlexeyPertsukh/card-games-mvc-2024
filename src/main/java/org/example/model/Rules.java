@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Rules {
     private static final int MAX_WIN_POINT = 21;
-    private static final int BLACK_JACK_CARD_NUMBERS = 3;
+    private static final int BLACK_JACK_CARD_NUMBERS = 2;
     private static Rules rules;
 
     private Rules() {
@@ -29,15 +29,15 @@ public class Rules {
         return point < winPoint;
     }
 
-    public boolean isBlackJack(int cardNumbers, int point) {
-        return cardNumbers == BLACK_JACK_CARD_NUMBERS && point == MAX_WIN_POINT;
+    public boolean isBlackJack(int cardsNumber, int point) {
+        return cardsNumber == BLACK_JACK_CARD_NUMBERS && point == MAX_WIN_POINT;
     }
 
     public int winPoint(List<Integer> numbers) {
         int max = 0;
-        for (int number : numbers) {
-            if (number >= max && number <= MAX_WIN_POINT) {
-                max = number;
+        for (int num : numbers) {
+            if (num >= max && num <= MAX_WIN_POINT) {
+                max = num;
             }
         }
         return max;

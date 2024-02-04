@@ -8,7 +8,7 @@ import org.example.model.player.Player;
 public class PlayerData {
     private final Player player;
     private final Deck deck;
-    private PlayerState state = PlayerState.IN_GAME;
+    private PlayerStatus status = PlayerStatus.IN_GAME;
     private int point;
 
     public PlayerData(Player player, Deck deck) {
@@ -41,18 +41,18 @@ public class PlayerData {
         return deck;
     }
 
-    public PlayerState getState() {
-        return state;
+    public PlayerStatus getStatus() {
+        return status;
     }
 
     public boolean isInGame() {
-        return state == PlayerState.IN_GAME;
+        return status == PlayerStatus.IN_GAME;
     }
 
-    public void setState(PlayerState state) {
+    public void setStatus(PlayerStatus status) {
 //        if(this.state != PlayerState.IN_GAME) {
 //            throw new IllegalArgumentException("the player is not in the game");
 //        }
-        this.state = state;
+        this.status = status;
     }
 }

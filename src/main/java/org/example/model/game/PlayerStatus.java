@@ -1,6 +1,6 @@
 package org.example.model.game;
 
-public enum PlayerState {
+public enum PlayerStatus {
     IN_GAME,
     BUST,
     LOSE,

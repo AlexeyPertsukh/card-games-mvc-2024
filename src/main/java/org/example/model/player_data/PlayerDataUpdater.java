@@ -3,7 +3,7 @@ package org.example.model.player_data;
 import org.example.model.Deck;
 import org.example.model.Rules;
 import org.example.model.card.Card;
-import org.example.model.game.PlayerState;
+import org.example.model.game.PlayerStatus;
 import org.example.model.game.PlayerData;
 import org.example.model.point_counter.PointCounter;
 
@@ -36,13 +36,13 @@ public class PlayerDataUpdater {
         return out;
     }
 
-    private PlayerState state(boolean isOpen, int point) {
+    private PlayerStatus state(boolean isOpen, int point) {
         if (rules.isBust(point)) {
-            return PlayerState.BUST;
+            return PlayerStatus.BUST;
         }
 
         if (!isOpen) {
-            return PlayerState.IN_GAME;
+            return PlayerStatus.IN_GAME;
         }
 
 //        if(rules.isBlackJack(data.getDeck().size(), point)) {
@@ -54,6 +54,6 @@ public class PlayerDataUpdater {
 //        if(rules.isWin(winPoint, point)) {
 //            return GameState.WIN;
 //        }
-        return PlayerState.IN_GAME;
+        return PlayerStatus.IN_GAME;
     }
 }
