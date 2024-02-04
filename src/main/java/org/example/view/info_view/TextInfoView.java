@@ -1,6 +1,6 @@
 package org.example.view.info_view;
 
-import org.example.view.Printer;
+import org.example.view.views.printer.Printer;
 
 public class TextInfoView extends AbstractInfoView{
     private final String text;
@@ -12,6 +12,6 @@ public class TextInfoView extends AbstractInfoView{
 
     @Override
     public void show() {
-        printer.out(text);
+        printer.output(text);
     }
 }

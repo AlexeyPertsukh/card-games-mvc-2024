@@ -1,8 +1,8 @@
-package org.example.view;
+package org.example.view.views.reader;
 
 import java.util.Scanner;
 
-public class KeyboardReader implements Reader{
+public class KeyboardReader implements Reader {
     private final Scanner scanner = new Scanner(System.in);
     @Override
     public String input() {

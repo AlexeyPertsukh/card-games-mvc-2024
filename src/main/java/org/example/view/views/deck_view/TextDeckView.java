@@ -2,7 +2,7 @@ package org.example.view.views.deck_view;
 
 import org.example.model.Deck;
 import org.example.model.card.Card;
-import org.example.view.Printer;
+import org.example.view.views.printer.Printer;
 
 import java.util.List;
 import java.util.function.Function;
@@ -22,7 +22,7 @@ public class TextDeckView extends DeckView<String> {
         List<Card> cards = deck.toList();
         for (Card card : cards) {
             String text = map.apply(card);
-            printer.out(text);
+            printer.output(text);
         }
     }
 

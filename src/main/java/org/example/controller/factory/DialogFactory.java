@@ -1,7 +1,7 @@
 package org.example.controller.factory;
 
-import org.example.view.Printer;
-import org.example.view.Reader;
+import org.example.view.views.printer.Printer;
+import org.example.view.views.reader.Reader;
 import org.example.view.dialog_view.DialogView;
 import org.example.view.dialog_view.SelectStringDialogView;
 

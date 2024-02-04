@@ -1,6 +1,5 @@
 package org.example.model.game;
 
-import jdk.jshell.Snippet;
 import org.example.model.Deck;
 import org.example.model.Rules;
 import org.example.model.card.Card;
@@ -10,7 +9,7 @@ import org.example.model.point_counter.PointCounter;
 
 import java.util.*;
 
-public class GameAm implements Game {
+public class GameAmerican implements Game {
     private static final boolean CARD_CLOSE = false;
     private static final boolean CARD_OPEN = true;
     private final Rules rules;
@@ -22,7 +21,7 @@ public class GameAm implements Game {
     private final Map<Player, PlayerData> storage = new HashMap<>();
 
 
-    public GameAm(Rules rules, PointCounter counter, Deck masterDeck, Dealer dealer, Player... players) {
+    public GameAmerican(Rules rules, PointCounter counter, Deck masterDeck, Dealer dealer, Player... players) {
         this.rules = rules;
         this.counter = counter;
         this.masterDeck = masterDeck;

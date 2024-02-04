@@ -1,6 +1,6 @@
 package org.example.view.card_mapper;
 
-public class SmallStringsCardMapper extends StringsCardMapper {
+public class SmallStringsCardMapper extends StringsCombainCardMapper {
 
     public static final String CHANGE_SYMBOL = "$";
     private static final String[] BACK = {

@@ -2,7 +2,7 @@ package org.example.view.views.group_player_data_view;
 
 import org.example.model.card.Card;
 import org.example.model.game.PlayerData;
-import org.example.view.Printer;
+import org.example.view.views.printer.Printer;
 import org.example.view.views.AbstractView;
 
 import java.util.List;

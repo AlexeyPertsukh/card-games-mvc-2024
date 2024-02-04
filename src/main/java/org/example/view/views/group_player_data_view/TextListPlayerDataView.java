@@ -6,7 +6,7 @@ import org.example.model.player.bot.Bot;
 import org.example.model.player.Player;
 import org.example.model.game.PlayerStatus;
 import org.example.model.game.PlayerData;
-import org.example.view.Printer;
+import org.example.view.views.printer.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class TextListPlayerDataView extends ListPlayerDataView<String> {
 
     private void show(String[] strings) {
         for (String s : strings) {
-            printer.out(s);
+            printer.output(s);
         }
     }
 

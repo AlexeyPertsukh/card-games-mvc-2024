@@ -2,7 +2,7 @@ package org.example.view.views.deck_view;
 
 import org.example.model.Deck;
 import org.example.model.card.Card;
-import org.example.view.Printer;
+import org.example.view.views.printer.Printer;
 import org.example.view.views.AbstractView;
 
 import java.util.function.Function;

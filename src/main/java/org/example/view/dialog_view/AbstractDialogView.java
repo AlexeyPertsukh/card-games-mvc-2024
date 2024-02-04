@@ -1,7 +1,7 @@
 package org.example.view.dialog_view;
 
-import org.example.view.Printer;
-import org.example.view.Reader;
+import org.example.view.views.printer.Printer;
+import org.example.view.views.reader.Reader;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -27,12 +27,12 @@ public abstract class AbstractDialogView<T> implements DialogView<T> {
     @Override
     public T input() {
         while (true) {
-            printer.out(tittle);
+            printer.output(tittle);
             String key = reader.input();
             if (predicate.test(key)) {
                 return map.apply(key);
             }
-            printer.out(errorMessage);
+            printer.output(errorMessage);
         }
     }
 }

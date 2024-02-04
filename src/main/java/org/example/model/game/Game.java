@@ -12,8 +12,7 @@ public interface Game {
     Iterator<Player> playerIterator();
 
     Dealer dealer();
-//    PlayerData playerData(Player player);
-//    PlayerData dealerData();
+
     Deck deck(Player player);
     PlayerStatus status(Player player);
     boolean isInGame(Player player);

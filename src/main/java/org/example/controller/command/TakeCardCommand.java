@@ -10,7 +10,7 @@ public class TakeCardCommand extends GameControllerCommand {
 
     @Override
     public void execute() {
-        controller.addCardCurrentPlayer();
+        controller.takeCardCurrentPlayer();
     }
 
 }

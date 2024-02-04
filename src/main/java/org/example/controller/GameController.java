@@ -7,13 +7,11 @@ import org.example.controller.factory.DialogFactory;
 import org.example.controller.factory.ViewFactory;
 import org.example.model.Deck;
 import org.example.model.card.Card;
-import org.example.model.game.GameAm;
+import org.example.model.game.Game;
 import org.example.model.game.PlayerData;
 import org.example.model.player.Player;
 import org.example.model.player.bot.Bot;
 import org.example.model.player.bot.Dealer;
-import org.example.view.Printer;
-import org.example.view.Reader;
 import org.example.view.dialog_view.DialogView;
 import org.example.view.info_view.InfoView;
 import org.example.view.views.View;
@@ -25,9 +23,7 @@ public class GameController {
 
     private static final String DIALOG_ERROR_MESSAGE = "incorrect input";
 
-    private final Printer printer;
-    private final Reader reader;
-    private final GameAm gameAm;
+    private final Game game;
     private final DialogFactory dialogFactory;
     private final ViewFactory viewFactory;
     private final GameController controller = this;
@@ -35,10 +31,8 @@ public class GameController {
     private Player currentPlayer;
 
 
-    public GameController(Printer printer, Reader reader, GameAm gameAm, DialogFactory dialogFactory, ViewFactory viewFactory) {
-        this.printer = printer;
-        this.reader = reader;
-        this.gameAm = gameAm;
+    public GameController(Game game, DialogFactory dialogFactory, ViewFactory viewFactory) {
+        this.game = game;
         this.dialogFactory = dialogFactory;
         this.viewFactory = viewFactory;
     }
@@ -66,14 +60,20 @@ public class GameController {
 
 
     private void showTable() {
-        List<PlayerData> list = gameAm.tableData();
+        List<PlayerData> list = game.tableData();
         View table = viewFactory.tableView();
 
         table.show(list);
     }
 
-    public void addCardCurrentPlayer() {
-        gameAm.addOpenCard(currentPlayer);
+    public void takeCardCurrentPlayer() {
+        Card card = game.addOpenCard(currentPlayer);
+        View cardView = viewFactory.cardView();
+        InfoView infoView = viewFactory.infoAddCard(currentPlayer);
+
+        infoView.show();
+        cardView.show(card);
+
     }
 
     private void setCurrentPlayer(Player player) {
@@ -92,7 +92,7 @@ public class GameController {
 
             View deckView = viewFactory.deckView();
 
-            Iterator<Player> iterator = gameAm.playerIterator();
+            Iterator<Player> iterator = game.playerIterator();
 
             while (iterator.hasNext()) {
                 Player player = iterator.next();
@@ -108,15 +108,15 @@ public class GameController {
         }
 
         private void beginAddCardPlayer(Player player) {
-            List<Card> cards = gameAm.beginAddPlayerCard(player);
+            List<Card> cards = game.beginAddPlayerCard(player);
             Deck deck = new Deck(cards);
 
             beginAddCard(player, deck);
         }
 
         private void beginAddCardDealer() {
-            Dealer dealer = gameAm.dealer();
-            List<Card> cards = gameAm.beginAddDealerCard();
+            Dealer dealer = game.dealer();
+            List<Card> cards = game.beginAddDealerCard();
             Deck deck = new Deck(cards);
 
             beginAddCard(dealer, deck);
@@ -138,12 +138,23 @@ public class GameController {
 
             while (true) {
                 showTable();
+
+                if (isSkip(command)) {
+                    return;
+                }
+                if(!game.isInGame(player)) {
+                    DialogView<String> dialog = dialogFactory.dialogBust(player.getName());
+                    dialog.input();
+                    return;
+                }
+
+
                 if (isBoot(player)) {
                     Bot bot = (Bot) player;
-                    Deck deck = gameAm.deck(player);
+                    Deck deck = game.deck(player);
                     Bot.BotCommand botCommand = bot.input(deck);
                     String key = toKeyCommand(botCommand);
-                    printer.out(key);
+                    viewFactory.infoText(key).show();
                     command = toCommand(key);
                 } else {
                     DialogView<String> dialog = dialogFactory.playerInputDialog(
@@ -155,14 +166,7 @@ public class GameController {
                     command = toCommand(key);
                 }
                 command.execute();
-                if (isSkip(command)) {
-                    return;
-                }
-                if(!gameAm.isInGame(player)) {
-                    DialogView<String> dialog = dialogFactory.dialogBust(player.getName());
-                    dialog.input();
-                    return;
-                }
+
             }
 
         }
@@ -175,7 +179,7 @@ public class GameController {
 
         @Override
         public void execute() {
-            Iterator<Player> iterator = gameAm.playerIterator();
+            Iterator<Player> iterator = game.playerIterator();
 
             while (iterator.hasNext()) {
                 Player player = iterator.next();
@@ -191,12 +195,12 @@ public class GameController {
     private class DealerOpenCardState extends State {
         @Override
         public void execute() {
-            Dealer dealer = gameAm.dealer();
-            if(!gameAm.isDeckOpen(dealer)) {
+            Dealer dealer = game.dealer();
+            if(!game.isDeckOpen(dealer)) {
                 viewFactory.infoDealerShowCards().show();
-                gameAm.openDeck(dealer);
+                game.openDeck(dealer);
 
-                Deck deck = gameAm.deck(dealer);
+                Deck deck = game.deck(dealer);
                 View deckView = viewFactory.deckView();
                 deckView.show(deck);
 
@@ -209,7 +213,7 @@ public class GameController {
     private class DealerActionState extends ActionState {
         @Override
         public void execute() {
-            Dealer dealer = gameAm.dealer();
+            Dealer dealer = game.dealer();
             onePlayerAction(dealer);
         }
     }

@@ -1,17 +1,31 @@
 package org.example.model.card;
 
-public enum CardSuit {
-    DIAMOND("♦"),
-    HEART("♥"),
-    CLUB("♣"),
-    SPADE("♠");
-    private final String icon;
+import static org.example.model.card.CardSuit.Color.BLACK;
+import static org.example.model.card.CardSuit.Color.RED;
 
-    CardSuit(String icon) {
+public enum CardSuit {
+    DIAMOND("♦", RED),
+    HEART("♥", RED),
+    CLUB("♣", BLACK),
+    SPADE("♠", BLACK);
+    private final String icon;
+    private final Color color;
+
+    CardSuit(String icon, Color color) {
         this.icon = icon;
+        this.color = color;
     }
 
     public String getIcon() {
         return icon;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public enum Color {
+        BLACK,
+        RED
     }
 }

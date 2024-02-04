@@ -1,7 +1,6 @@
 package org.example.view.views;
 
-import org.example.model.card.Card;
-import org.example.view.Printer;
+import org.example.view.views.printer.Printer;
 
 public abstract class AbstractView<T> implements View<T>{
     protected final Printer printer;

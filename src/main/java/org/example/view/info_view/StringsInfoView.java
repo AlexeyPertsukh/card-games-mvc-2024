@@ -1,6 +1,6 @@
 package org.example.view.info_view;
 
-import org.example.view.Printer;
+import org.example.view.views.printer.Printer;
 
 public class StringsInfoView extends AbstractInfoView {
     private final String[] strings;
@@ -13,7 +13,8 @@ public class StringsInfoView extends AbstractInfoView {
     @Override
     public void show() {
         for (String s : strings) {
-            printer.out(s);
+            printer.output(s);
         }
     }
+
 }
