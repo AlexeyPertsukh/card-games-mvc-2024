@@ -10,11 +10,7 @@ public class TakeCardCommand extends GameControllerCommand {
 
     @Override
     public void execute() {
-        controller.takeCard();
+        controller.addCardCurrentPlayer();
     }
 
-    @Override
-    public String key() {
-        return KEY;
-    }
 }

@@ -1,20 +1,20 @@
-package org.example.view.card_info_factory;
+package org.example.view.card_mapper;
 
 import org.example.model.card.Card;
 
-public class TextCardInfoFactory implements CardInfoFactory<String>{
+public class TextCardMapper implements CardMapper<String> {
     private final static String BACK = "<hidden>";
-    private static TextCardInfoFactory factory;
+    private static TextCardMapper factory;
 
-    public static TextCardInfoFactory getInstance() {
+    public static TextCardMapper getInstance() {
         if (factory == null) {
-            factory = new TextCardInfoFactory();
+            factory = new TextCardMapper();
         }
         return factory;
     }
 
     @Override
-    public String create(Card card) {
+    public String apply(Card card) {
         if(!card.isOpen()) {
             return BACK;
         }

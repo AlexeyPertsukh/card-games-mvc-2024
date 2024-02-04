@@ -22,7 +22,7 @@ public class PlayerDataUpdater {
         Deck deck = data.getDeck();
 
         Deck deckOpenCards = deckOpenCards(deck);
-        int point = counter.count(deckOpenCards);
+        int point = counter.apply(deckOpenCards);
     }
 
     private Deck deckOpenCards(Deck deck) {

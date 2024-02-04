@@ -3,51 +3,55 @@ package org.example.controller;
 import org.example.controller.command.Command;
 import org.example.controller.command.TakeCardCommand;
 import org.example.controller.command.SkipCommand;
+import org.example.controller.factory.DialogFactory;
+import org.example.controller.factory.ViewFactory;
 import org.example.model.Deck;
 import org.example.model.card.Card;
-import org.example.model.game.Game;
+import org.example.model.game.GameAm;
 import org.example.model.game.PlayerData;
-import org.example.model.player.Bot;
-import org.example.model.player.Dealer;
 import org.example.model.player.Player;
+import org.example.model.player.bot.Bot;
+import org.example.model.player.bot.Dealer;
 import org.example.view.Printer;
 import org.example.view.Reader;
-import org.example.view.card_info_factory.SmallStringsCardInfoFactory;
-import org.example.view.card_info_factory.TextCardInfoFactory;
 import org.example.view.dialog_view.DialogView;
-import org.example.view.dialog_view.SelectStringDialogView;
+import org.example.view.info_view.InfoView;
 import org.example.view.views.View;
-import org.example.view.views.card_view.StringsCardView;
-import org.example.view.views.deck_view.StringsDeckView;
-import org.example.view.views.group_player_data_view.TextListPlayerDataView;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GameController {
 
     private static final String DIALOG_ERROR_MESSAGE = "incorrect input";
+
     private final Printer printer;
     private final Reader reader;
-    private final Game game;
-    private final InfoFactory infoFactory = InfoFactory.getInstance();
+    private final GameAm gameAm;
+    private final DialogFactory dialogFactory;
+    private final ViewFactory viewFactory;
     private final GameController controller = this;
     private State state;
+    private Player currentPlayer;
 
 
-    public GameController(Printer printer, Reader reader, Game game) {
+    public GameController(Printer printer, Reader reader, GameAm gameAm, DialogFactory dialogFactory, ViewFactory viewFactory) {
         this.printer = printer;
         this.reader = reader;
-        this.game = game;
+        this.gameAm = gameAm;
+        this.dialogFactory = dialogFactory;
+        this.viewFactory = viewFactory;
     }
 
     public void go() {
-        showTittle();
+        viewFactory.infoTittle().show();
 
-        this.state = new BeginDealCardState();
+        this.state = new BeginAddCardState();
 
         while (!isEnd()) {
             state.execute();
+            nextState();
+
         }
 
     }
@@ -56,234 +60,208 @@ public class GameController {
         return state instanceof EndGameState;
     }
 
-    private void showDialogStart() {
-        DialogView<String> dialog = new SelectStringDialogView(
-                printer,
-                reader,
-                "Press 'y' to start game",
-                "",
-                "y"
-        );
-        dialog.input();
-    }
-
-    private void cardsAtBegin() {
-
-        View<Deck> deckView = new StringsDeckView(
-                printer,
-                SmallStringsCardInfoFactory.getInstance()::create
-        );
-
-        for (int i = 0; i < game.numberPlayers(); i++) {
-
-            Player player = game.get(i).getPlayer();
-            String text = String.format("[%s] receives cards", player.getName());
-            printer.out(text);
-
-            if (isDealer(player)) {
-                game.giveBeginCardToDealer(i);
-            } else {
-                game.giveBeginCardToPlayer(i);
-            }
-
-            game.updateData(i);
-
-            Deck deck = game.get(i).getDeck();
-            deckView.show(deck);
-        }
-    }
-
-    private boolean isDealer(Player player) {
-        return player instanceof Dealer;
-    }
-
-    private boolean isBot(Player player) {
+    private boolean isBoot(Player player) {
         return player instanceof Bot;
     }
 
-    private DialogView<String> dialogView() {
-        String tittle = "(y/n)";
-        return new SelectStringDialogView(printer,
-                reader,
-                tittle,
-                DIALOG_ERROR_MESSAGE,
-                "y", "n"
-        );
+
+    private void showTable() {
+        List<PlayerData> list = gameAm.tableData();
+        View table = viewFactory.tableView();
+
+        table.show(list);
     }
 
-    private void showTittle() {
-        for (String s : infoFactory.tittle()) {
-            printer.out(s);
-        }
+    public void addCardCurrentPlayer() {
+        gameAm.addOpenCard(currentPlayer);
     }
 
-
-    private void showPlayersData() {
-        View<List<PlayerData>> view = new TextListPlayerDataView(
-                printer,
-                TextCardInfoFactory.getInstance()::create
-        );
-        view.show(game.getPlayerDataList());
-    }
-
-    private Command inputCommand() {
-        int index = game.getIndexCurrentPlayer();
-        PlayerData data = game.get(index);
-        Player player = data.getPlayer();
-
-        String tittle = String.format("[%s] input command: %s - take card, %s - skip",
-                player.getName(),
-                TakeCardCommand.KEY,
-                SkipCommand.KEY
-        );
-
-        if (isBot(player)) {
-            Deck deck = data.getDeck();
-            return inputCommandBot(player, deck, tittle);
-        }
-        return inputCommandPlayer(tittle);
-    }
-
-    public void skip() {
-        game.next();
-    }
-
-    private Command inputCommandPlayer(String tittle) {
-        List<String> keys = commandKeys();
-
-        DialogView<String> dialog = new SelectStringDialogView(
-                printer,
-                reader,
-                tittle,
-                DIALOG_ERROR_MESSAGE,
-                keys
-        );
-        String key = dialog.input();
-        return command(key);
-    }
-
-    private Command inputCommandBot(Player player, Deck deck, String tittle) {
-        printer.out(tittle);
-        Bot<String> bot = (Bot<String>) player;
-        String key = bot.input(
-                deck,
-                TakeCardCommand.KEY,
-                SkipCommand.KEY,
-                game.getCounter()::count
-        );
-        printer.out(key);
-        return command(key);
-    }
-
-
-    public void takeCard() {
-        int index = game.getIndexCurrentPlayer();
-        PlayerData data = game.get(index);
-        List<Card> cards = game.giveOpenCard(index);
-        game.updateData(index);
-
-        String text = String.format("[%s] receives card",
-                data.getPlayer().getName()
-        );
-        printer.out(text);
-
-        View<Card> view = new StringsCardView(
-                printer,
-                SmallStringsCardInfoFactory.getInstance()::create
-        );
-        view.show(cards.get(0));
-    }
-
-    private List<String> commandKeys() {
-        List<String> keys = new ArrayList<>();
-        keys.add(SkipCommand.KEY);
-        keys.add(TakeCardCommand.KEY);
-        return keys;
-    }
-
-    private Command command(String key) {
-        switch (key.toLowerCase()) {
-            case SkipCommand.KEY:
-                return new SkipCommand(this);
-            case TakeCardCommand.KEY:
-                return new TakeCardCommand(this);
-            default:
-                throw new IllegalArgumentException("illegal command: " + key);
-        }
+    private void setCurrentPlayer(Player player) {
+        currentPlayer = player;
     }
 
     private abstract class State {
         public abstract void execute();
     }
 
-    private class BeginDealCardState extends State {
+    private class BeginAddCardState extends State {
         @Override
         public void execute() {
-            showDialogStart();
+            DialogView<String> dialog = dialogFactory.dialogStart();
+            dialog.input();
 
-            View<Deck> deckView = new StringsDeckView(
-                    printer,
-                    SmallStringsCardInfoFactory.getInstance()::create
-            );
+            View deckView = viewFactory.deckView();
 
-            for (int i = 0; i < game.numberPlayers(); i++) {
+            Iterator<Player> iterator = gameAm.playerIterator();
 
-                Player player = game.get(i).getPlayer();
-                String text = String.format("[%s] receives cards", player.getName());
-                printer.out(text);
+            while (iterator.hasNext()) {
+                Player player = iterator.next();
+                beginAddCardPlayer(player);
 
-                if (isDealer(player)) {
-                    game.giveBeginCardToDealer(i);
-                } else {
-                    game.giveBeginCardToPlayer(i);
-                }
-
-                game.updateData(i);
-
-                Deck deck = game.get(i).getDeck();
-                deckView.show(deck);
             }
-            nextState();
+
+            beginAddCardDealer();
+            DialogView<String> dialogView = dialogFactory.dialogBeginCardDealOver();
+            dialogView.input();
+
+
+        }
+
+        private void beginAddCardPlayer(Player player) {
+            List<Card> cards = gameAm.beginAddPlayerCard(player);
+            Deck deck = new Deck(cards);
+
+            beginAddCard(player, deck);
+        }
+
+        private void beginAddCardDealer() {
+            Dealer dealer = gameAm.dealer();
+            List<Card> cards = gameAm.beginAddDealerCard();
+            Deck deck = new Deck(cards);
+
+            beginAddCard(dealer, deck);
+        }
+
+        private void beginAddCard(Player player, Deck deck) {
+            InfoView info = viewFactory.infoAddCard(player);
+            info.show();
+
+            View deckView = viewFactory.deckView();
+            deckView.show(deck);
         }
     }
+
+    private abstract class ActionState extends State {
+        protected void onePlayerAction(Player player) {
+            setCurrentPlayer(player);
+            Command command = null;
+
+            while (true) {
+                showTable();
+                if (isBoot(player)) {
+                    Bot bot = (Bot) player;
+                    Deck deck = gameAm.deck(player);
+                    Bot.BotCommand botCommand = bot.input(deck);
+                    String key = toKeyCommand(botCommand);
+                    printer.out(key);
+                    command = toCommand(key);
+                } else {
+                    DialogView<String> dialog = dialogFactory.playerInputDialog(
+                            player.getName(),
+                            TakeCardCommand.KEY,
+                            SkipCommand.KEY
+                    );
+                    String key = dialog.input();
+                    command = toCommand(key);
+                }
+                command.execute();
+                if (isSkip(command)) {
+                    return;
+                }
+                if(!gameAm.isInGame(player)) {
+                    DialogView<String> dialog = dialogFactory.dialogBust(player.getName());
+                    dialog.input();
+                    return;
+                }
+            }
+
+        }
+        private boolean isSkip(Command command) {
+            return command instanceof SkipCommand;
+        }
+    }
+
+    private class PlayerActionState extends ActionState {
+
+        @Override
+        public void execute() {
+            Iterator<Player> iterator = gameAm.playerIterator();
+
+            while (iterator.hasNext()) {
+                Player player = iterator.next();
+                onePlayerAction(player);
+
+            }
+            showTable();
+        }
+
+
+    }
+
+    private class DealerOpenCardState extends State {
+        @Override
+        public void execute() {
+            Dealer dealer = gameAm.dealer();
+            if(!gameAm.isDeckOpen(dealer)) {
+                viewFactory.infoDealerShowCards().show();
+                gameAm.openDeck(dealer);
+
+                Deck deck = gameAm.deck(dealer);
+                View deckView = viewFactory.deckView();
+                deckView.show(deck);
+
+                DialogView<String> dialog = dialogFactory.dialogPressToContinue();
+                dialog.input();
+            }
+        }
+    }
+
+    private class DealerActionState extends ActionState {
+        @Override
+        public void execute() {
+            Dealer dealer = gameAm.dealer();
+            onePlayerAction(dealer);
+        }
+    }
+
 
     private class EndGameState extends State {
 
         @Override
         public void execute() {
-
+//            viewFactory.infoEnd().show();
         }
     }
 
-    private class PlayerActionsState extends State {
-
-        @Override
-        public void execute() {
-            while (game.hasNextPlayer()) {
-                showPlayersData();
-                Command command = inputCommand();
-                command.execute();
-
-                PlayerData current = game.getCurrent();
-                if(!current.isInGame() && game.hasNextPlayer()) {
-                    game.next();
-                }
-            }
-
-            nextState();
+    private Command toCommand(String key) {
+        switch (key) {
+            case TakeCardCommand.KEY:
+                return new TakeCardCommand(this);
+            case SkipCommand.KEY:
+                return new SkipCommand(this);
+            default:
+                throw new IllegalArgumentException("illegal player key command: " + key);
         }
-
     }
+
+    private String toKeyCommand(Bot.BotCommand botCommand) {
+        switch (botCommand) {
+            case TAKE:
+                return TakeCardCommand.KEY;
+            case SKIP:
+                return SkipCommand.KEY;
+            default:
+                throw new IllegalArgumentException("illegal bot command: " + botCommand);
+        }
+    }
+
+
 
     private void nextState() {
-        if(state instanceof BeginDealCardState) {
-            state = new PlayerActionsState();
+        if (state instanceof BeginAddCardState) {
+            state = new PlayerActionState();
             return;
         }
-        if(state instanceof PlayerActionsState) {
-            state = new EndGameState();
+        if (state instanceof PlayerActionState) {
+            state = new DealerOpenCardState();
             return;
         }
+        if (state instanceof DealerOpenCardState) {
+            state = new DealerActionState();
+            return;
+        }
+
+        state = new EndGameState();
 
     }
 

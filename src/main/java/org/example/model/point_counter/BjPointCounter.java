@@ -18,7 +18,7 @@ public class BjPointCounter implements PointCounter {
     }
 
     @Override
-    public int count(Deck deck) {
+    public Integer apply(Deck deck) {
         int points = 0;
         for (Card card : deck.toList()) {
             points += cardPoint(card);
@@ -59,4 +59,6 @@ public class BjPointCounter implements PointCounter {
                 throw new IllegalArgumentException("illegal card rank: " + rank);
         }
     }
+
+
 }

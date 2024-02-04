@@ -2,7 +2,7 @@ package org.example.view.views.group_player_data_view;
 
 import org.example.model.Deck;
 import org.example.model.card.Card;
-import org.example.model.player.Bot;
+import org.example.model.player.bot.Bot;
 import org.example.model.player.Player;
 import org.example.model.game.PlayerStatus;
 import org.example.model.game.PlayerData;
@@ -70,7 +70,7 @@ public class TextListPlayerDataView extends ListPlayerDataView<String> {
 
         List<String> strings = new ArrayList<>();
         String name = player.getName();
-        if(player instanceof Bot<?>) {
+        if(player instanceof Bot) {
             name+="[bot]";
         }
         strings.add(name);

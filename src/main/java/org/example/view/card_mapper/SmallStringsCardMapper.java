@@ -1,6 +1,6 @@
-package org.example.view.card_info_factory;
+package org.example.view.card_mapper;
 
-public class SmallStringsCardInfoFactory extends StringsCardInfoFactory{
+public class SmallStringsCardMapper extends StringsCardMapper {
 
     public static final String CHANGE_SYMBOL = "$";
     private static final String[] BACK = {
@@ -169,11 +169,11 @@ public class SmallStringsCardInfoFactory extends StringsCardInfoFactory{
 
 
 
-    private static SmallStringsCardInfoFactory factory;
+    private static SmallStringsCardMapper factory;
 
-    public static SmallStringsCardInfoFactory getInstance() {
+    public static SmallStringsCardMapper getInstance() {
         if(factory == null) {
-            factory = new SmallStringsCardInfoFactory();
+            factory = new SmallStringsCardMapper();
         }
         return factory;
     }

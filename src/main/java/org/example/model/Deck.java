@@ -12,6 +12,10 @@ public class Deck {
     public Deck() {
     }
 
+    public Deck(List<Card> cards) {
+        this.cards.addAll(cards);
+    }
+
     public Card take() {
         return cards.remove(cards.size() - 1);
     }
@@ -36,12 +40,17 @@ public class Deck {
     }
 
     public boolean isOpen() {
-        for (Card card :                cards) {
-            if(!card.isOpen()) {
+        for (Card card : cards) {
+            if (!card.isOpen()) {
                 return false;
             }
         }
         return true;
     }
 
+    public void open() {
+        for (Card card : cards) {
+            card.open();
+        }
+    }
 }
