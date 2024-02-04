@@ -269,7 +269,10 @@ public class GameController {
                     game.next();
                 }
             }
+
+            nextState();
         }
+
     }
 
     private void nextState() {

@@ -3,6 +3,7 @@ package org.example.model.game;
 import org.example.model.Deck;
 import org.example.model.Rules;
 import org.example.model.card.Card;
+import org.example.model.player.Dealer;
 import org.example.model.player.Player;
 import org.example.model.point_counter.PointCounter;
 
@@ -17,11 +18,12 @@ public class Game {
     private final Deck masterDeck;
 
     private final List<PlayerData> playerDataList = new ArrayList<>();
+    private final PlayerData dealerData;
     private final PlayerDataIterator iterator;
 
 
 
-    public Game(Rules rules, PointCounter counter, Deck masterDeck, Player... players) {
+    public Game(Rules rules, PointCounter counter, Deck masterDeck, Dealer dealer, Player... players) {
         this.rules = rules;
         this.counter = counter;
         this.masterDeck = masterDeck;
@@ -33,6 +35,8 @@ public class Game {
             PlayerData data = new PlayerData(player, deck);
             playerDataList.add(data);
         }
+
+        dealerData = new PlayerData(dealer, new Deck());
 
         iterator = new PlayerDataIterator(playerDataList);
 

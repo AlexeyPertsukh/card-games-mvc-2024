@@ -20,13 +20,14 @@ public class Main {
         Player firstPlayer = new Player("Player 1");
 //        Player secondPlayer = new Player("Player 2");
         Player secondPlayer = new Bot<String>("Player 2", new DealerAi());
-        Player thirdPlayer = new Dealer<String>("Dealer");
+        Dealer dealer = new Dealer<String>("Dealer");
 
         Game game = new Game(
                 Rules.getInstance(),
                 BjPointCounter.getInstance(),
                 deck,
-                firstPlayer, secondPlayer, thirdPlayer
+                dealer,
+                firstPlayer, secondPlayer
         );
 
         GameController gameController = new GameController(printer, reader, game);
