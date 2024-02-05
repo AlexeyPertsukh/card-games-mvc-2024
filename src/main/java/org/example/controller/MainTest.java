@@ -1,17 +1,11 @@
 package org.example.controller;
 
-import org.example.view.views.printer.ColorPrinter;
 import org.example.view.views.printer.ConsolePrinter;
 import org.example.view.views.printer.Printer;
-import org.example.view.views.view_menu.MenuView;
-import org.example.view.views.view_menu.StringsMenuView;
+import org.example.view.views.view_menu.BasicStringsMenuView;
+import org.example.view.views.view_menu.menu_model.LetterMenu;
 import org.example.view.views.view_menu.menu_model.Menu;
 import org.example.view.views.view_menu.menu_model.NumericMenu;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class MainTest {
     public static void main(String[] args) {
@@ -25,10 +19,10 @@ public class MainTest {
         menu.add("two");
         menu.add("three");
 
-        var menuView = new StringsMenuView(printer);
+        var menuView = new BasicStringsMenuView(printer);
         menuView.show(menu);
 
-        String text = menu.getValue("12");
+        String text = menu.getValue("b");
         System.out.println(text);
 
     }

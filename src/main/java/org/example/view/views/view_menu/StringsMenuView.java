@@ -5,12 +5,15 @@ import org.example.view.views.view_menu.menu_model.Menu;
 
 import java.util.List;
 
-public class StringsMenuView implements MenuView<String[]>{
-    private static final String TEMPLATE = "%s. %s";
-    protected final Printer printer;
+public abstract class StringsMenuView implements MenuView<String[]>{
 
-    public StringsMenuView(Printer printer) {
+    protected final Printer printer;
+    private final String textTemplate;
+
+
+    public StringsMenuView(Printer printer, String textTemplate) {
         this.printer = printer;
+        this.textTemplate = textTemplate;
     }
 
     @Override
@@ -19,8 +22,9 @@ public class StringsMenuView implements MenuView<String[]>{
         printer.output(menu.tittle());
         printer.output("-------");
         for (Menu.Item item : items                ) {
-            String text = String.format(TEMPLATE, item.key, item.value);
+            String text = String.format(textTemplate, item.key, item.value);
             printer.output(text);
         }
+
     }
 }
