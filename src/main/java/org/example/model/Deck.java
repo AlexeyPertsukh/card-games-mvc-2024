@@ -16,6 +16,11 @@ public class Deck {
         this.cards.addAll(cards);
     }
 
+    public Card get(int index) {
+        return cards.get(index);
+    }
+
+
     public Card take() {
         return cards.remove(cards.size() - 1);
     }
@@ -34,9 +39,6 @@ public class Deck {
 
     public void shuffle() {
         Collections.shuffle(cards);
-    }
-
-    public void sort() {
     }
 
     public boolean isOpen() {

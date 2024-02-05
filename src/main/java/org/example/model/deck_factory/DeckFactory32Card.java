@@ -10,6 +10,6 @@ public class DeckFactory32Card extends BasicDeckFactory{
 
     @Override
     public Deck get() {
-        return get(CardRank.SIX);
+        return getFrom(CardRank.SIX);
     }
 }

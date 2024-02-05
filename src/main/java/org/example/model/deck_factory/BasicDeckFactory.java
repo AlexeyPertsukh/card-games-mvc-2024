@@ -6,7 +6,7 @@ import org.example.model.card.CardRank;
 import org.example.model.card.CardSuit;
 
 public abstract class BasicDeckFactory  implements DeckFactory{
-    protected Deck get(CardRank start) {
+    protected Deck getFrom(CardRank start) {
         Deck deck = new Deck();
         int startIndex = start.ordinal();
         CardRank[] ranks = CardRank.values();
