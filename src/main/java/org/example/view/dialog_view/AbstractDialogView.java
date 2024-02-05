@@ -12,27 +12,35 @@ public abstract class AbstractDialogView<T> implements DialogView<T> {
     private final String tittle;
     private final String errorMessage;
     private final Predicate<String> predicate;
-    private final Function<String, T> map;
+    private final Function<String, T> mapper;
 
-    public AbstractDialogView(Printer printer, Reader reader, String tittle, String errorMessage, Predicate<String> predicate, Function<String, T> map) {
+    public AbstractDialogView(Printer printer, Reader reader, String tittle, String errorMessage, Predicate<String> predicate, Function<String, T> mapper) {
         this.printer = printer;
         this.reader = reader;
         this.tittle = tittle;
         this.errorMessage = errorMessage;
         this.predicate = predicate;
-        this.map = map;
+        this.mapper = mapper;
     }
 
 
     @Override
     public T input() {
         while (true) {
-            printer.output(tittle);
+            showTittle();
             String key = reader.input();
             if (predicate.test(key)) {
-                return map.apply(key);
+                return mapper.apply(key);
             }
-            printer.output(errorMessage);
+            showErrorMessage();
         }
+    }
+
+    protected void showTittle() {
+        printer.output(tittle);
+    }
+
+    protected void showErrorMessage() {
+        printer.output(errorMessage);
     }
 }
