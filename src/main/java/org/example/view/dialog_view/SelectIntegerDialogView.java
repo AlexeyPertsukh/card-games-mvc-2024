@@ -8,18 +8,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class SelectIntegerDialogView extends IntegerDialogView{
+public class SelectIntegerDialogView extends IntegerDialogView {
     public SelectIntegerDialogView(Printer printer, Reader reader, String tittle, String errorMessage, List<Integer> integers) {
         super(printer, reader, tittle, errorMessage, predicate(integers));
     }
 
-    public SelectIntegerDialogView(Printer printer, Reader reader, String tittle, String errorMessage, Integer... integers) {
+    public SelectIntegerDialogView(Printer printer, Reader reader, String tittle, String errorMessage, int... integers) {
         this(printer, reader, tittle, errorMessage, list(integers));
     }
 
-    private static List<Integer> list(Integer... integers) {
+    private static List<Integer> list(int... integers) {
         List<Integer> list = new ArrayList<>();
-        Collections.addAll(list, integers);
+        for (int num : integers) {
+            list.add(num);
+        }
         return list;
     }
 

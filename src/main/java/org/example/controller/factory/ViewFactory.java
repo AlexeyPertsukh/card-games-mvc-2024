@@ -2,6 +2,7 @@ package org.example.controller.factory;
 
 import org.example.model.Deck;
 import org.example.model.card.Card;
+import org.example.model.game.PlayerData;
 import org.example.model.player.Player;
 import org.example.view.views.table_data_view.TableDataView;
 import org.example.view.views.printer.Printer;
@@ -10,6 +11,8 @@ import org.example.view.info_view.InfoView;
 import org.example.view.info_view.StringsInfoView;
 import org.example.view.info_view.TextInfoView;
 import org.example.view.views.View;
+
+import java.util.List;
 
 public class ViewFactory {
     private static final String[] TITTLE = {
@@ -22,15 +25,13 @@ public class ViewFactory {
 
 
     private final Printer printer;
-    private final CardMapper<String[]> stringsCardMapper;
     private final View<Deck> deckView;
     private final View<Card> cardView;
-    private final TableDataView<?> tableView;
+    private final View<List<PlayerData>> tableView;
 
 
-    public ViewFactory(Printer printer, CardMapper<String[]> stringsCardMapper, View<Deck> deckView, View<Card> cardView, TableDataView<?> tableView) {
+    public ViewFactory(Printer printer, View<Deck> deckView, View<Card> cardView,View<List<PlayerData>> tableView) {
         this.printer = printer;
-        this.stringsCardMapper = stringsCardMapper;
         this.deckView = deckView;
         this.cardView = cardView;
         this.tableView = tableView;
