@@ -7,8 +7,8 @@ import org.example.view.views.printer.Printer;
 import java.util.List;
 import java.util.function.Function;
 
-public class MonoTextTableView extends AbstractTextTableView{
-    public MonoTextTableView(Printer printer, Function<Card, String> mapper) {
+public class TextTableView extends AbstractTextTableView{
+    public TextTableView(Printer printer, Function<Card, String> mapper) {
         super(printer, mapper);
     }
 
