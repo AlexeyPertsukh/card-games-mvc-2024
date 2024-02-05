@@ -5,31 +5,13 @@ import org.example.model.card.Card;
 import org.example.model.card.CardRank;
 import org.example.model.card.CardSuit;
 
-public class DeckFactory54Card implements DeckFactory{
-    private static DeckFactory54Card factory;
-    private DeckFactory54Card() {
-    }
+public class DeckFactory54Card extends BasicDeckFactory{
 
-    public static DeckFactory54Card getInstance() {
-        if(factory == null) {
-            factory = new DeckFactory54Card();
-        }
-        return factory;
+    public DeckFactory54Card() {
     }
 
     @Override
-    public Deck create() {
-        Deck deck = new Deck();
-        int indexRankTwo = CardRank.TWO.ordinal();
-        CardRank[] ranks = CardRank.values();
-        CardSuit[] suits = CardSuit.values();
-
-        for (int i = indexRankTwo; i < ranks.length; i++) {
-            for (CardSuit suit : suits) {
-                Card card = new Card(ranks[i], suit);
-                deck.add(card);
-            }
-        }
-        return deck;
+    public Deck get() {
+        return get(CardRank.TWO);
     }
 }

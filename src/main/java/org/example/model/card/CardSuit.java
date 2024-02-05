@@ -4,6 +4,8 @@ import static org.example.model.card.CardSuit.Color.BLACK;
 import static org.example.model.card.CardSuit.Color.RED;
 
 public enum CardSuit {
+    NONE_RED("R", RED),
+    NONE_BLACK("B", BLACK),
     DIAMOND("♦", RED),
     HEART("♥", RED),
     CLUB("♣", BLACK),
@@ -22,6 +24,10 @@ public enum CardSuit {
 
     public Color getColor() {
         return color;
+    }
+
+    public boolean isNone() {
+        return this == NONE_RED || this == NONE_BLACK;
     }
 
     public enum Color {

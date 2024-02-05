@@ -2,6 +2,9 @@ package org.example.model.deck_factory;
 
 import org.example.model.Deck;
 
-public interface DeckFactory {
-    Deck create();
+import java.util.function.Supplier;
+
+public interface DeckFactory extends Supplier<Deck> {
+    @Override
+    Deck get();
 }

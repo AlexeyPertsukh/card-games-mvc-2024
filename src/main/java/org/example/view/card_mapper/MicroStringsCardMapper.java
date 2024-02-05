@@ -2,6 +2,7 @@ package org.example.view.card_mapper;
 
 import org.example.model.card.Card;
 import org.example.model.card.CardRank;
+import org.example.model.card.CardSuit;
 
 public class MicroStringsCardMapper extends StringsCardMapper {
     private static final String[] SPADES = {
@@ -73,18 +74,11 @@ public class MicroStringsCardMapper extends StringsCardMapper {
     };
 
     private static final String BACK = "\uD83C\uDCA0";
-    private static final String JOKER = "\uD83C\uDCCF";
+    private static final String JOKER_RED = "\uD83C\uDCDF";
+    private static final String JOKER_BLACK = "\uD83C\uDCBF";
 
-    private static MicroStringsCardMapper mapper;
 
-    private MicroStringsCardMapper() {
-    }
-
-    public static MicroStringsCardMapper getInstance() {
-        if(mapper == null) {
-            mapper = new MicroStringsCardMapper();
-        }
-        return mapper;
+    public MicroStringsCardMapper() {
     }
 
     @Override
@@ -95,7 +89,10 @@ public class MicroStringsCardMapper extends StringsCardMapper {
 
         CardRank rank = card.getRank();
         if(rank == CardRank.JOKER) {
-            return toStrings(JOKER);
+            if(card.getSuit().getColor() == CardSuit.Color.RED) {
+                return toStrings(JOKER_RED);
+            }
+            return toStrings(JOKER_BLACK);
         }
 
         int num = rank.ordinal() - 1;

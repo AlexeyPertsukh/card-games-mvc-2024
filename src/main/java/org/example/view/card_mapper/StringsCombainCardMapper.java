@@ -58,6 +58,9 @@ public abstract class StringsCombainCardMapper extends StringsCardMapper {
     }
 
     private String suitPicture(CardSuit suit) {
+        if(suit.isNone()) {
+            return suit.getIcon();
+        }
         switch (suit) {
             case DIAMOND:
                 return diamond();

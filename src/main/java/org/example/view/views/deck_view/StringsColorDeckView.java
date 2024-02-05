@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class StringsColorDeckView extends StringsDeckView {
+public class StringsColorDeckView extends StringsDeckView implements ColorMapper{
     private final ColorPrinter colorPrinter;
 
     public StringsColorDeckView(ColorPrinter colorPrinter, Function<Card, String[]> map) {
@@ -46,20 +46,6 @@ public class StringsColorDeckView extends StringsDeckView {
             colorPrinter.colorOut(color, pic[line]);
         }
         colorPrinter.output("");
-    }
-
-    private ColorPrinter.Color color(Card card) {
-        if (!card.isOpen()) {
-            return ColorPrinter.Color.RESET;
-        }
-        switch (card.getSuit().getColor()) {
-            case BLACK:
-                return ColorPrinter.Color.GREEN;
-            case RED:
-                return ColorPrinter.Color.RED;
-            default:
-                return ColorPrinter.Color.RESET;
-        }
     }
 
 

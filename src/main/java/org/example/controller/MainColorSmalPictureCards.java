@@ -31,7 +31,7 @@ public class MainColorSmalPictureCards {
         Printer printer = new ConsolePrinter();
         ColorPrinter colorPrinter = new ColorConsolePrinter();
         Reader reader = new KeyboardReader();
-        Deck deck = DeckFactory54Card.getInstance().create();
+        Deck deck = (new DeckFactory54Card()).get();
         Player firstPlayer = new Player("Player 1");
 //        Player secondPlayer = new Player("Player 2");
         Player secondPlayer = new Bot("Player 2", new DealerAi(), BjPointCounter.getInstance());

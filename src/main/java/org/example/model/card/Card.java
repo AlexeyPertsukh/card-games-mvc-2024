@@ -10,9 +10,17 @@ public class Card {
     }
 
     public Card(CardRank rank, CardSuit suit, boolean isOpen) {
+        validate(rank, suit);
         this.rank = rank;
         this.suit = suit;
         this.isOpen = isOpen;
+    }
+
+    private static void validate(CardRank rank, CardSuit suit) {
+        if ((rank == CardRank.JOKER && !suit.isNone()) || (rank != CardRank.JOKER && suit.isNone())) {
+            String message = String.format("illegal card: suit %s, rank %s", suit, rank);
+            throw new IllegalArgumentException(message);
+        }
     }
 
     public CardRank getRank() {
