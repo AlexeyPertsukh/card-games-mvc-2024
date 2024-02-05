@@ -6,7 +6,7 @@ import org.example.view.views.printer.ColorPrinter;
 public interface ColorMapper {
      default ColorPrinter.Color color(Card card) {
         if (!card.isOpen()) {
-            return ColorPrinter.Color.RESET;
+            return ColorPrinter.Color.DEFAULT;
         }
         switch (card.getSuit().getColor()) {
             case BLACK:
@@ -14,7 +14,7 @@ public interface ColorMapper {
             case RED:
                 return ColorPrinter.Color.RED;
             default:
-                return ColorPrinter.Color.RESET;
+                return ColorPrinter.Color.DEFAULT;
         }
     }
 }

@@ -17,7 +17,7 @@ public class TextColorTableDataView extends AbstractTableDataView<String> {
     private final static String LINE = "----";
     private final static ColorPrinter.Color NAME_COLOR = ColorPrinter.Color.YELLOW;
     private final static ColorPrinter.Color IN_GAME_COLOR = ColorPrinter.Color.BLUE;
-    private final static ColorPrinter.Color BUST_COLOR = ColorPrinter.Color.RESET;
+    private final static ColorPrinter.Color BUST_COLOR = ColorPrinter.Color.DEFAULT;
     private final static ColorPrinter.Color WIN_COLOR = ColorPrinter.Color.GREEN;
     private final static ColorPrinter.Color BLACK_JACK_COLOR = WIN_COLOR;
     private final static ColorPrinter.Color LOSE_COLOR = BUST_COLOR;
@@ -96,7 +96,7 @@ public class TextColorTableDataView extends AbstractTableDataView<String> {
                 List<Card> cards = deck.toList();
 
                 String text = "";
-                ColorPrinter.Color color = ColorPrinter.Color.RESET;
+                ColorPrinter.Color color = ColorPrinter.Color.DEFAULT;
                 if (cards.size() > line) {
                     Card card = cards.get(line);
                     text = text(card);
@@ -111,7 +111,7 @@ public class TextColorTableDataView extends AbstractTableDataView<String> {
 
     private ColorPrinter.Color color(Card card) {
         if (!card.isOpen()) {
-            return ColorPrinter.Color.RESET;
+            return ColorPrinter.Color.DEFAULT;
         }
         switch (card.getSuit().getColor()) {
             case BLACK:
@@ -119,7 +119,7 @@ public class TextColorTableDataView extends AbstractTableDataView<String> {
             case RED:
                 return ColorPrinter.Color.RED;
             default:
-                return ColorPrinter.Color.RESET;
+                return ColorPrinter.Color.DEFAULT;
         }
     }
 
@@ -131,7 +131,7 @@ public class TextColorTableDataView extends AbstractTableDataView<String> {
             case LOSE: return LOSE_COLOR;
             case WIN: return WIN_COLOR;
             case BLACK_JACK: return BLACK_JACK_COLOR;
-            default: return ColorPrinter.Color.RESET;
+            default: return ColorPrinter.Color.DEFAULT;
         }
     }
 

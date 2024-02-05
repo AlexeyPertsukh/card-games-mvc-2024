@@ -2,7 +2,6 @@ package org.example.view.views.card_view;
 
 import org.example.model.card.Card;
 import org.example.view.views.printer.ColorPrinter;
-import org.example.view.views.printer.Printer;
 
 import java.util.function.Function;
 
@@ -27,7 +26,7 @@ public class StringsColorCardView extends CardView<String[]> {
 
     private ColorPrinter.Color color(Card card) {
         if (!card.isOpen()) {
-            return ColorPrinter.Color.RESET;
+            return ColorPrinter.Color.DEFAULT;
         }
         switch (card.getSuit().getColor()) {
             case BLACK:
@@ -35,7 +34,7 @@ public class StringsColorCardView extends CardView<String[]> {
             case RED:
                 return ColorPrinter.Color.RED;
             default:
-                return ColorPrinter.Color.RESET;
+                return ColorPrinter.Color.DEFAULT;
         }
     }
 }

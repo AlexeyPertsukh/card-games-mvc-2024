@@ -5,7 +5,7 @@ public interface ColorPrinter extends Printer{
     void colorOut(Color color, String text);
 
     public enum Color {
-        RESET("\u001B[0m"),
+        DEFAULT("\u001B[0m"),
         RED("\u001B[31m"),
         GREEN("\u001B[32m"),
         BLUE("\u001B[34m"),

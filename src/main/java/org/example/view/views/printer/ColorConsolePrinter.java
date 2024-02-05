@@ -11,7 +11,7 @@ public class ColorConsolePrinter extends ConsolePrinter implements ColorPrinter{
     public void colorOut(Color color, String text) {
         System.out.print(color.getCode());
         out(text);
-        System.out.print(Color.RESET.getCode());
+        System.out.print(Color.DEFAULT.getCode());
     }
 
 }

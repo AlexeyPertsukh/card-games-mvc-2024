@@ -1,6 +1,10 @@
 package org.example.view.card_mapper;
 
+import org.example.view.card_mapper.suit_symbol_factory.PrimitiveSuitSymbolFactory;
+import org.example.view.card_mapper.suit_symbol_factory.SuitSymbolFactory;
+
 public class SmallStringsCardMapper extends StringsCombainCardMapper {
+    private final static SuitSymbolFactory symbolFactory = new PrimitiveSuitSymbolFactory();
 
     public static final String CHANGE_SYMBOL = "$";
     private static final String[] BACK = {
@@ -154,21 +158,6 @@ public class SmallStringsCardMapper extends StringsCombainCardMapper {
             "└───────────┘",
     };
 
-
-    private static final String DIAMOND = "#";
-    private static final String HEART = "v";
-    private static final String SPADE = "^";
-    private static final String CLUB = "*";
-
-            /*
-        private static final String DIAMOND = "♦";
-    HEART("♥"),
-    CLUB("♣"),
-    SPADE("♠");
-     */
-
-
-
     private static SmallStringsCardMapper factory;
 
     public static SmallStringsCardMapper getInstance() {
@@ -260,22 +249,22 @@ public class SmallStringsCardMapper extends StringsCombainCardMapper {
 
     @Override
     protected String diamond() {
-        return DIAMOND;
+        return symbolFactory.diamond();
     }
 
     @Override
     protected String heart() {
-        return HEART;
+        return symbolFactory.heart();
     }
 
     @Override
     protected String club() {
-        return CLUB;
+        return symbolFactory.club();
     }
 
     @Override
     protected String spade() {
-        return SPADE;
+        return symbolFactory.spade();
     }
 
 
