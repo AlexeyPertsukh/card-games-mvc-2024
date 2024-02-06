@@ -1,11 +1,10 @@
 package org.example.view.dialog_view;
 
-import org.example.view.views.printer.Printer;
-import org.example.view.views.reader.Reader;
+import org.example.view.printer.Printer;
+import org.example.view.reader.Reader;
 import org.example.view.views.view_menu.menu_model.Menu;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class KeyMenuDialogView extends SelectStringDialogView{
     private final Menu menu;

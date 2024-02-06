@@ -4,8 +4,8 @@ import org.example.model.Deck;
 import org.example.view.card_mapper.TextCardMapper;
 import org.example.view.views.deck_view.DeckView;
 import org.example.view.views.deck_view.TextColorDeckView;
-import org.example.view.views.printer.ColorConsolePrinter;
-import org.example.view.views.printer.ColorPrinter;
+import org.example.view.printer.ColorConsolePrinter;
+import org.example.view.printer.ColorPrinter;
 
 public class MainDeckTestText {
     public static void main(String[] args) {

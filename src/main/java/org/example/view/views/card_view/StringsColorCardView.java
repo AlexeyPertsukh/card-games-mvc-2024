@@ -1,7 +1,7 @@
 package org.example.view.views.card_view;
 
 import org.example.model.card.Card;
-import org.example.view.views.printer.ColorPrinter;
+import org.example.view.printer.ColorPrinter;
 
 import java.util.function.Function;
 

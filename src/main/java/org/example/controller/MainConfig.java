@@ -25,13 +25,13 @@ import org.example.view.views.card_view.CardView;
 import org.example.view.views.card_view.StringsCardView;
 import org.example.view.views.card_view.StringsColorCardView;
 import org.example.view.views.deck_view.*;
-import org.example.view.views.printer.ColorConsolePrinter;
-import org.example.view.views.printer.ConsolePrinter;
-import org.example.view.views.printer.Printer;
-import org.example.view.views.reader.KeyboardReader;
-import org.example.view.views.reader.Reader;
-import org.example.view.views.table_data_view.TextColorTableDataView;
-import org.example.view.views.table_data_view.TextTableDataView;
+import org.example.view.printer.ColorConsolePrinter;
+import org.example.view.printer.ConsolePrinter;
+import org.example.view.printer.Printer;
+import org.example.view.reader.KeyboardReader;
+import org.example.view.reader.Reader;
+import org.example.view.views.player_data_view.ColorTextPdataView;
+import org.example.view.views.player_data_view.TextPdataView;
 import org.example.view.views.view_menu.BasicStringsMenuView;
 import org.example.view.views.view_menu.MenuView;
 import org.example.view.views.view_menu.menu_model.Menu;
@@ -272,9 +272,9 @@ public class MainConfig {
 
     private static View<List<PlayerData>> tableDataView(Color color, CardMapper<String> cardMapper) {
         if(color == Color.MONO) {
-            return new TextTableDataView(new ConsolePrinter(), cardMapper);
+            return new TextPdataView(new ConsolePrinter(), cardMapper);
         }
-        return new TextColorTableDataView(new ColorConsolePrinter(), cardMapper);
+        return new ColorTextPdataView(new ColorConsolePrinter(), cardMapper);
     }
 
     private static Color color(int num) {

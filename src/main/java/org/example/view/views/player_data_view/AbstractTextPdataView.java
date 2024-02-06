@@ -5,7 +5,7 @@ import org.example.model.game.PlayerData;
 import org.example.model.game.PlayerStatus;
 import org.example.model.player.Player;
 import org.example.model.player.bot.Bot;
-import org.example.view.views.printer.Printer;
+import org.example.view.printer.Printer;
 
 import java.util.ArrayList;
 import java.util.List;

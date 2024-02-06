@@ -1,4 +1,4 @@
-package org.example.view.views.reader;
+package org.example.view.reader;
 
 public interface Reader {
     String input();

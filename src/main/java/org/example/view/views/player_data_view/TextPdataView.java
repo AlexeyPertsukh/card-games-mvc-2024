@@ -4,13 +4,9 @@ import org.example.model.Deck;
 import org.example.model.card.Card;
 import org.example.model.game.PlayerData;
 import org.example.model.game.PlayerStatus;
-import org.example.model.player.Player;
-import org.example.model.player.bot.Bot;
-import org.example.view.views.printer.Printer;
-import org.example.view.views.table_view.TableView;
+import org.example.view.printer.Printer;
 import org.example.view.views.table_view.TextTableView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 

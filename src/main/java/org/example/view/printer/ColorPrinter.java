@@ -1,4 +1,4 @@
-package org.example.view.views.printer;
+package org.example.view.printer;
 
 public interface ColorPrinter extends Printer{
     void colorOutput(Color color, String text);

@@ -1,4 +1,4 @@
-package org.example.view.views.reader;
+package org.example.view.reader;
 
 import java.util.Scanner;
 

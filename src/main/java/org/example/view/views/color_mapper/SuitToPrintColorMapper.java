@@ -1,7 +1,7 @@
 package org.example.view.views.color_mapper;
 
 import org.example.model.card.CardSuit;
-import org.example.view.views.printer.ColorPrinter;
+import org.example.view.printer.ColorPrinter;
 
 import java.util.function.Function;
 

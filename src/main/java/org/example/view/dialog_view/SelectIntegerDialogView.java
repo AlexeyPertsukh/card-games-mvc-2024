@@ -1,10 +1,9 @@
 package org.example.view.dialog_view;
 
-import org.example.view.views.printer.Printer;
-import org.example.view.views.reader.Reader;
+import org.example.view.printer.Printer;
+import org.example.view.reader.Reader;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 

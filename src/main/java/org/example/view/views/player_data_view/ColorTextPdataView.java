@@ -5,10 +5,8 @@ import org.example.model.card.Card;
 import org.example.model.card.CardSuit;
 import org.example.model.game.PlayerData;
 import org.example.model.game.PlayerStatus;
-import org.example.model.player.Player;
-import org.example.model.player.bot.Bot;
 import org.example.view.views.color_mapper.SuitToPrintColorMapper;
-import org.example.view.views.printer.ColorPrinter;
+import org.example.view.printer.ColorPrinter;
 import org.example.view.views.table_view.ColorTextTableView;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package org.example.view.views.deck_view;
 
 import org.example.model.card.Card;
-import org.example.view.views.printer.ColorPrinter;
+import org.example.view.printer.ColorPrinter;
 
 public interface ColorMapper {
      default ColorPrinter.Color color(Card card) {

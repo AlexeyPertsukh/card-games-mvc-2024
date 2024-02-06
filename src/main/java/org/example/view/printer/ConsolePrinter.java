@@ -1,6 +1,4 @@
-package org.example.view.views.printer;
-
-import org.example.view.views.printer.Printer;
+package org.example.view.printer;
 
 public class ConsolePrinter implements Printer {
     @Override

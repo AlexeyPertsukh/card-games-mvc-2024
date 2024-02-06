@@ -1,6 +1,6 @@
 package org.example.view.info_view;
 
-import org.example.view.views.printer.Printer;
+import org.example.view.printer.Printer;
 
 public class TextInfoView extends AbstractInfoView{
     private final String text;

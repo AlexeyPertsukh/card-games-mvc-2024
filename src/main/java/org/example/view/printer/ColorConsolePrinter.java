@@ -1,4 +1,4 @@
-package org.example.view.views.printer;
+package org.example.view.printer;
 
 public class ColorConsolePrinter extends ConsolePrinter implements ColorPrinter{
 

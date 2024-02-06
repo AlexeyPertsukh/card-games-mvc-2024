@@ -4,8 +4,7 @@ import org.example.model.Deck;
 import org.example.model.card.Card;
 import org.example.model.card.CardSuit;
 import org.example.view.views.color_mapper.SuitToPrintColorMapper;
-import org.example.view.views.printer.ColorPrinter;
-import org.example.view.views.printer.Printer;
+import org.example.view.printer.ColorPrinter;
 
 import java.util.List;
 import java.util.function.Function;
