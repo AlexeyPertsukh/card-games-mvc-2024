@@ -4,7 +4,7 @@ import org.example.model.card.Card;
 import org.example.model.card.CardRank;
 import org.example.model.card.CardSuit;
 
-public class MicroStringsCardMapper extends StringsCardMapper {
+public class MicroPicCardMapper implements CardMapper<String[]> {
     private static final String[] SPADES = {
             "\uD83C\uDCA2",
             "\uD83C\uDCA3",
@@ -78,7 +78,7 @@ public class MicroStringsCardMapper extends StringsCardMapper {
     private static final String JOKER_BLACK = "\uD83C\uDCBF";
 
 
-    public MicroStringsCardMapper() {
+    public MicroPicCardMapper() {
     }
 
     @Override

@@ -43,8 +43,9 @@ import java.util.function.Function;
 
 public class MainConfig {
     public final static String MICRO_PIC = "1";
-    public final static String SMALL_PIC = "2";
-    public final static String LARGE_PIC = "3";
+    public final static String MINI_PIC = "2";
+    public final static String SMALL_PIC = "3";
+    public final static String LARGE_PIC = "4";
 
     public final static String COLOR_MONO = "1";
     public final static String COLOR_COL = "2";
@@ -96,7 +97,7 @@ public class MainConfig {
             numCardPic = config.numCardPic;
         }
 
-        CardMapper<String[]> picCardMapper = picCardMapper(numCardPic);
+        CardMapper<String[]> picCardMapper = picCardMapper(String.valueOf(numCardPic));
 
         //COLOR
         int numColor = 0;
@@ -223,6 +224,7 @@ public class MainConfig {
     private static DialogView<String> dialogCardPicture(Printer printer, Reader reader) {
         Menu menu = new NumericMenu("CARD PICTURES");
         menu.add("MICRO");
+        menu.add("MINI");
         menu.add("SMALL");
         menu.add("LARGE");
 
@@ -231,14 +233,16 @@ public class MainConfig {
         return new KeyMenuDialogView(printer, reader, "select:", ERROR_MESSAGE, menu, view::show);
     }
 
-    private static CardMapper<String[]> picCardMapper(int num) {
-        switch (num) {
-            case 1:
-                return new MicroStringsCardMapper();
-            case 2:
-                return new SmallStringsCardMapper();
-            case 3:
-                return new LargeStringsCardMapper();
+    private static CardMapper<String[]> picCardMapper(String arg) {
+        switch (arg) {
+            case MICRO_PIC:
+                return new MicroPicCardMapper();
+            case MINI_PIC:
+                return new MiniPicCardMapper();
+            case SMALL_PIC:
+                return new SmallPicCardMapper();
+            case LARGE_PIC:
+                return new LargePicCardMapper();
             default:
                 throw new IllegalArgumentException("cardStringMapper");
         }
@@ -250,7 +254,7 @@ public class MainConfig {
         if(color == Color.MONO) {
             return new StringsDeckView(new ColorConsolePrinter(), cardMapper);
         }
-        return new StringsColorDeckView(new ColorConsolePrinter(), cardMapper);
+        return new ColorPicDeckView(new ColorConsolePrinter(), cardMapper);
     }
     private static DeckView<String> textDeckView(Color color, CardMapper<String> cardMapper) {
         if(color == Color.MONO) {

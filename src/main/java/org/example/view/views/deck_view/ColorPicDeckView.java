@@ -2,17 +2,16 @@ package org.example.view.views.deck_view;
 
 import org.example.model.Deck;
 import org.example.model.card.Card;
-import org.example.model.card.CardSuit;
 import org.example.view.views.printer.ColorPrinter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class StringsColorDeckView extends StringsDeckView implements ColorMapper{
+public class ColorPicDeckView extends StringsDeckView implements ColorMapper{
     private final ColorPrinter colorPrinter;
 
-    public StringsColorDeckView(ColorPrinter colorPrinter, Function<Card, String[]> map) {
+    public ColorPicDeckView(ColorPrinter colorPrinter, Function<Card, String[]> map) {
         super(colorPrinter, map);
         this.colorPrinter = colorPrinter;
     }

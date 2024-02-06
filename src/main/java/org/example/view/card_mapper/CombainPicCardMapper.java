@@ -4,7 +4,7 @@ import org.example.model.card.Card;
 import org.example.model.card.CardRank;
 import org.example.model.card.CardSuit;
 
-public abstract class StringsCombainCardMapper extends StringsCardMapper {
+public abstract class CombainPicCardMapper extends PicCardMapper {
     @Override
     public String[] apply(Card card) {
         if (!card.isOpen()) {

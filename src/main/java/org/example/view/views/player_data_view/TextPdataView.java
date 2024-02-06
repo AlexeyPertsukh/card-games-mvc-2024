@@ -3,6 +3,7 @@ package org.example.view.views.player_data_view;
 import org.example.model.Deck;
 import org.example.model.card.Card;
 import org.example.model.game.PlayerData;
+import org.example.model.game.PlayerStatus;
 import org.example.model.player.Player;
 import org.example.model.player.bot.Bot;
 import org.example.view.views.printer.Printer;
@@ -52,6 +53,7 @@ public class TextPdataView extends AbstractTextPdataView {
 
 
     @Override
-    protected void showOneStatus(List<PlayerData> data) {
+    protected void showOneStatus(PlayerStatus status, String textStatus) {
+        printer.out(textStatus);
     }
 }
