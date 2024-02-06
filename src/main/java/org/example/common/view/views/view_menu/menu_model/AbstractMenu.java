@@ -33,6 +33,11 @@ public abstract class AbstractMenu implements Menu {
     }
 
     @Override
+    public void add(List<String> strings) {
+        values.addAll(strings);
+    }
+
+    @Override
     public String getValue(String key) {
         int index = toIndex.apply(key);
         return values.get(index);

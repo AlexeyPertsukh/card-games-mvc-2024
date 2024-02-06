@@ -9,6 +9,7 @@ public interface Menu {
     String tittle();
 
     void add(String text);
+    void add(List<String> strings);
 
     String getValue(String key);
 
