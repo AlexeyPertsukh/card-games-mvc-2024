@@ -21,36 +21,27 @@ public class TextPdataView extends AbstractTextPdataView {
         tableView = new TextTableView(printer, cardMapper);
     }
 
+    @Override
+    protected void showOneName(String name) {
+        printer.out(name);
+    }
+
+    @Override
+    protected void showOneLine(String line) {
+        printer.out(line);
+    }
+
+    @Override
     protected String template() {
         return tableView.template();
     }
 
 
-    @Override
-    protected void showName(List<PlayerData> data) {
-        String template = template();
-        for (PlayerData d : data) {
-            String text = String.format(template, name(d.getPlayer()));
-            printer.out(text);
-        }
-        printer.output();
-    }
 
-    private String name(Player player) {
-        String text = player.getName();
-        if (player instanceof Bot) {
-            text += "[bot]";
-        }
-        return text;
-    }
 
     @Override
-    protected void showLine(int repeat) {
-        for (int i = 0; i < repeat; i++) {
-            String text = String.format(template(), LINE);
-            printer.out(text);
-        }
-        printer.output();
+    protected void showOnePoint(String textPoint) {
+        printer.out(textPoint);
     }
 
     @Override
@@ -61,16 +52,6 @@ public class TextPdataView extends AbstractTextPdataView {
 
 
     @Override
-    protected void showPoint(List<PlayerData> data) {
-        for (PlayerData d : data) {
-            String text = text(d.getPoint(), d.isCardsOpen());
-            text = String.format(template(), text);
-            printer.out(text);
-        }
-        printer.output();
-    }
-
-    @Override
-    protected void showStatus(List<PlayerData> data) {
+    protected void showOneStatus(List<PlayerData> data) {
     }
 }

@@ -13,8 +13,10 @@ import org.example.model.point_counter.BjPointCounter;
 import org.example.model.point_counter.PointCounter;
 import org.example.view.card_mapper.TextCardMapper;
 import org.example.view.views.View;
+import org.example.view.views.player_data_view.ColorTextPdataView;
 import org.example.view.views.player_data_view.TextPdataView;
 import org.example.view.views.printer.ColorConsolePrinter;
+import org.example.view.views.printer.ColorPrinter;
 import org.example.view.views.printer.ConsolePrinter;
 import org.example.view.views.printer.Printer;
 import org.example.view.views.reader.KeyboardReader;
@@ -28,6 +30,7 @@ public class MainTest {
     public static void main(String[] args) {
 
         Printer printer = new ConsolePrinter();
+        ColorPrinter colorPrinter = new ColorConsolePrinter();
         Reader reader = new KeyboardReader();
 
         DeckFactory factory = new DeckFactory54CardRandom(3);
@@ -63,7 +66,7 @@ public class MainTest {
             data.add(d);
         }
 
-        View<List<PlayerData>> view = new TextPdataView(printer, TextCardMapper.getInstance());
+        View<List<PlayerData>> view = new ColorTextPdataView(colorPrinter, TextCardMapper.getInstance());
         view.show(data);
 
     }

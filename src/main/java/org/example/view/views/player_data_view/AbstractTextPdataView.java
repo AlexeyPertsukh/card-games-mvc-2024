@@ -1,15 +1,13 @@
 package org.example.view.views.player_data_view;
 
 import org.example.model.Deck;
-import org.example.model.card.Card;
 import org.example.model.game.PlayerData;
+import org.example.model.player.Player;
+import org.example.model.player.bot.Bot;
 import org.example.view.views.printer.Printer;
-import org.example.view.views.table_view.TableView;
-import org.example.view.views.table_view.TextTableView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public abstract class AbstractTextPdataView extends PdataView<String> {
     protected static final String LINE = "------";
@@ -28,15 +26,42 @@ public abstract class AbstractTextPdataView extends PdataView<String> {
         showTable(data);
         showLine(repeat);
         showPoint(data);
-        showStatus(data);
+        showOneStatus(data);
     }
 
-    protected abstract void showName(List<PlayerData> data);
-    protected abstract void showLine(int repeat);
-    protected abstract void showTable(List<PlayerData> data);
-    protected abstract void showPoint(List<PlayerData> data);
-    protected abstract void showStatus(List<PlayerData> data);
+    private void showName(List<PlayerData> data) {
+        String template = template();
+        for (PlayerData d : data) {
+            String text = String.format(template, name(d.getPlayer()));
+            showOneName(text);
+        }
+        printer.output();
+    }
 
+    private void showPoint(List<PlayerData> data) {
+        for (PlayerData d : data) {
+            String text = text(d.getPoint(), d.isCardsOpen());
+            text = String.format(template(), text);
+            showOnePoint(text);
+        }
+        printer.output();
+    }
+
+    private void showLine(int repeat) {
+        for (int i = 0; i < repeat; i++) {
+            String text = String.format(template(), LINE);
+            showOneLine(text);
+        }
+        printer.output();
+    }
+
+    protected String name(Player player) {
+        String text = player.getName();
+        if (player instanceof Bot) {
+            text += "[bot]";
+        }
+        return text;
+    }
     protected List<Deck> decks(List<PlayerData> data) {
         List<Deck> decks = new ArrayList<>();
         for (PlayerData d : data) {
@@ -49,4 +74,10 @@ public abstract class AbstractTextPdataView extends PdataView<String> {
         return isOpen ? String.format(POINT_TEMPLATE, point) : HIDDEN;
     }
 
+    protected abstract void showOneName(String name);
+    protected abstract void showOneLine(String line);
+    protected abstract void showOnePoint(String textPoint);
+    protected abstract String template();
+    protected abstract void showTable(List<PlayerData> data);
+    protected abstract void showOneStatus(List<PlayerData> data);
 }
