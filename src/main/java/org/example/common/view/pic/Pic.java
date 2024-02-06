@@ -6,11 +6,11 @@ public class Pic {
     private final String[] value;
 
     public Pic(@NotNull String[] value) {
-        this.value = value;
+        this.value = value.clone();
     }
 
     public Pic(@NotNull String value) {
-        this.value = new String[]{value};
+        this(new String[]{value});
     }
 
     public String get(int index) {
@@ -25,3 +25,5 @@ public class Pic {
         return value().length;
     }
 }
+
+/* TODO check that the string does not change */

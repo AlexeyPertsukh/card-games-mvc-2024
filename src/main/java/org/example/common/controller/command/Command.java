@@ -1,4 +1,4 @@
-package org.example.black_jack.controller.command;
+package org.example.common.controller.command;
 
 public interface Command {
     void execute();
