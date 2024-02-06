@@ -1,6 +1,7 @@
 package org.example.black_jack.controller;
 
-import org.example.black_jack.controller.factory.ViewFactory;
+import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
+import org.example.black_jack.controller.factory.view_factory.ViewFactory;
 import org.example.black_jack.controller.game.PlayerData;
 import org.example.black_jack.controller.command.Command;
 import org.example.black_jack.controller.command.TakeCardCommand;
@@ -23,15 +24,17 @@ public class GameController {
 
     private final Game game;
     private final ViewFactory viewFactory;
+    private final DialogFactory dialogFactory;
     private final GameController controller = this;
     private State state;
     private Player currentPlayer;
 
 
-    public GameController(Game game, ViewFactory viewFactory) {
+    public GameController(Game game, ViewFactory viewFactory, DialogFactory dialogFactory) {
         this.game = game;
 
         this.viewFactory = viewFactory;
+        this.dialogFactory = dialogFactory;
     }
 
     public void go() {
@@ -81,7 +84,7 @@ public class GameController {
     private class BeginAddCardState extends State {
         @Override
         public void execute() {
-            DialogView<String> dialog = viewFactory.dialogStart();
+            DialogView<String> dialog = dialogFactory.dialogStart();
             dialog.input();
 
             Iterator<Player> iterator = game.playerIterator();
@@ -93,7 +96,7 @@ public class GameController {
             }
 
             beginAddCardDealer();
-            DialogView<String> dialogView = viewFactory.dialogBeginCardDealOver();
+            DialogView<String> dialogView = dialogFactory.dialogBeginCardDealOver();
             dialogView.input();
 
 
@@ -135,7 +138,7 @@ public class GameController {
                     return;
                 }
                 if(!game.isInGame(player)) {
-                    DialogView<String> dialog = viewFactory.dialogBust(player.getName());
+                    DialogView<String> dialog = dialogFactory.dialogBust(player.getName());
                     dialog.input();
                     return;
                 }
@@ -149,7 +152,7 @@ public class GameController {
                     viewFactory.infoText(key).show();
                     command = toCommand(key);
                 } else {
-                    DialogView<String> dialog = viewFactory.dialogPlayerInput(
+                    DialogView<String> dialog = dialogFactory.dialogPlayerInput(
                             player.getName(),
                             TakeCardCommand.KEY,
                             SkipCommand.KEY
@@ -196,7 +199,7 @@ public class GameController {
                 View deckView = viewFactory.picDeckView(deck);
                 deckView.show();
 
-                DialogView<String> dialog = viewFactory.dialogPressToContinue();
+                DialogView<String> dialog = dialogFactory.dialogPressToContinue();
                 dialog.input();
             }
         }

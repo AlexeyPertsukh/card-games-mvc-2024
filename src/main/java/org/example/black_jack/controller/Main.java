@@ -1,7 +1,10 @@
 package org.example.black_jack.controller;
 
-import org.example.black_jack.controller.factory.MonoViewFactory;
-import org.example.black_jack.controller.factory.ViewFactory;
+import org.example.black_jack.controller.factory.dialog_factory.BaseDialogFactory;
+import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
+import org.example.black_jack.controller.factory.view_factory.BaseViewFactory;
+import org.example.black_jack.controller.factory.view_factory.ColorViewFactory;
+import org.example.black_jack.controller.factory.view_factory.ViewFactory;
 import org.example.black_jack.controller.game.Game;
 import org.example.black_jack.controller.game.GameAmerican;
 import org.example.black_jack.model.BjPointCounter;
@@ -28,8 +31,10 @@ public class Main {
 
         TextCardMapper textCardMapper = new TextCardMapper();
         PicCardMapper picCardMapper = new SmallPicCardMapper();
-        ViewFactory viewFactory = new MonoViewFactory(textCardMapper, picCardMapper);
-        GameController controller = new GameController(game, viewFactory);
+//        ViewFactory viewFactory = new BaseViewFactory(textCardMapper, picCardMapper);
+        ViewFactory viewFactory = new ColorViewFactory(textCardMapper, picCardMapper);
+        DialogFactory dialogFactory = new BaseDialogFactory();
+        GameController controller = new GameController(game, viewFactory, dialogFactory);
         controller.go();
     }
 }

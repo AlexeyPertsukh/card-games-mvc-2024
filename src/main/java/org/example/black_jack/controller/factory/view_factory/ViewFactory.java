@@ -1,4 +1,4 @@
-package org.example.black_jack.controller.factory;
+package org.example.black_jack.controller.factory.view_factory;
 
 import org.example.black_jack.controller.game.PlayerData;
 import org.example.common.model.card.Card;
@@ -21,11 +21,5 @@ public interface ViewFactory {
     View playerData(List<PlayerData> data);
     View picCardView(Card card);
     View picDeckView(Deck deck);
-
-    DialogView<String> dialogStart();
-    DialogView<String> dialogBeginCardDealOver();
-    DialogView<String> dialogBust(String name);
-    DialogView<String> dialogPlayerInput(String name, String keyTake, String keySkip);
-    DialogView<String> dialogPressToContinue();
 
 }
