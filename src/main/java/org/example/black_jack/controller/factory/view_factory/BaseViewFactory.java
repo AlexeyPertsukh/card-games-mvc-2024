@@ -5,10 +5,8 @@ import org.example.black_jack.view.player_data_view.TextPdataView;
 import org.example.common.model.card.Card;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
-import org.example.common.view.dialog_view.DialogView;
-import org.example.common.view.dialog_view.SelectStringDialogView;
 import org.example.common.view.info_view.InfoView;
-import org.example.common.view.info_view.StringsInfoView;
+import org.example.common.view.info_view.MemoInfoView;
 import org.example.common.view.printer.ConsolePrinter;
 import org.example.common.view.printer.Printer;
 import org.example.common.view.reader.KeyboardReader;
@@ -33,7 +31,7 @@ public class BaseViewFactory extends AbstractViewFactory {
 
     @Override
     public View tittle() {
-        return new StringsInfoView(TITTLE, printer);
+        return new MemoInfoView(TITTLE, printer);
     }
 
     @Override

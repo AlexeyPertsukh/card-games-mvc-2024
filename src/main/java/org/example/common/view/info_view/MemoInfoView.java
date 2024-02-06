@@ -3,8 +3,8 @@ package org.example.common.view.info_view;
 import org.example.common.view.printer.Printer;
 import org.example.common.view.views.AbstractView;
 
-public class StringsInfoView extends AbstractView<String[]> {
-    public StringsInfoView(String[] value, Printer printer) {
+public class MemoInfoView extends AbstractView<String[]> {
+    public MemoInfoView(String[] value, Printer printer) {
         super(value, printer);
     }
 

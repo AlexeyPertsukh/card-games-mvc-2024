@@ -47,6 +47,7 @@ public class GameController {
             nextState();
 
         }
+        viewFactory.infoEnd().show();
 
     }
 
