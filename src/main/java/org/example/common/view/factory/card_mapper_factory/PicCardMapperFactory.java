@@ -1,10 +1,11 @@
 package org.example.common.view.factory.card_mapper_factory;
 
 import org.example.common.view.card_mapper.*;
+import org.example.common.view.pic.Pic;
 
-public class PicCardMapperFactory implements CardMapperFactory<String[]> {
+public class PicCardMapperFactory implements CardMapperFactory<Pic> {
     private static final Type DEFAULT = Type.MINI;
-    public CardMapper<String[]> get(Type type) {
+    public CardMapper<Pic> get(Type type) {
         switch (type) {
             case MICRO:return new MicroPicCardMapper();
             case MINI:return new MiniPicCardMapper();
@@ -15,19 +16,19 @@ public class PicCardMapperFactory implements CardMapperFactory<String[]> {
     }
 
     @Override
-    public CardMapper<String[]> get(int value) {
+    public CardMapper<Pic> get(int value) {
         Type type = Type.values()[value];
         return get(type);
     }
 
     @Override
-    public CardMapper<String[]> get(String value) {
+    public CardMapper<Pic> get(String value) {
         Type type = Type.valueOf(value);
         return get(type);
     }
 
     @Override
-    public CardMapper<String[]> get() {
+    public CardMapper<Pic> get() {
         return get(DEFAULT);
     }
 

@@ -1,5 +1,7 @@
 package org.example.common.view.card_mapper;
 
-public abstract class PicCardMapper implements CardMapper<String[]> {
+import org.example.common.view.pic.Pic;
+
+public abstract class PicCardMapper implements CardMapper<Pic> {
 
 }

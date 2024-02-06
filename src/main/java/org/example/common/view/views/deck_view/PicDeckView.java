@@ -2,14 +2,15 @@ package org.example.common.view.views.deck_view;
 
 import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
+import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.Printer;
 
 import java.util.List;
 import java.util.function.Function;
 
-public class PicDeckView extends DeckView<String[]> {
+public class PicDeckView extends DeckView<Pic> {
 
-    public PicDeckView(Deck value, Printer printer, Function<Card, String[]> map) {
+    public PicDeckView(Deck value, Printer printer, Function<Card, Pic> map) {
         super(value, printer, map);
     }
 
@@ -20,9 +21,9 @@ public class PicDeckView extends DeckView<String[]> {
         }
 
         List<Card> cards = value.toList();
-        String[] pic = null;
+        Pic pic = null;
         for (Card card : cards) {
-            String[] current = map.apply(card);
+            Pic current = map.apply(card);
             if (pic == null) {
                 pic = current;
                 continue;
@@ -30,16 +31,16 @@ public class PicDeckView extends DeckView<String[]> {
             pic = combine(pic, current);
         }
 
-        for (String s : pic) {
+        for (String s : pic.value()) {
             printer.output(s);
         }
     }
 
-    protected static String[] combine(String[] first, String[] second) {
-        String[] out = new String[first.length];
+    protected static Pic combine(Pic first, Pic second) {
+        String[] out = new String[first.size()];
         for (int i = 0; i < out.length; i++) {
-            out[i] = first[i] + second[i];
+            out[i] = first.get(i) + second.get(i);
         }
-        return out;
+        return new Pic(out);
     }
 }

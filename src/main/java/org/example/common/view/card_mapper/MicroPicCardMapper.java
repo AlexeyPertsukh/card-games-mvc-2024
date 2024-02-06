@@ -3,8 +3,9 @@ package org.example.common.view.card_mapper;
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardRank;
 import org.example.common.model.card.CardSuit;
+import org.example.common.view.pic.Pic;
 
-public class MicroPicCardMapper implements CardMapper<String[]> {
+public class MicroPicCardMapper implements CardMapper<Pic> {
     private static final String[] SPADES = {
             "\uD83C\uDCA2",
             "\uD83C\uDCA3",
@@ -82,17 +83,17 @@ public class MicroPicCardMapper implements CardMapper<String[]> {
     }
 
     @Override
-    public String[] apply(Card card) {
+    public Pic apply(Card card) {
         if(!card.isOpen()) {
-            return toStrings(BACK);
+            return pic(BACK);
         }
 
         CardRank rank = card.getRank();
         if(rank == CardRank.JOKER) {
             if(card.getSuit().getColor() == CardSuit.Color.RED) {
-                return toStrings(JOKER_RED);
+                return pic(JOKER_RED);
             }
-            return toStrings(JOKER_BLACK);
+            return pic(JOKER_BLACK);
         }
 
         int num = rank.ordinal() - 1;
@@ -104,11 +105,11 @@ public class MicroPicCardMapper implements CardMapper<String[]> {
             case CLUB: s = CLUBS[num];
             case DIAMOND: s = DIAMONDS[num];
         }
-        return toStrings(s);
+        return pic(s);
     }
 
-    private String[] toStrings(String s) {
-        return new String[] {s};
+    private Pic pic(String s) {
+        return new Pic(s);
     }
 
 }

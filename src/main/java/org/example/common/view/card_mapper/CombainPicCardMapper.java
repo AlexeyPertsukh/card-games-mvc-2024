@@ -3,12 +3,13 @@ package org.example.common.view.card_mapper;
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardRank;
 import org.example.common.model.card.CardSuit;
+import org.example.common.view.pic.Pic;
 
 public abstract class CombainPicCardMapper extends PicCardMapper {
     @Override
-    public String[] apply(Card card) {
+    public Pic apply(Card card) {
         if (!card.isOpen()) {
-            return back();
+            return pic(back());
         }
 
         String[] template = rankPicture(card.getRank());
@@ -19,7 +20,7 @@ public abstract class CombainPicCardMapper extends PicCardMapper {
         for (int i = 0; i < pic.length; i++) {
             pic[i] = pic[i].replace(changeSym, suitSym);
         }
-        return pic;
+        return pic(pic);
     }
 
     private String[] rankPicture(CardRank rank) {
@@ -122,5 +123,8 @@ public abstract class CombainPicCardMapper extends PicCardMapper {
         return out;
     }
 
+    private Pic pic(String[] value) {
+        return new Pic(value);
+    }
 
 }

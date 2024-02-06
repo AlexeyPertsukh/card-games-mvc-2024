@@ -4,7 +4,9 @@ import org.example.common.view.card_mapper.CardMapper;
 import org.example.common.view.card_mapper.MicroPicCardMapper;
 import org.example.common.view.card_mapper.MiniPicCardMapper;
 import org.example.common.view.card_mapper.SmallPicCardMapper;
+import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.ColorConsolePrinter;
+import org.example.common.view.views.View;
 import org.example.common.view.views.deck_view.DeckView;
 import org.example.common.model.deck.Deck;
 import org.example.common.view.views.deck_view.ColorPicDeckView;
@@ -24,19 +26,19 @@ public class MainPicDeckTest {
 
 
         for (Deck deck : TestDeckFactory.get()) {
-            DeckView<String[]> deckView = deckView(type, deck);
+            View deckView = deckView(type, deck);
             deckView.show();
         }
 
     }
 
-    private static DeckView<String[]> deckView(String type, Deck deck) {
+    private static View deckView(String type, Deck deck) {
         ColorPrinter colorPrinter = new ColorConsolePrinter();
-        CardMapper<String[]> cardMapper = cardMapper(type);
+        CardMapper<Pic> cardMapper = cardMapper(type);
         return new ColorPicDeckView(deck, colorPrinter, cardMapper);
     }
 
-    private static CardMapper<String[]> cardMapper(String type) {
+    private static CardMapper<Pic> cardMapper(String type) {
         switch (type) {
             case MICRO_PIC: return new MicroPicCardMapper();
             case MINI_PIC: return new MiniPicCardMapper();
