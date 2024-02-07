@@ -2,7 +2,6 @@ package org.example.black_jack.controller;
 
 import org.example.black_jack.controller.factory.dialog_factory.BaseDialogFactory;
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
-import org.example.black_jack.controller.factory.view_factory.BaseViewFactory;
 import org.example.black_jack.controller.factory.view_factory.ColorViewFactory;
 import org.example.black_jack.controller.factory.view_factory.ViewFactory;
 import org.example.black_jack.controller.game.Game;
@@ -15,7 +14,7 @@ import org.example.common.model.player.Player;
 import org.example.common.model.player.bot.Dealer;
 import org.example.common.model.point_counter.PointCounter;
 import org.example.common.view.card_mapper.PicCardMapper;
-import org.example.common.view.card_mapper.SmallPicCardMapper;
+import org.example.common.view.card_mapper.Small13x7PicCardMapper;
 import org.example.common.view.card_mapper.TextCardMapper;
 
 public class Main {
@@ -30,7 +29,7 @@ public class Main {
         Game game = new GameAmerican(rules, counter, deck, dealer, first, second);
 
         TextCardMapper textCardMapper = new TextCardMapper();
-        PicCardMapper picCardMapper = new SmallPicCardMapper();
+        PicCardMapper picCardMapper = new Small13x7PicCardMapper();
 //        ViewFactory viewFactory = new BaseViewFactory(textCardMapper, picCardMapper);
         ViewFactory viewFactory = new ColorViewFactory(textCardMapper, picCardMapper);
         DialogFactory dialogFactory = new BaseDialogFactory();

@@ -1,13 +1,12 @@
 package org.example.black_jack.controller.main_visual_test;
 
 import org.example.common.view.card_mapper.CardMapper;
-import org.example.common.view.card_mapper.MicroPicCardMapper;
-import org.example.common.view.card_mapper.MiniPicCardMapper;
-import org.example.common.view.card_mapper.SmallPicCardMapper;
+import org.example.common.view.card_mapper.Micro1x1PicCardMapper;
+import org.example.common.view.card_mapper.Mini9x5PicCardMapper;
+import org.example.common.view.card_mapper.Small13x7PicCardMapper;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.ColorConsolePrinter;
 import org.example.common.view.views.View;
-import org.example.common.view.views.deck_view.DeckView;
 import org.example.common.model.deck.Deck;
 import org.example.common.view.views.deck_view.ColorPicDeckView;
 import org.example.common.view.printer.ColorPrinter;
@@ -40,10 +39,10 @@ public class MainPicDeckTest {
 
     private static CardMapper<Pic> cardMapper(String type) {
         switch (type) {
-            case MICRO_PIC: return new MicroPicCardMapper();
-            case MINI_PIC: return new MiniPicCardMapper();
-            case SMALL_PIC: return new SmallPicCardMapper();
-            case LARGE_PIC: return new MicroPicCardMapper();
+            case MICRO_PIC: return new Micro1x1PicCardMapper();
+            case MINI_PIC: return new Mini9x5PicCardMapper();
+            case SMALL_PIC: return new Small13x7PicCardMapper();
+            case LARGE_PIC: return new Micro1x1PicCardMapper();
             default: throw new IllegalArgumentException("MainDeckTestPic.cardMapper");
         }
     }

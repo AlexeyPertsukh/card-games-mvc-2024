@@ -171,20 +171,27 @@ public class MainConfig {
         return new BaseDialogFactory();
     }
 
-    public static String picMicro() {
-        return PicCardMapperFactory.Type.MICRO.name();
+    public static String picMicro1x1() {
+        return PicCardMapperFactory.Type.MICRO_1X1.name();
     }
 
-    public static String picMini() {
-        return PicCardMapperFactory.Type.MINI.name();
+    public static String picMini9x5() {
+        return PicCardMapperFactory.Type.MINI_9X5.name();
+    }
+    public static String picMini5x3() {
+        return PicCardMapperFactory.Type.MINI_5X3.name();
     }
 
-    public static String picSmall() {
-        return PicCardMapperFactory.Type.SMALL.name();
+    public static String picSmall13x7() {
+        return PicCardMapperFactory.Type.SMALL_13X7.name();
     }
 
-    public static String picLarge() {
-        return PicCardMapperFactory.Type.LARGE.name();
+    public static String picLarge17X11() {
+        return PicCardMapperFactory.Type.LARGE_17X11.name();
+    }
+
+    public static String picMini4x3() {
+        return PicCardMapperFactory.Type.MINI_4X3.name();
     }
 
     enum ColorType {

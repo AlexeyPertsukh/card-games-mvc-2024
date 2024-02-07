@@ -4,13 +4,15 @@ import org.example.common.view.card_mapper.*;
 import org.example.common.view.pic.Pic;
 
 public class PicCardMapperFactory implements CardMapperFactory<Pic> {
-    private static final Type DEFAULT = Type.MINI;
+    private static final Type DEFAULT = Type.MINI_9X5;
     public CardMapper<Pic> get(Type type) {
         switch (type) {
-            case MICRO:return new MicroPicCardMapper();
-            case MINI:return new MiniPicCardMapper();
-            case SMALL:return new SmallPicCardMapper();
-            case LARGE:return new LargePicCardMapper();
+            case MICRO_1X1:return new Micro1x1PicCardMapper();
+            case MINI_9X5:return new Mini9x5PicCardMapper();
+            case MINI_4X3:return new Mini4x3PicCardMapper();
+            case MINI_5X3:return new Mini5x3PicCardMapper();
+            case SMALL_13X7:return new Small13x7PicCardMapper();
+            case LARGE_17X11:return new Large17x11PicCardMapper();
             default: throw new IllegalArgumentException("unsupported card mapper type: " + type);
         }
     }
@@ -33,10 +35,12 @@ public class PicCardMapperFactory implements CardMapperFactory<Pic> {
     }
 
     public enum Type {
-        MICRO,
-        MINI,
-        SMALL,
-        LARGE
+        MICRO_1X1,
+        MINI_4X3,
+        MINI_5X3,
+        MINI_9X5,
+        SMALL_13X7,
+        LARGE_17X11
     }
 
 }

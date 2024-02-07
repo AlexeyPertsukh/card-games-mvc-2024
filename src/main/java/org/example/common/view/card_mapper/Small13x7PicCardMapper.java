@@ -3,7 +3,7 @@ package org.example.common.view.card_mapper;
 import org.example.common.view.card_mapper.suit_symbol_factory.PrimitiveSuitSymbolFactory;
 import org.example.common.view.card_mapper.suit_symbol_factory.SuitSymbolFactory;
 
-public class SmallPicCardMapper extends CombainPicCardMapper {
+public class Small13x7PicCardMapper extends CombainPicCardMapper {
     private final static SuitSymbolFactory symbolFactory = new PrimitiveSuitSymbolFactory();
 
     public static final String CHANGE_SYMBOL = "$";
@@ -158,11 +158,11 @@ public class SmallPicCardMapper extends CombainPicCardMapper {
             "└───────────┘",
     };
 
-    private static SmallPicCardMapper factory;
+    private static Small13x7PicCardMapper factory;
 
-    public static SmallPicCardMapper getInstance() {
+    public static Small13x7PicCardMapper getInstance() {
         if(factory == null) {
-            factory = new SmallPicCardMapper();
+            factory = new Small13x7PicCardMapper();
         }
         return factory;
     }
