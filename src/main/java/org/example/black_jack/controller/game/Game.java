@@ -20,7 +20,7 @@ public interface Game {
     boolean isDeckOpen(Player player);
     void openDeck(Player player);
 
-    List<PlayerData> tableData();
+    List<PlayerData> playerData();
 
     Card addOpenCard(Player player);
     List<Card> addOpenCard(Player player, int num);
@@ -31,4 +31,5 @@ public interface Game {
     List<Card> beginAddPlayerCard(Player player);
     List<Card> beginAddDealerCard();
 
+    void calculateResult();
 }

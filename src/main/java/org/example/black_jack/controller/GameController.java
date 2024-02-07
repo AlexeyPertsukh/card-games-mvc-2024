@@ -61,7 +61,7 @@ public class GameController {
 
 
     private void showTable() {
-        List<PlayerData> data = game.tableData();
+        List<PlayerData> data = game.playerData();
         View table = viewFactory.playerData(data);
         table.show();
     }
@@ -138,7 +138,7 @@ public class GameController {
                 if (isSkip(command)) {
                     return;
                 }
-                if(!game.isInGame(player)) {
+                if (!game.isInGame(player)) {
                     DialogView<String> dialog = dialogFactory.dialogBust(player.getName());
                     dialog.input();
                     return;
@@ -166,6 +166,7 @@ public class GameController {
             }
 
         }
+
         private boolean isSkip(Command command) {
             return command instanceof SkipCommand;
         }
@@ -192,7 +193,7 @@ public class GameController {
         @Override
         public void execute() {
             Dealer dealer = game.dealer();
-            if(!game.isDeckOpen(dealer)) {
+            if (!game.isDeckOpen(dealer)) {
                 viewFactory.infoDealerShowCards().show();
                 game.openDeck(dealer);
 
@@ -211,6 +212,15 @@ public class GameController {
         public void execute() {
             Dealer dealer = game.dealer();
             onePlayerAction(dealer);
+        }
+    }
+
+    private class CalculateGame extends State {
+        @Override
+        public void execute() {
+            game.calculateResult();
+            showTable();
+
         }
     }
 
@@ -246,7 +256,6 @@ public class GameController {
     }
 
 
-
     private void nextState() {
         if (state instanceof BeginAddCardState) {
             state = new PlayerActionState();
@@ -260,6 +269,12 @@ public class GameController {
             state = new DealerActionState();
             return;
         }
+
+        if (state instanceof DealerActionState) {
+            state = new CalculateGame();
+            return;
+        }
+
 
         state = new EndGameState();
 

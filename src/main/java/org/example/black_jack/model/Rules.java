@@ -22,6 +22,10 @@ public class Rules {
         return cardsNumber == BLACK_JACK_CARD_NUMBERS && point == MAX_WIN_POINT;
     }
 
+    public boolean isMaxWinPoint(int point) {
+        return point == MAX_WIN_POINT;
+    }
+
     public int winPoint(List<Integer> numbers) {
         int max = 0;
         for (int num : numbers) {

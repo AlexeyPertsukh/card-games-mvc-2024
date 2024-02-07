@@ -19,6 +19,8 @@ public class GameAmerican implements Game {
 
     private final List<Player> players = new ArrayList<>();
     private final Map<Player, PlayerData> storage = new HashMap<>();
+    private final DataUpdater updater;
+
 
 
     public GameAmerican(Rules rules, PointCounter counter, Deck masterDeck, Dealer dealer, Player... players) {
@@ -38,6 +40,7 @@ public class GameAmerican implements Game {
 
         PlayerData dealerData = new PlayerData(dealer, new Deck());
         storage.put(dealer, dealerData);
+        updater = new DataUpdater(rules, counter);
     }
 
 
@@ -87,7 +90,7 @@ public class GameAmerican implements Game {
     }
 
     @Override
-    public List<PlayerData> tableData() {
+    public List<PlayerData> playerData() {
         List<PlayerData> out = new ArrayList<>();
         for (Player player : players) {
             PlayerData data = storage.get(player);
@@ -154,38 +157,13 @@ public class GameAmerican implements Game {
 
     private void updateData(Player player) {
         PlayerData data = storage.get(player);
-        Deck deck = data.getDeck();
-        int point = counter.apply(deck);
-        data.setPoint(point);
-
-        PlayerStatus status = PlayerStatus.IN_GAME;
-
-        if (rules.isBust(point)) {
-            status = PlayerStatus.BUST;
-        } else if (rules.isBlackJack(deck.size(), point)) {
-            status = PlayerStatus.BLACK_JACK;
-        }
-
-        data.setStatus(status);
+        updater.updateOnWork(data);
     }
 
-    private PlayerStatus statusWhenCalcResult(PlayerData data, int winPoint) {
-        Deck deck = data.getDeck();
-        int point = data.getPoint();
-        if (rules.isBlackJack(deck.size(), point)) {
-            return PlayerStatus.BLACK_JACK;
-        }
-        if (rules.isBust(point)) {
-            return PlayerStatus.BUST;
-        }
-        if (rules.isLose(winPoint, point)) {
-            return PlayerStatus.LOSE;
-        }
-        if (rules.isWin(winPoint, point)) {
-            return PlayerStatus.WIN;
-        }
-
-        throw new IllegalArgumentException();
+    @Override
+    public void calculateResult() {
+        List<PlayerData> list = new ArrayList<>(storage.values());
+        updater.updateResult(list);
     }
 
     public class PlayerIterator implements Iterator<Player> {
