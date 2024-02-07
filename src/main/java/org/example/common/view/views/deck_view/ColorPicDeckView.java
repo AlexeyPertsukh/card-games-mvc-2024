@@ -45,11 +45,16 @@ public class ColorPicDeckView extends PicDeckView {
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             String[] arr = pictures.get(i).value();
-            ColorPrinter.Color color = colorMapper.apply(card.getSuit().getColor());
+
+            ColorPrinter.Color color = toColor(card);
             colorPrinter.colorOut(color, arr[line]);
         }
         colorPrinter.output("");
     }
 
+    private ColorPrinter.Color toColor(Card card) {
+        ColorPrinter.Color color = colorMapper.apply(card.getSuit().getColor());
+        return card.isOpen() ? color : ColorPrinter.Color.DEFAULT;
+    }
 
 }

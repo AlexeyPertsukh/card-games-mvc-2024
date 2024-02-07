@@ -84,7 +84,7 @@ public class Mini9x5PicVer2CardMapper extends CombainPicCardMapper {
             "┌───────┐",
             "│9  $$$ │",
             "│  $$$  │",
-            "│$$$   9│",
+            "│ $$$  9│",
             "└───────┘",
     };
 
