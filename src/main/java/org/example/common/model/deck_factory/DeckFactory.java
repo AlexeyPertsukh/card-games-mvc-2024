@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 public interface DeckFactory extends Supplier<Deck> {
     @Override
     Deck get();
-
     Deck shoes(int num);
+    Deck getRandom(int num);
+
 }

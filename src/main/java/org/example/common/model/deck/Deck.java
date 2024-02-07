@@ -25,6 +25,15 @@ public class Deck {
         return cards.remove(cards.size() - 1);
     }
 
+    public Deck take(int num) {
+        Deck deck = new Deck();
+        for (int i = 0; i < num; i++) {
+            deck.add(take());
+        }
+        return deck;
+    }
+
+
     public List<Card> toList() {
         return new ArrayList<>(cards);
     }

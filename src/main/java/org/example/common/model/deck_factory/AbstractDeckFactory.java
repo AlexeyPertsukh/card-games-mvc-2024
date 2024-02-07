@@ -32,4 +32,11 @@ public abstract class AbstractDeckFactory implements DeckFactory{
         }
         return deck;
     }
+
+    @Override
+    public Deck getRandom(int num) {
+        Deck deck = get();
+        deck.shuffle();
+        return deck.take(num);
+    }
 }
