@@ -1,5 +1,6 @@
 package org.example.black_jack.controller.game;
 
+import org.example.black_jack.model.BjCardComparator;
 import org.example.black_jack.model.Rules;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.point_counter.PointCounter;
@@ -11,6 +12,8 @@ public class DataUpdater {
     private final Rules rules;
     private final PointCounter counter;
 
+    private final BjCardComparator comparator = new BjCardComparator();
+
     public DataUpdater(Rules rules, PointCounter counter) {
         this.rules = rules;
         this.counter = counter;
@@ -18,8 +21,10 @@ public class DataUpdater {
 
     public void updateOnWork(PlayerData data) {
         Deck deck = data.getDeck();
+        deck.sort(comparator);
         int point = counter.apply(deck);
         data.setPoint(point);
+
 
         if (rules.isBust(point)) {
             data.setStatus(PlayerStatus.BUST);

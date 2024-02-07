@@ -4,6 +4,7 @@ import org.example.common.model.card.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Deck {
@@ -70,5 +71,9 @@ public class Deck {
         for (Card card : cards) {
             card.open();
         }
+    }
+
+    public void sort(Comparator<Card> c) {
+        cards.sort(c);
     }
 }

@@ -17,9 +17,6 @@ public class ColorTextPdataView extends AbstractTextPdataView {
     private static final ColorPrinter.Color COLOR_NAME = ColorPrinter.Color.YELLOW;
     private static final ColorPrinter.Color COLOR_POINT = COLOR_DEFAULT;
     private static final ColorPrinter.Color COLOR_LINE = COLOR_DEFAULT;
-    private static final ColorPrinter.Color COLOR_STATUS_IN_GAME = ColorPrinter.Color.CYAN;
-    private static final ColorPrinter.Color COLOR_STATUS_WIN = ColorPrinter.Color.GREEN;
-    private static final ColorPrinter.Color COLOR_STATUS_BJ = COLOR_STATUS_WIN;
     protected final ColorPrinter colorPrinter;
     protected final ColorTextTableView colorTableView;
     private final Function<CardSuit.Color, ColorPrinter.Color> colorMapper = new SuitToPrintColorMapper();
@@ -57,16 +54,32 @@ public class ColorTextPdataView extends AbstractTextPdataView {
 
     @Override
     protected void showOneStatus(PlayerStatus status, String textStatus) {
-        ColorPrinter.Color color = color(status);
+        ColorPrinter.Color color = ColorMap.get(status);
         colorPrinter.colorOut(color, textStatus);
     }
 
-    private ColorPrinter.Color color(PlayerStatus status) {
-        switch (status) {
-            case IN_GAME: return COLOR_STATUS_IN_GAME;
-            case WIN: return COLOR_STATUS_WIN;
-            case BLACK_JACK: return COLOR_STATUS_BJ;
-            default: return COLOR_DEFAULT;
+    enum ColorMap {
+        IN_GAME(PlayerStatus.IN_GAME, ColorPrinter.Color.CYAN),
+        WIN(PlayerStatus.WIN, ColorPrinter.Color.GREEN),
+        LOSE(PlayerStatus.LOSE, ColorPrinter.Color.RED),
+        BUST(PlayerStatus.BUST, ColorPrinter.Color.RED),
+        BLACK_JACK(PlayerStatus.BLACK_JACK, ColorPrinter.Color.GREEN),
+        ;
+        private final PlayerStatus status;
+        private final ColorPrinter.Color color;
+
+        ColorMap(PlayerStatus status, ColorPrinter.Color color) {
+            this.status = status;
+            this.color = color;
+        }
+
+        public static ColorPrinter.Color get(PlayerStatus status) {
+            for (ColorMap map : values()) {
+                if(map.status == status) {
+                    return map.color;
+                }
+            }
+            throw new IllegalArgumentException("illegal status to covert in printer color: " + status);
         }
     }
 

@@ -1,5 +1,6 @@
 package org.example.black_jack.controller.game;
 
+import org.example.black_jack.model.BjCardComparator;
 import org.example.common.model.deck.Deck;
 import org.example.black_jack.model.Rules;
 import org.example.common.model.card.Card;
@@ -20,8 +21,6 @@ public class GameAmerican implements Game {
     private final List<Player> players = new ArrayList<>();
     private final Map<Player, PlayerData> storage = new HashMap<>();
     private final DataUpdater updater;
-
-
 
     public GameAmerican(Rules rules, PointCounter counter, Deck masterDeck, Dealer dealer, Player... players) {
         this.rules = rules;
