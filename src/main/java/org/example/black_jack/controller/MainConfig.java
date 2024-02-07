@@ -18,7 +18,6 @@ import org.example.common.model.player.bot.Dealer;
 import org.example.common.model.player.bot.DealerAi;
 import org.example.common.model.point_counter.PointCounter;
 import org.example.common.view.card_mapper.CardMapper;
-import org.example.common.view.card_mapper.PicCardMapper;
 import org.example.common.view.card_mapper.TextCardMapper;
 import org.example.common.view.dialog_view.DialogView;
 import org.example.common.view.dialog_view.KeyMenuDialogView;
@@ -58,11 +57,13 @@ public class MainConfig {
         PointCounter counter = new BjPointCounter();
         Deck deck = (new DeckFactory54Card()).get();
 
+        GameController controller;
         if (isManual(args)) {
-            manual(printer, reader, counter, deck);
+            controller = manual(printer, reader, counter, deck);
         } else {
-            auto(counter, deck, args);
+            controller = auto(counter, deck, args);
         }
+        controller.go();
 
     }
 
@@ -70,7 +71,7 @@ public class MainConfig {
         return args == null || args.length == 0;
     }
 
-    private static void start(ViewFactory viewFactory, DialogFactory dialogFactory, PointCounter counter, Deck deck, Player... players) {
+    private static GameController controller(ViewFactory viewFactory, DialogFactory dialogFactory, PointCounter counter, Deck deck, Player... players) {
         Game game = new GameAmerican(
                 new Rules(),
                 counter,
@@ -78,16 +79,15 @@ public class MainConfig {
                 new Dealer("Dealer", counter),
                 players
         );
-        GameController controller = new GameController(game, viewFactory, dialogFactory);
-        controller.go();
+        return new GameController(game, viewFactory, dialogFactory);
     }
 
-    private static void auto(PointCounter counter, Deck deck, String... args) {
+    private static GameController auto(PointCounter counter, Deck deck, String... args) {
         Config config = config(args);
         Player[] players = players(counter, config.numPlayer, config.numBot);
         ColorType colorType = colorType(config.colorName);
         CardMapper<Pic> picCardMapper = picCardMapper(config.picName);
-        start(
+        return controller(
                 viewFactory(colorType, picCardMapper),
                 dialogFactory(),
                 counter,
@@ -98,7 +98,7 @@ public class MainConfig {
     }
 
 
-    private static void manual(Printer printer, Reader reader, PointCounter counter, Deck deck) {
+    private static GameController manual(Printer printer, Reader reader, PointCounter counter, Deck deck) {
         DialogView<Integer> dialog = dialogPlayers(printer, reader);
         int numPlayer = dialog.input();
         dialog = dialogBots(printer, reader);
@@ -113,7 +113,7 @@ public class MainConfig {
         //PIC
         CardMapper<Pic> picCardMapper = picCardMapper();
 
-        start(
+        return controller(
                 viewFactory(colorType, picCardMapper),
                 dialogFactory(),
                 counter,
