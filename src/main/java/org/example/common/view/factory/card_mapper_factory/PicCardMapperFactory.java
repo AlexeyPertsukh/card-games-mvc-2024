@@ -8,9 +8,11 @@ public class PicCardMapperFactory implements CardMapperFactory<Pic> {
     public CardMapper<Pic> get(Type type) {
         switch (type) {
             case MICRO_1X1:return new Micro1x1PicCardMapper();
-            case MINI_9X5:return new Mini9x5PicCardMapper();
+            case MINI_2X3:return new Mini2x3PicCardMapper();
             case MINI_4X3:return new Mini4x3PicCardMapper();
             case MINI_5X3:return new Mini5x3PicCardMapper();
+//            case MINI_9X5:return new Mini9x5PicCardMapper();
+            case MINI_9X5:return new Mini9x5PicVer2CardMapper();
             case SMALL_13X7:return new Small13x7PicCardMapper();
             case LARGE_17X11:return new Large17x11PicCardMapper();
             default: throw new IllegalArgumentException("unsupported card mapper type: " + type);
@@ -36,6 +38,7 @@ public class PicCardMapperFactory implements CardMapperFactory<Pic> {
 
     public enum Type {
         MICRO_1X1,
+        MINI_2X3,
         MINI_4X3,
         MINI_5X3,
         MINI_9X5,

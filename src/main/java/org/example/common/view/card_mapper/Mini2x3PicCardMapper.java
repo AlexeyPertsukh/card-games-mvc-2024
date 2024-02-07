@@ -3,137 +3,107 @@ package org.example.common.view.card_mapper;
 import org.example.common.view.card_mapper.suit_symbol_factory.PrimitiveSuitSymbolFactory;
 import org.example.common.view.card_mapper.suit_symbol_factory.SuitSymbolFactory;
 
-public class Mini9x5PicCardMapper extends CombainPicCardMapper {
+public class Mini2x3PicCardMapper extends CombainPicCardMapper {
     private final static SuitSymbolFactory symbolFactory = new PrimitiveSuitSymbolFactory();
 //    private final static SuitSymbolFactory symbolFactory = new OriginalSuitSymbolFactory();
 
     public static final String CHANGE_SYMBOL = "$";
     private static final String[] BACK = {
-            "┌───────┐",
-            "│░░░░░░░│",
-            "│░░░░░░░│",
-            "│░░░░░░░│",
-            "└───────┘",
+            "--",
+            "░░",
+            "--",
     };
 
     private static final String[] JOKER = {
-            "┌───────┐",
-            "│ JOKER │",
-            "│   $   │",
-            "│ JOKER │",
-            "└───────┘",
+            "--",
+            "J$",
+            "--",
     };
     private static final String[] TWO = {
-            "┌───────┐",
-            "│$2     │",
-            "│       │",
-            "│     2$│",
-            "└───────┘",
+            "--",
+            "$2",
+            "--",
     };
 
     private static final String[] THREE = {
-            "┌───────┐",
-            "│$3     │",
-            "│       │",
-            "│     3$│",
-            "└───────┘",
+            "--",
+            "$3",
+            "--",
     };
 
     private static final String[] FOUR = {
-            "┌───────┐",
-            "│$4     │",
-            "│       │",
-            "│     4$│",
-            "└───────┘",
+            "--",
+            "$4",
+            "--",
     };
 
     private static final String[] FIVE = {
-            "┌───────┐",
-            "│$5     │",
-            "│       │",
-            "│     5$│",
-            "└───────┘",
+            "--",
+            "$5",
+            "--",
     };
 
 
     private static final String[] SIX = {
-            "┌───────┐",
-            "│$6     │",
-            "│       │",
-            "│     6$│",
-            "└───────┘",
+            "--",
+            "$6",
+            "--",
     };
 
     private static final String[] SEVEN = {
-            "┌───────┐",
-            "│$7     │",
-            "│       │",
-            "│     7$│",
-            "└───────┘",
+            "--",
+            "$7",
+            "--",
     };
 
     private static final String[] EIGHT = {
-            "┌───────┐",
-            "│$8     │",
-            "│       │",
-            "│     8$│",
-            "└───────┘",
+            "--",
+            "$8",
+            "--",
     };
 
 
     private static final String[] NINE = {
-            "┌───────┐",
-            "│$9     │",
-            "│       │",
-            "│     9$│",
-            "└───────┘",
+            "--",
+            "$9",
+            "--",
     };
 
     private static final String[] TEN = {
-            "┌───────┐",
-            "│$10    │",
-            "│       │",
-            "│    10$│",
-            "└───────┘",
+            "--",
+            "$t",
+            "--",
     };
 
     private static final String[] JACK = {
-            "┌───────┐",
-            "│J      │",
-            "│   $   │",
-            "│      J│",
-            "└───────┘",
+            "--",
+            "J$",
+            "--",
     };
 
     private static final String[] QUEEN = {
-            "┌───────┐",
-            "│Q      │",
-            "│   $   │",
-            "│      Q|",
-            "└───────┘",
+            "--",
+            "Q$",
+            "--",
     };
 
     private static final String[] KING = {
-            "┌───────┐",
-            "│K      │",
-            "│   $   │",
-            "│      K│",
-            "└───────┘",
+            "--",
+            "K$",
+            "--",
     };
 
     private static final String[] ACE = {
-            "┌───────┐",
-            "│A      │",
-            "│   $   │",
-            "│      A│",
-            "└───────┘",
+            "--",
+            "A$",
+            "--",
     };
 
-    private static Mini9x5PicCardMapper factory;
+    private static Mini2x3PicCardMapper factory;
 
-    public static Mini9x5PicCardMapper getInstance() {
+    public static Mini2x3PicCardMapper getInstance() {
         if(factory == null) {
-            factory = new Mini9x5PicCardMapper();
+            factory = new Mini2x3PicCardMapper();
         }
         return factory;
     }

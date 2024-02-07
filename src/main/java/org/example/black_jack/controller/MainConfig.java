@@ -194,6 +194,10 @@ public class MainConfig {
         return PicCardMapperFactory.Type.MINI_4X3.name();
     }
 
+    public static String picMini2x3() {
+        return PicCardMapperFactory.Type.MINI_2X3.name();
+    }
+
     enum ColorType {
         MONO,
         COL
