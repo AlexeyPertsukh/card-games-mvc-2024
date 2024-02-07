@@ -90,9 +90,9 @@ public class Mini9x5PicVer2CardMapper extends CombainPicCardMapper {
 
     private static final String[] TEN = {
             "┌───────┐",
-            "│10  $$$│",
-            "│  $$$$ │",
-            "│$$$  10│",
+            "│10 $$$ │",
+            "│ $$ $$ │",
+            "│ $$$ 10│",
             "└───────┘",
     };
 

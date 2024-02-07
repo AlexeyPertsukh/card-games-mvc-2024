@@ -1,4 +1,4 @@
-package org.example.black_jack.controller.main_visual_test;
+package org.example.visual_control.controller;
 
 import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
