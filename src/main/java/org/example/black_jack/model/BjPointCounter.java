@@ -11,7 +11,9 @@ public class BjPointCounter implements PointCounter {
     public Integer apply(Deck deck) {
         int points = 0;
         for (Card card : deck.toList()) {
-            points += cardPoint(card);
+            if(card.isOpen()) {
+                points += cardPoint(card);
+            }
         }
         return points;
     }

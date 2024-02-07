@@ -3,7 +3,7 @@ package org.example.common.model.deck_factory;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.card.CardRank;
 
-public class DeckFactory54CardRandom extends BasicDeckFactory{
+public class DeckFactory54CardRandom extends AbstractDeckFactory {
     private final int num;
     public DeckFactory54CardRandom(int num) {
         this.num = num;

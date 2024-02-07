@@ -1,4 +1,4 @@
-package org.example.visual_control.controller;
+package org.example.visual_control.controller.pic_control;
 
 import org.example.common.view.factory.card_mapper_factory.PicCardMapperFactory;
 import org.example.common.view.printer.ConsolePrinter;

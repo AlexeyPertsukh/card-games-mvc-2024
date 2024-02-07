@@ -32,6 +32,13 @@ public class Deck {
     public void add(Card card) {
         cards.add(card);
     }
+    public void add(List<Card> list) {
+        cards.addAll(list);
+    }
+    public void add(Deck deck) {
+        add(deck.toList());
+    }
+
 
     public int size() {
         return cards.size();

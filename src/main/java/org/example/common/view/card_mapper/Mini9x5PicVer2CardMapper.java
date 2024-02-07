@@ -32,9 +32,9 @@ public class Mini9x5PicVer2CardMapper extends CombainPicCardMapper {
 
     private static final String[] THREE = {
         "┌───────┐",
-        "│3      │",
-        "│ $ $ $ │",
-        "│      3│",
+        "│3  $   │",
+        "│   $   │",
+        "│   $  3│",
         "└───────┘",
     };
 

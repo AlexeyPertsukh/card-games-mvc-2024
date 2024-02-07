@@ -111,9 +111,9 @@ public class Small13x7PicCardMapper extends CombainPicCardMapper {
     private static final String[] TEN = {
             "┌───────────┐",
             "│ 10        │",
-            "│ $  $ $  $ │",
-            "│   $   $   │",
-            "│ $  $ $  $ │",
+            "│  $ $ $ $  │",
+            "│    $ $    │",
+            "│  $ $ $ $  │",
             "│        10 │",
             "└───────────┘",
     };

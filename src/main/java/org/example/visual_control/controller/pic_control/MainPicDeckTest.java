@@ -1,6 +1,5 @@
-package org.example.visual_control.controller;
+package org.example.visual_control.controller.pic_control;
 
-import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.common.view.card_mapper.*;
 import org.example.common.view.dialog_view.DialogView;
 import org.example.common.view.dialog_view.KeyMenuDialogView;
@@ -8,14 +7,12 @@ import org.example.common.view.dialog_view.SelectIntegerDialogView;
 import org.example.common.view.factory.card_mapper_factory.PicCardMapperFactory;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.ColorConsolePrinter;
-import org.example.common.view.printer.Printer;
 import org.example.common.view.reader.KeyboardReader;
 import org.example.common.view.reader.Reader;
 import org.example.common.view.views.View;
 import org.example.common.model.deck.Deck;
 import org.example.common.view.views.deck_view.ColorPicDeckView;
 import org.example.common.view.printer.ColorPrinter;
-import org.example.common.view.views.deck_view.PicDeckView;
 import org.example.common.view.views.view_menu.TextMenuView;
 import org.example.common.view.views.view_menu.menu_model.Menu;
 import org.example.common.view.views.view_menu.menu_model.NumericMenu;

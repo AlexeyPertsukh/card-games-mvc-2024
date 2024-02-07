@@ -1,4 +1,4 @@
-package org.example.visual_control.controller;
+package org.example.visual_control.controller.pic_control;
 
 import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
