@@ -87,6 +87,8 @@ public class GameController {
                 return new DealerShowCardState(this);
             case 4:
                 return new DealerActionState(this);
+            case 5:
+                return new CalcResultState(this);
 
             default:
                 return new EndGameState(this);

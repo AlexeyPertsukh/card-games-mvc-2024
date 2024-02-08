@@ -25,5 +25,6 @@ public class CalcResultState extends State {
     @Override
     public void execute() {
         game.calculateResult();
+        controller.showTable();
     }
 }
