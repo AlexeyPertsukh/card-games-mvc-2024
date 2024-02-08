@@ -26,4 +26,3 @@ public class Pic {
     }
 }
 
-/* TODO check that the string does not change */

@@ -1,6 +1,5 @@
 package org.example.black_jack.model.game;
 
-import org.example.black_jack.model.BjCardComparator;
 import org.example.black_jack.model.Rules;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.point_counter.PointCounter;
@@ -11,8 +10,6 @@ import java.util.List;
 public class DataUpdater {
     private final Rules rules;
     private final PointCounter counter;
-
-    private final BjCardComparator comparator = new BjCardComparator();
 
     public DataUpdater(Rules rules, PointCounter counter) {
         this.rules = rules;
