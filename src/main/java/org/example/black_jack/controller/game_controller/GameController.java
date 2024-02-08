@@ -2,6 +2,7 @@ package org.example.black_jack.controller.game_controller;
 
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.black_jack.controller.factory.view_factory.ViewFactory;
+import org.example.black_jack.controller.game_controller.state.*;
 import org.example.black_jack.controller.state.*;
 import org.example.black_jack.model.game.PlayerData;
 import org.example.black_jack.model.game.Game;
@@ -18,7 +19,7 @@ public class GameController {
     private final Game game;
     private final ViewFactory viewFactory;
     private final DialogFactory dialogFactory;
-    private org.example.black_jack.controller.state.State state;
+    private State state;
 
     private int indexState;
 

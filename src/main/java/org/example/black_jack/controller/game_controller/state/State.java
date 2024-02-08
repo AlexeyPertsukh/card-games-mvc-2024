@@ -1,4 +1,4 @@
-package org.example.black_jack.controller.state;
+package org.example.black_jack.controller.game_controller.state;
 
 import org.example.black_jack.controller.game_controller.GameController;
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;

@@ -21,7 +21,7 @@ import java.util.function.Function;
 public class ColorViewFactory extends AbstractViewFactory {
     private final static ColorPrinter.Color COLOR_TITTLE = ColorPrinter.Color.BLUE;
     private final static ColorPrinter.Color COLOR_END = ColorPrinter.Color.PURPLE;
-    private final static ColorPrinter.Color COLOR_GAME_RESULT = ColorPrinter.Color.CYAN;
+    private final static ColorPrinter.Color COLOR_GAME_RESULT = ColorPrinter.Color.BLUE;
     private final Function<Card, String> textCardMapper;
     private final Function<Card, Pic> picCardMapper;
     private final ColorPrinter printer = new ColorConsolePrinter();

@@ -1,4 +1,4 @@
-package org.example.black_jack.controller.state;
+package org.example.black_jack.controller.game_controller.state;
 
 import org.example.black_jack.controller.game_controller.GameController;
 import org.example.black_jack.model.game.PlayerData;
@@ -7,7 +7,7 @@ import org.example.common.model.player.Player;
 
 import java.util.List;
 
-public class BeginDealCardState extends org.example.black_jack.controller.state.State {
+public class BeginDealCardState extends State {
 
     public BeginDealCardState(GameController controller) {
         super(controller);
