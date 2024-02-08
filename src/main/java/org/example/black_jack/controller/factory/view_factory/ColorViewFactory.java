@@ -57,7 +57,8 @@ public class ColorViewFactory extends AbstractViewFactory {
 
     @Override
     public View infoBotCmdInput(String name, String keyTake, String keySkip) {
-        return null;
+        String text = String.format(DIALOG_INPUT_CMD_TEMPLATE, name, keyTake, keySkip);
+        return new InfoView(text, printer);
     }
 
     @Override

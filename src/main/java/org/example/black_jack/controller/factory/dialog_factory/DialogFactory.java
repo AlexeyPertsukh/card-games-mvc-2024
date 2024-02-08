@@ -7,7 +7,7 @@ public interface DialogFactory {
 
     DialogView<String> dialogBeginCardDealOver();
 
-    DialogView<String> dialogBust(String name);
+    DialogView<String> dialogNotInGame(String name);
 
     DialogView<String> dialogPlayerCmdInput(String name, String keyTake, String keySkip);
 

@@ -10,12 +10,12 @@ import org.example.common.model.player.Player;
 
 import java.util.List;
 
-public class BeginDealCardState extends org.example.black_jack.controller.state.State {
+public class CalcResultState extends State {
     private final Game game;
     private final DialogFactory dialogFactory;
     private final ViewFactory viewFactory;
 
-    public BeginDealCardState(GameController controller) {
+    public CalcResultState(GameController controller) {
         super(controller);
         game = controller.getGame();
         dialogFactory = controller.getDialogFactory();
@@ -24,16 +24,6 @@ public class BeginDealCardState extends org.example.black_jack.controller.state.
 
     @Override
     public void execute() {
-        game.beginAddCard();
-        List<PlayerData> list = game.playerData();
-
-        for (PlayerData data : list) {
-            Player player = data.getPlayer();
-            Deck deck = data.getDeck();
-            viewFactory.infoAddCard(player.getName()).show();
-            viewFactory.picDeckView(deck).show();
-        }
-        dialogFactory.dialogBeginCardDealOver().input();
-        controller.showTable();
+        game.calculateResult();
     }
 }

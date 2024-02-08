@@ -43,7 +43,7 @@ public class BaseDialogFactory extends AbstractDialogFactory {
     }
 
     @Override
-    public DialogView<String> dialogBust(String name) {
+    public DialogView<String> dialogNotInGame(String name) {
         String key = DEFAULT_CONTINUE_KEY;
         String tittle = String.format(BUST_MESSAGE_TEMPLATE,
                 name,

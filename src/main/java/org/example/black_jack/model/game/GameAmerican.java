@@ -85,6 +85,7 @@ public class GameAmerican implements Game {
     public void openDeck(Player player) {
         PlayerData data = storage.get(player);
         data.getDeck().open();
+        updateData(player);
     }
 
     @Override

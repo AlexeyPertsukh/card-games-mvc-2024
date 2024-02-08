@@ -1,8 +1,8 @@
 package org.example.black_jack.controller;
 
-public class Main_4p0b_Mini5x3Pic_color {
-    private static final String PLAYER_NUM = "4";
-    private static final String BOT_NUM = "0";
+public class Main_3p1b_Mini5x3Pic_color {
+    private static final String PLAYER_NUM = "3";
+    private static final String BOT_NUM = "1";
     private static final String CARD_PIC = MainConfig.picMini5x3();
     private static final String COLOR = MainConfig.ColorType.COL.name();
 
