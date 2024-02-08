@@ -3,7 +3,6 @@ package org.example.black_jack.controller.factory.view_factory;
 import org.example.black_jack.model.game.PlayerData;
 import org.example.black_jack.view.player_data_view.TextPdataView;
 import org.example.common.model.card.Card;
-import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
 import org.example.common.view.info_view.InfoView;
 import org.example.common.view.info_view.MemoInfoView;
@@ -46,8 +45,14 @@ public class BaseViewFactory extends AbstractViewFactory {
     }
 
     @Override
-    public View infoAddCard(Player player) {
-        String text = String.format(ADD_CARDS_TEMPLATE, player.getName());
+    public View infoAddCard(String name) {
+        String text = String.format(ADD_CARDS_TEMPLATE, name);
+        return new InfoView(text, printer);
+    }
+
+    @Override
+    public View infoBotCmdInput(String name, String keyTake, String keySkip) {
+        String text = String.format(DIALOG_INPUT_CMD_TEMPLATE, name, keyTake, keySkip);
         return new InfoView(text, printer);
     }
 
@@ -62,12 +67,7 @@ public class BaseViewFactory extends AbstractViewFactory {
     }
 
     @Override
-    public View picCardView(Card card) {
-        return new PicCardView(card, printer, picCardMapper);
-    }
-
-    @Override
-    public View picDeckView(Deck deck) {
+    public View picDeckView(org.example.common.model.deck.Deck deck) {
         return new PicDeckView(deck, printer, picCardMapper);
     }
 

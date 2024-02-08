@@ -6,12 +6,12 @@ public class TextCardMapper implements CardMapper<String> {
     private final static String BACK = "<hidden>";
 
     @Override
-    public String apply(Card card) {
-        if(!card.isOpen()) {
+    public String apply(Card deck) {
+        if(!deck.isOpen()) {
             return BACK;
         }
-        String infoSuit = card.getSuit().getIcon();
-        String infoRank = card.getRank().getLabel();
+        String infoSuit = deck.getSuit().getIcon();
+        String infoRank = deck.getRank().getLabel();
         return String.format("%s %s", infoSuit, infoRank);
     }
 }

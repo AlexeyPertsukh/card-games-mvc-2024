@@ -2,7 +2,6 @@ package org.example.black_jack.view.player_data_view;
 
 import org.example.black_jack.model.game.PlayerData;
 import org.example.black_jack.model.game.PlayerStatus;
-import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.view.printer.Printer;
 import org.example.common.view.views.table_view.TextTableView;
@@ -15,7 +14,7 @@ public class TextPdataView extends AbstractTextPdataView {
 
     public TextPdataView(List<PlayerData> value, Printer printer,  Function<Card, String> cardMapper) {
         super(value, printer);
-        List<Deck> decks = decks(value);
+        List<org.example.common.model.deck.Deck> decks = decks(value);
         this.tableView = new TextTableView(decks, printer, cardMapper);
     }
 

@@ -1,6 +1,5 @@
 package org.example.common.view.views.table_view;
 
-import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.view.printer.Printer;
 
@@ -12,7 +11,7 @@ public abstract class AbstractTextTableView extends TableView<String> {
     protected static final String EMPTY = "";
     protected final static String TEMPLATE = "%-20s";
 
-    public AbstractTextTableView(List<Deck> value, Printer printer, Function<Card, String> mapper) {
+    public AbstractTextTableView(List<org.example.common.model.deck.Deck> value, Printer printer, Function<Card, String> mapper) {
         super(value, printer, mapper);
     }
 
@@ -24,19 +23,19 @@ public abstract class AbstractTextTableView extends TableView<String> {
         }
     }
 
-    protected abstract void showLine(List<Deck> decks, int line);
+    protected abstract void showLine(List<org.example.common.model.deck.Deck> decks, int line);
 
-    protected String text(Card card) {
-        return card.isOpen() ? mapper.apply(card) : HIDDEN;
+    protected String text(Card deck) {
+        return deck.isOpen() ? mapper.apply(deck) : HIDDEN;
     }
 
     public String template() {
         return TEMPLATE;
     }
 
-    protected static int max(List<Deck> decks) {
+    protected static int max(List<org.example.common.model.deck.Deck> decks) {
         int max = 0;
-        for (Deck deck : decks) {
+        for (org.example.common.model.deck.Deck deck : decks) {
             if (deck.size() > max) {
                 max = deck.size();
             }

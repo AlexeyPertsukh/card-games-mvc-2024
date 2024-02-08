@@ -2,7 +2,6 @@ package org.example.black_jack.view.player_data_view;
 
 import org.example.black_jack.model.game.PlayerData;
 import org.example.black_jack.model.game.PlayerStatus;
-import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardSuit;
 import org.example.common.view.views.color_mapper.SuitToPrintColorMapper;
@@ -24,7 +23,7 @@ public class ColorTextPdataView extends AbstractTextPdataView {
     public ColorTextPdataView(List<PlayerData> value, ColorPrinter colorPrinter, Function<Card, String> cardMapper) {
         super(value, colorPrinter);
         this.colorPrinter = colorPrinter;
-        List<Deck> decks = decks(value);
+        List<org.example.common.model.deck.Deck> decks = decks(value);
         colorTableView = new ColorTextTableView(decks, colorPrinter, cardMapper);
     }
 
@@ -63,6 +62,7 @@ public class ColorTextPdataView extends AbstractTextPdataView {
         WIN(PlayerStatus.WIN, ColorPrinter.Color.GREEN),
         LOSE(PlayerStatus.LOSE, ColorPrinter.Color.RED),
         BUST(PlayerStatus.BUST, ColorPrinter.Color.RED),
+        PUSH(PlayerStatus.PUSH, ColorPrinter.Color.YELLOW),
         BLACK_JACK(PlayerStatus.BLACK_JACK, ColorPrinter.Color.GREEN),
         ;
         private final PlayerStatus status;

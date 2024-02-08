@@ -1,8 +1,8 @@
 package org.example.black_jack.model.game;
 
-import org.example.common.model.deck.Deck;
 import org.example.black_jack.model.Rules;
 import org.example.common.model.card.Card;
+import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
 import org.example.common.model.player.bot.Dealer;
 import org.example.common.model.point_counter.PointCounter;
@@ -31,12 +31,12 @@ public class GameAmerican implements Game {
         masterDeck.shuffle();
 
         for (Player player : players) {
-            Deck deck = new Deck();
+            org.example.common.model.deck.Deck deck = new org.example.common.model.deck.Deck();
             PlayerData data = new PlayerData(player, deck);
             storage.put(player, data);
         }
 
-        PlayerData dealerData = new PlayerData(dealer, new Deck());
+        PlayerData dealerData = new PlayerData(dealer, new org.example.common.model.deck.Deck());
         storage.put(dealer, dealerData);
         updater = new DataUpdater(rules, counter);
     }
@@ -99,58 +99,54 @@ public class GameAmerican implements Game {
     }
 
     @Override
-    public Card addOpenCard(Player player) {
+    public Deck addOpenCard(Player player) {
         return addCard(player, CARD_OPEN);
     }
 
     @Override
-    public Card addCloseCard(Player player) {
+    public Deck addCloseCard(Player player) {
         return addCard(player, CARD_CLOSE);
     }
 
     @Override
-    public List<Card> addOpenCard(Player player, int num) {
+    public Deck addOpenCard(Player player, int num) {
         return addCard(player, CARD_OPEN, num);
     }
 
     @Override
-    public List<Card> addCloseCard(Player player, int num) {
+    public Deck addCloseCard(Player player, int num) {
         return addCard(player, CARD_CLOSE, num);
     }
 
     @Override
-    public List<Card> beginAddPlayerCard(Player player) {
-        return addOpenCard(player, 2);
-    }
-
-    @Override
-    public List<Card> beginAddDealerCard() {
-        List<Card> cards = new ArrayList<>();
-        Card card = addOpenCard(dealer());
-        cards.add(card);
-        card = addCloseCard(dealer());
-        cards.add(card);
-        return cards;
-    }
-
-    private List<Card> addCard(Player player, boolean isOpen, int num) {
-        List<Card> cards = new ArrayList<>();
-
-        for (int i = 0; i < num; i++) {
-            Card card = masterDeck.take();
-            if (isOpen) {
-                card.open();
+    public void beginAddCard() {
+        for (PlayerData data : storage.values()) {
+            Player player = data.getPlayer();
+            if (player == dealer) {
+                continue;
             }
-            cards.add(card);
-            storage.get(player).getDeck().add(card);
+            addOpenCard(player, 2);
         }
-        updateData(player);
-        return cards;
+
+        addOpenCard(dealer);
+        addCloseCard(dealer);
     }
 
-    private Card addCard(Player player, boolean isOpen) {
-        List<Card> cards = addCard(player, isOpen, 1);
-        return cards.get(0);
+    private Deck addCard(Player player, boolean isOpen, int num) {
+
+        Deck playerDeck = storage.get(player).getDeck();
+        Deck second = masterDeck.take(num);
+        if (isOpen) {
+            second.open();
+        }
+        playerDeck.add(second);
+
+        updateData(player);
+        return second;
+    }
+
+    private Deck addCard(Player player, boolean isOpen) {
+        return addCard(player, isOpen, 1);
     }
 
     private void updateData(Player player) {
@@ -161,7 +157,8 @@ public class GameAmerican implements Game {
     @Override
     public void calculateResult() {
         List<PlayerData> list = new ArrayList<>(storage.values());
-        updater.updateResult(list);
+        int dealerPoint = storage.get(dealer).getPoint();
+        updater.updateResult(list, dealerPoint);
     }
 
     public class PlayerIterator implements Iterator<Player> {

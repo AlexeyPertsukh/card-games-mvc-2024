@@ -83,14 +83,14 @@ public class Micro1x1PicCardMapper implements CardMapper<Pic> {
     }
 
     @Override
-    public Pic apply(Card card) {
-        if(!card.isOpen()) {
+    public Pic apply(Card deck) {
+        if(!deck.isOpen()) {
             return pic(BACK);
         }
 
-        CardRank rank = card.getRank();
+        CardRank rank = deck.getRank();
         if(rank == CardRank.JOKER) {
-            if(card.getSuit().getColor() == CardSuit.Color.RED) {
+            if(deck.getSuit().getColor() == CardSuit.Color.RED) {
                 return pic(JOKER_RED);
             }
             return pic(JOKER_BLACK);
@@ -99,7 +99,7 @@ public class Micro1x1PicCardMapper implements CardMapper<Pic> {
         int num = rank.ordinal() - 1;
 
         String s = "";
-        switch (card.getSuit()) {
+        switch (deck.getSuit()) {
             case SPADE: s = SPADES[num];
             case HEART: s = HEARTS[num];
             case CLUB: s = CLUBS[num];

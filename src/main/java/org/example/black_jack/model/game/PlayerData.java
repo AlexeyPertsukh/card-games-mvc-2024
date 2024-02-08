@@ -1,17 +1,16 @@
 package org.example.black_jack.model.game;
 
 
-import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.model.player.Player;
 
 public class PlayerData {
     private final Player player;
-    private final Deck deck;
+    private final org.example.common.model.deck.Deck deck;
     private PlayerStatus status = PlayerStatus.IN_GAME;
     private int point;
 
-    public PlayerData(Player player, Deck deck) {
+    public PlayerData(Player player, org.example.common.model.deck.Deck deck) {
         this.player = player;
         this.deck = deck;
     }
@@ -25,8 +24,8 @@ public class PlayerData {
     }
 
     public boolean isCardsOpen() {
-        for (Card card : deck.toList()) {
-            if(!card.isOpen()) {
+        for (Card deck : this.deck.toList()) {
+            if(!deck.isOpen()) {
                 return false;
             }
         }
@@ -37,7 +36,7 @@ public class PlayerData {
         return player;
     }
 
-    public Deck getDeck() {
+    public org.example.common.model.deck.Deck getDeck() {
         return deck;
     }
 

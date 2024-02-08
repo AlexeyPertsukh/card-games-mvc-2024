@@ -1,7 +1,6 @@
 package org.example.common.view.views.table_view;
 
 import org.example.common.view.views.color_mapper.SuitToPrintColorMapper;
-import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardSuit;
 import org.example.common.view.printer.ColorPrinter;
@@ -12,14 +11,14 @@ import java.util.function.Function;
 public class ColorTextTableView extends AbstractTextTableView{
     private final ColorPrinter colorPrinter;
     private final Function<CardSuit.Color, ColorPrinter.Color> colorNapper = new SuitToPrintColorMapper();
-    public ColorTextTableView(List<Deck> value, ColorPrinter colorPrinter, Function<Card, String> mapper) {
+    public ColorTextTableView(List<org.example.common.model.deck.Deck> value, ColorPrinter colorPrinter, Function<Card, String> mapper) {
         super(value, colorPrinter, mapper);
         this.colorPrinter = colorPrinter;
     }
 
     @Override
-    protected void showLine(List<Deck> decks, int line) {
-        for (Deck deck : decks) {
+    protected void showLine(List<org.example.common.model.deck.Deck> decks, int line) {
+        for (org.example.common.model.deck.Deck deck : decks) {
             String text = EMPTY;
             ColorPrinter.Color color = ColorPrinter.Color.DEFAULT;
 
@@ -36,11 +35,11 @@ public class ColorTextTableView extends AbstractTextTableView{
         printer.output();
     }
 
-    private ColorPrinter.Color color(Card card) {
-        if(!card.isOpen()) {
+    private ColorPrinter.Color color(Card deck) {
+        if(!deck.isOpen()) {
             return ColorPrinter.Color.DEFAULT;
         }
-        return colorNapper.apply(card.getSuit().getColor());
+        return colorNapper.apply(deck.getSuit().getColor());
     }
 
 }

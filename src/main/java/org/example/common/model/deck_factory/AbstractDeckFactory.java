@@ -1,13 +1,12 @@
 package org.example.common.model.deck_factory;
 
-import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardRank;
 import org.example.common.model.card.CardSuit;
 
 public abstract class AbstractDeckFactory implements DeckFactory{
-    protected Deck getFrom(CardRank start) {
-        Deck deck = new Deck();
+    protected org.example.common.model.deck.Deck getFrom(CardRank start) {
+        org.example.common.model.deck.Deck deck = new org.example.common.model.deck.Deck();
         int startIndex = start.ordinal();
         CardRank[] ranks = CardRank.values();
         CardSuit[] suits = CardSuit.values();
@@ -25,8 +24,8 @@ public abstract class AbstractDeckFactory implements DeckFactory{
     }
 
     @Override
-    public Deck shoes(int num) {
-        Deck deck = new Deck();
+    public org.example.common.model.deck.Deck shoes(int num) {
+        org.example.common.model.deck.Deck deck = new org.example.common.model.deck.Deck();
         for (int i = 0; i < num; i++) {
             deck.add(get());
         }
@@ -34,8 +33,8 @@ public abstract class AbstractDeckFactory implements DeckFactory{
     }
 
     @Override
-    public Deck getRandom(int num) {
-        Deck deck = get();
+    public org.example.common.model.deck.Deck getRandom(int num) {
+        org.example.common.model.deck.Deck deck = get();
         deck.shuffle();
         return deck.take(num);
     }

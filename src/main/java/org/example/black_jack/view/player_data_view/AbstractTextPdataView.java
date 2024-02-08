@@ -89,6 +89,7 @@ public abstract class AbstractTextPdataView extends PdataView {
     protected static String text(PlayerStatus state) {
         switch (state) {
             case BLACK_JACK: return "BLACK JACK";
+            case PUSH: return "PUSH";
             case BUST: return "BUST";
             case LOSE: return "LOSE";
             case WIN: return "WIN";

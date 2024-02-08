@@ -1,7 +1,6 @@
 package org.example.black_jack.model.game;
 
 import org.example.common.model.deck.Deck;
-import org.example.common.model.card.Card;
 import org.example.common.model.player.Player;
 import org.example.common.model.player.bot.Dealer;
 
@@ -22,14 +21,13 @@ public interface Game {
 
     List<PlayerData> playerData();
 
-    Card addOpenCard(Player player);
-    List<Card> addOpenCard(Player player, int num);
+    Deck addOpenCard(Player player);
+    Deck addOpenCard(Player player, int num);
 
-    Card addCloseCard(Player player);
-    List<Card> addCloseCard(Player player, int num);
+    Deck addCloseCard(Player player);
+    Deck addCloseCard(Player player, int num);
 
-    List<Card> beginAddPlayerCard(Player player);
-    List<Card> beginAddDealerCard();
+    void beginAddCard();
 
     void calculateResult();
 }

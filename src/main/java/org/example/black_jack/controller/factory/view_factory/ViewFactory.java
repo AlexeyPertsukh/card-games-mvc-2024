@@ -11,13 +11,13 @@ import java.util.List;
 public interface ViewFactory {
     View tittle();
     View infoEnd();
-    View infoAddCard(Player player);
+    View infoAddCard(String name);
     View infoText(String text);
     View infoDealerShowCards();
+    View infoBotCmdInput(String name, String keyTake, String keySkip);
 
 
     View playerData(List<PlayerData> data);
-    View picCardView(Card card);
     View picDeckView(Deck deck);
 
 }

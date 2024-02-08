@@ -1,6 +1,5 @@
 package org.example.common.view.views.deck_view;
 
-import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.Printer;
@@ -10,7 +9,7 @@ import java.util.function.Function;
 
 public class PicDeckView extends DeckView<Pic> {
 
-    public PicDeckView(Deck value, Printer printer, Function<Card, Pic> map) {
+    public PicDeckView(org.example.common.model.deck.Deck value, Printer printer, Function<Card, Pic> map) {
         super(value, printer, map);
     }
 
@@ -20,10 +19,10 @@ public class PicDeckView extends DeckView<Pic> {
             return;
         }
 
-        List<Card> cards = value.toList();
+        List<Card> decks = value.toList();
         Pic pic = null;
-        for (Card card : cards) {
-            Pic current = map.apply(card);
+        for (Card deck : decks) {
+            Pic current = map.apply(deck);
             if (pic == null) {
                 pic = current;
                 continue;

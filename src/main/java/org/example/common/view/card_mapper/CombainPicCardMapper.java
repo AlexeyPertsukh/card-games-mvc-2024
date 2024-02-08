@@ -7,15 +7,15 @@ import org.example.common.view.pic.Pic;
 
 public abstract class CombainPicCardMapper extends PicCardMapper {
     @Override
-    public Pic apply(Card card) {
-        if (!card.isOpen()) {
+    public Pic apply(Card deck) {
+        if (!deck.isOpen()) {
             return pic(back());
         }
 
-        String[] template = rankPicture(card.getRank());
+        String[] template = rankPicture(deck.getRank());
         String[] pic = cloneArr(template);
         String changeSym = changeSymbol();
-        String suitSym = suitPicture(card.getSuit());
+        String suitSym = suitPicture(deck.getSuit());
 
         for (int i = 0; i < pic.length; i++) {
             pic[i] = pic[i].replace(changeSym, suitSym);

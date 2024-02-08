@@ -9,7 +9,7 @@ public interface DialogFactory {
 
     DialogView<String> dialogBust(String name);
 
-    DialogView<String> dialogPlayerInput(String name, String keyTake, String keySkip);
+    DialogView<String> dialogPlayerCmdInput(String name, String keyTake, String keySkip);
 
     DialogView<String> dialogPressToContinue();
 }

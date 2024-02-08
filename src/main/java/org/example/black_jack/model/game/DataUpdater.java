@@ -21,7 +21,7 @@ public class DataUpdater {
 
     public void updateOnWork(PlayerData data) {
         Deck deck = data.getDeck();
-        deck.sort(comparator);
+//        deck.sort(comparator);
         int point = counter.apply(deck);
         data.setPoint(point);
 
@@ -41,18 +41,23 @@ public class DataUpdater {
 
     }
 
-    public void updateResult(List<PlayerData> list) {
+    public void updateResult(List<PlayerData> list, int dealerPoint) {
         List<Integer> points = pointList(list);
         int winPoint = rules.winPoint(points);
 
         for (PlayerData data : list) {
-            updateResult(data, winPoint);
+            updateResult(data, winPoint, dealerPoint);
         }
     }
 
-    private void updateResult(PlayerData data, int winPoint) {
+    private void updateResult(PlayerData data, int winPoint, int dealerPoint) {
         Deck deck = data.getDeck();
         int point = data.getPoint();
+
+        if(rules.isPush(winPoint, point, dealerPoint)) {
+            data.setStatus(PlayerStatus.PUSH);
+            return;
+        }
 
         if (rules.isBust(point)) {
             data.setStatus(PlayerStatus.BUST);
@@ -84,5 +89,6 @@ public class DataUpdater {
         }
         return points;
     }
+
 
 }

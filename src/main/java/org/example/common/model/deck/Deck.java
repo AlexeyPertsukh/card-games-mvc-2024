@@ -8,22 +8,22 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Deck {
-    private final List<Card> cards = new ArrayList<>();
+    private final List<Card> decks = new ArrayList<>();
 
     public Deck() {
     }
 
-    public Deck(List<Card> cards) {
-        this.cards.addAll(cards);
+    public Deck(List<Card> decks) {
+        this.decks.addAll(decks);
     }
 
     public Card get(int index) {
-        return cards.get(index);
+        return decks.get(index);
     }
 
 
     public Card take() {
-        return cards.remove(cards.size() - 1);
+        return decks.remove(decks.size() - 1);
     }
 
     public Deck take(int num) {
@@ -36,14 +36,14 @@ public class Deck {
 
 
     public List<Card> toList() {
-        return new ArrayList<>(cards);
+        return new ArrayList<>(decks);
     }
 
-    public void add(Card card) {
-        cards.add(card);
+    public void add(Card deck) {
+        decks.add(deck);
     }
     public void add(List<Card> list) {
-        cards.addAll(list);
+        decks.addAll(list);
     }
     public void add(Deck deck) {
         add(deck.toList());
@@ -51,16 +51,16 @@ public class Deck {
 
 
     public int size() {
-        return cards.size();
+        return decks.size();
     }
 
     public void shuffle() {
-        Collections.shuffle(cards);
+        Collections.shuffle(decks);
     }
 
     public boolean isOpen() {
-        for (Card card : cards) {
-            if (!card.isOpen()) {
+        for (Card deck : decks) {
+            if (!deck.isOpen()) {
                 return false;
             }
         }
@@ -68,12 +68,12 @@ public class Deck {
     }
 
     public void open() {
-        for (Card card : cards) {
-            card.open();
+        for (Card deck : decks) {
+            deck.open();
         }
     }
 
     public void sort(Comparator<Card> c) {
-        cards.sort(c);
+        decks.sort(c);
     }
 }

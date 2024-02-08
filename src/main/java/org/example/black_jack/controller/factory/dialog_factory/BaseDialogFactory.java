@@ -59,8 +59,8 @@ public class BaseDialogFactory extends AbstractDialogFactory {
     }
 
     @Override
-    public DialogView<String> dialogPlayerInput(String name, String keyTake, String keySkip) {
-        String tittle = String.format("[%s] input command: %s - take card, %s - skip",
+    public DialogView<String> dialogPlayerCmdInput(String name, String keyTake, String keySkip) {
+        String tittle = String.format(DIALOG_INPUT_CMD_TEMPLATE,
                 name,
                 keyTake,
                 keySkip
