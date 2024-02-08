@@ -1,9 +1,10 @@
-package org.example.black_jack.controller.game;
+package org.example.black_jack.model.game;
 
 public enum PlayerStatus {
     IN_GAME,
     BUST,
     LOSE,
     WIN,
-    BLACK_JACK;
+    BLACK_JACK,
+    PUSH;
 }

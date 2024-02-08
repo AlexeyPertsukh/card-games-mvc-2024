@@ -2,13 +2,13 @@ package org.example.black_jack.controller;
 
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.black_jack.controller.factory.view_factory.ViewFactory;
-import org.example.black_jack.controller.game.PlayerData;
+import org.example.black_jack.model.game.PlayerData;
 import org.example.common.controller.command.Command;
 import org.example.black_jack.controller.command.TakeCardCommand;
 import org.example.black_jack.controller.command.SkipCommand;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
-import org.example.black_jack.controller.game.Game;
+import org.example.black_jack.model.game.Game;
 import org.example.common.model.player.Player;
 import org.example.common.model.player.bot.Bot;
 import org.example.common.model.player.bot.Dealer;

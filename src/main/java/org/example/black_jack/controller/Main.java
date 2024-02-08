@@ -4,8 +4,8 @@ import org.example.black_jack.controller.factory.dialog_factory.BaseDialogFactor
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.black_jack.controller.factory.view_factory.ColorViewFactory;
 import org.example.black_jack.controller.factory.view_factory.ViewFactory;
-import org.example.black_jack.controller.game.Game;
-import org.example.black_jack.controller.game.GameAmerican;
+import org.example.black_jack.model.game.Game;
+import org.example.black_jack.model.game.GameAmerican;
 import org.example.black_jack.model.BjPointCounter;
 import org.example.black_jack.model.Rules;
 import org.example.common.model.deck.Deck;

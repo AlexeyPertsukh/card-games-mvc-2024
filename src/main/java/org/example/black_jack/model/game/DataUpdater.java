@@ -1,4 +1,4 @@
-package org.example.black_jack.controller.game;
+package org.example.black_jack.model.game;
 
 import org.example.black_jack.model.BjCardComparator;
 import org.example.black_jack.model.Rules;

@@ -1,7 +1,7 @@
 package org.example.black_jack.view.player_data_view;
 
-import org.example.black_jack.controller.game.PlayerData;
-import org.example.black_jack.controller.game.PlayerStatus;
+import org.example.black_jack.model.game.PlayerData;
+import org.example.black_jack.model.game.PlayerStatus;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardSuit;

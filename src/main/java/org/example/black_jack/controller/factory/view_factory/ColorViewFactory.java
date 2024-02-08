@@ -1,6 +1,6 @@
 package org.example.black_jack.controller.factory.view_factory;
 
-import org.example.black_jack.controller.game.PlayerData;
+import org.example.black_jack.model.game.PlayerData;
 import org.example.black_jack.view.player_data_view.ColorTextPdataView;
 import org.example.common.model.card.Card;
 import org.example.common.model.deck.Deck;
@@ -8,12 +8,9 @@ import org.example.common.model.player.Player;
 import org.example.common.view.info_view.ColorInfoView;
 import org.example.common.view.info_view.ColorMemoInfoView;
 import org.example.common.view.info_view.InfoView;
-import org.example.common.view.info_view.MemoInfoView;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.ColorConsolePrinter;
 import org.example.common.view.printer.ColorPrinter;
-import org.example.common.view.reader.KeyboardReader;
-import org.example.common.view.reader.Reader;
 import org.example.common.view.views.View;
 import org.example.common.view.views.card_view.ColorPicCardView;
 import org.example.common.view.views.deck_view.ColorPicDeckView;

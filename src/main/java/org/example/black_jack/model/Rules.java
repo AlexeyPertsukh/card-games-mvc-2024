@@ -26,6 +26,10 @@ public class Rules {
         return point == MAX_WIN_POINT;
     }
 
+    public boolean isPush(int winPoint, int point, int dealerPoint) {
+        return (point == winPoint) && (point==dealerPoint);
+    }
+
     public int winPoint(List<Integer> numbers) {
         int max = 0;
         for (int num : numbers) {
@@ -35,5 +39,6 @@ public class Rules {
         }
         return max;
     }
+
 
 }

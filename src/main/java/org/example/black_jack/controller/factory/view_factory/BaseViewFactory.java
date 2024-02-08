@@ -1,6 +1,6 @@
 package org.example.black_jack.controller.factory.view_factory;
 
-import org.example.black_jack.controller.game.PlayerData;
+import org.example.black_jack.model.game.PlayerData;
 import org.example.black_jack.view.player_data_view.TextPdataView;
 import org.example.common.model.card.Card;
 import org.example.common.model.deck.Deck;

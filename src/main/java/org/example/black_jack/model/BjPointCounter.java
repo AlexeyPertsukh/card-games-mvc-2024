@@ -5,20 +5,23 @@ import org.example.common.model.card.Card;
 import org.example.common.model.card.CardRank;
 import org.example.common.model.point_counter.PointCounter;
 
+import java.util.Map;
+
 public class BjPointCounter implements PointCounter {
+    private static final int MAX_POINT = 21;
 
     @Override
     public Integer apply(Deck deck) {
         int points = 0;
         for (Card card : deck.toList()) {
             if(card.isOpen()) {
-                points += cardPoint(card);
+                points += cardPoint(points, card);
             }
         }
         return points;
     }
 
-    private static int cardPoint(Card card) {
+    private static int cardPoint(int prevPoints, Card card) {
         CardRank rank = card.getRank();
         switch (rank) {
             case TWO:
@@ -46,7 +49,8 @@ public class BjPointCounter implements PointCounter {
             case KING:
                 return 10;
             case ACE:
-                return 11;
+                return MAX_POINT > prevPoints ? 11: 1;
+
             default:
                 throw new IllegalArgumentException("illegal card rank: " + rank);
         }
