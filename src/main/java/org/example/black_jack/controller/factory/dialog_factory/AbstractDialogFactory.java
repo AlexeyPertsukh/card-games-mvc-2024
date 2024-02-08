@@ -6,4 +6,6 @@ public abstract class AbstractDialogFactory implements DialogFactory{
     protected static final String DIALOG_ERROR_MESSAGE = "incorrect input";
     protected static final String BASIC_PRESS_TO_CONTINUE_TEMPLATE = "press '%s' to continue";
     protected static final String DIALOG_INPUT_CMD_TEMPLATE = "[%s] input command: %s - take card, %s - skip";
+    protected static final String DIALOG_IS_BOT = "[%s] is BOT, press '%s' to continue";
+    protected static final String DEALER_REVEALS_CARD_TEMPLATE = "Dealer reveals his cards, press '%s' to continue";
 }

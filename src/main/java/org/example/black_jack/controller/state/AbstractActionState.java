@@ -24,7 +24,7 @@ public abstract class AbstractActionState extends State {  //Игроки(кро
         Deck deck = game.deck(player);
         Bot bot = (Bot) player;
         String name = bot.getName();
-
+        dialogFactory.dialogIsBot(bot.getName()).input();
         viewFactory.infoBotCmdInput(name, TAKE_KEY, SKIP_KEY).show();
 
         Bot.BotCommand botCommand = bot.input(deck);

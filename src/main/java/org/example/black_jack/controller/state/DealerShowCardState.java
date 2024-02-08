@@ -15,10 +15,10 @@ public class DealerShowCardState extends State {
     @Override
     public void execute() {
         Dealer dealer = game.dealer();
+        dialogFactory.dialogDealerRevealsCard(dealer.getName()).input();
         viewFactory.infoDealerShowCards().show();
         game.openDeck(dealer);
         Deck dealerDeck = game.deck(dealer);
         viewFactory.picDeckView(dealerDeck).show();
-        dialogFactory.dialogPressToContinue().input();
     }
 }

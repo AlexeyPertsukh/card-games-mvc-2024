@@ -76,9 +76,20 @@ public class BaseDialogFactory extends AbstractDialogFactory {
     }
 
     @Override
+    public DialogView<String> dialogDealerRevealsCard(String name) {
+        String key = DEFAULT_CONTINUE_KEY;
+        final String tittle = String.format(DEALER_REVEALS_CARD_TEMPLATE, key);
+        return dialogPressOne(tittle, key);
+    }
+
+    @Override
     public DialogView<String> dialogPressToContinue() {
         String key = DEFAULT_CONTINUE_KEY;
         final String tittle = String.format(BASIC_PRESS_TO_CONTINUE_TEMPLATE, key);
+        return dialogPressOne(tittle, key);
+    }
+
+    public DialogView<String> dialogPressOne(String tittle, String key) {
         return new SelectStringDialogView(
                 printer,
                 reader,
@@ -88,4 +99,10 @@ public class BaseDialogFactory extends AbstractDialogFactory {
         );
     }
 
+    @Override
+    public DialogView<String> dialogIsBot(String name) {
+        String key = DEFAULT_CONTINUE_KEY;
+        final String tittle = String.format(DIALOG_IS_BOT, name, key);
+        return dialogPressOne(tittle, key);
+    }
 }
