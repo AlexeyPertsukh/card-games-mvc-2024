@@ -10,14 +10,9 @@ import org.example.common.model.player.bot.Dealer;
 public class DealerActionState extends AbstractActionState {
     private final static String TAKE_KEY = "t";
     private final static String SKIP_KEY = "s";
-    private final DialogFactory dialogFactory;
-    private final ViewFactory viewFactory;
-    private final Game game;
     public DealerActionState(GameController controller) {
         super(controller);
-        dialogFactory = controller.getDialogFactory();
-        viewFactory = controller.getViewFactory();
-        game = controller.getGame();
+
     }
 
     @Override

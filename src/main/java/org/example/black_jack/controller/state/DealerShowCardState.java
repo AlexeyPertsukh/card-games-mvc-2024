@@ -8,14 +8,8 @@ import org.example.common.model.deck.Deck;
 import org.example.common.model.player.bot.Dealer;
 
 public class DealerShowCardState extends State {
-    private final DialogFactory dialogFactory;
-    private final ViewFactory viewFactory;
-    private final Game game;
     public DealerShowCardState(GameController controller) {
         super(controller);
-        dialogFactory = controller.getDialogFactory();
-        viewFactory = controller.getViewFactory();
-        game = controller.getGame();
     }
 
     @Override

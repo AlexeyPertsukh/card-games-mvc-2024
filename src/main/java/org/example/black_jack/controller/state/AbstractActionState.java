@@ -14,16 +14,10 @@ import java.util.Iterator;
 public abstract class AbstractActionState extends State {  //Игроки(кроме дилера) берут карты или пропускают ходы
     protected final static String TAKE_KEY = "t";
     protected final static String SKIP_KEY = "s";
-    protected final Game game;
-    protected final DialogFactory dialogFactory;
-    protected final ViewFactory viewFactory;
     protected boolean skip;
 
     public AbstractActionState(GameController controller) {
         super(controller);
-        game = controller.getGame();
-        dialogFactory = controller.getDialogFactory();
-        viewFactory = controller.getViewFactory();
     }
 
     protected Command autoInput(Player player) {
