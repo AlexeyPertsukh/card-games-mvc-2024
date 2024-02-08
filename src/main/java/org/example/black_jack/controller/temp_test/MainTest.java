@@ -1,4 +1,4 @@
-package org.example.black_jack.controller;
+package org.example.black_jack.controller.temp_test;
 
 import org.example.black_jack.model.BjPointCounter;
 import org.example.common.model.card.Card;

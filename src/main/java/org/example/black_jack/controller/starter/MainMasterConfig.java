@@ -1,5 +1,6 @@
-package org.example.black_jack.controller;
+package org.example.black_jack.controller.starter;
 
+import org.example.black_jack.controller.game_controller.GameController;
 import org.example.black_jack.controller.factory.dialog_factory.BaseDialogFactory;
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.black_jack.controller.factory.view_factory.BaseViewFactory;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class MainConfig {
+public class MainMasterConfig {
     public final static String MICRO_PIC = "1";
     public final static String MINI_PIC = "2";
     public final static String SMALL_PIC = "3";

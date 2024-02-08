@@ -1,4 +1,4 @@
-package org.example.black_jack.controller;
+package org.example.black_jack.controller.game_controller;
 
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.black_jack.controller.factory.view_factory.ViewFactory;

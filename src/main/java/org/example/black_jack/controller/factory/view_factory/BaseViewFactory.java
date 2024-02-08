@@ -51,6 +51,11 @@ public class BaseViewFactory extends AbstractViewFactory {
     }
 
     @Override
+    public View infoGameResult() {
+        return new MemoInfoView(MESSAGE_GAME_RESULT, printer);
+    }
+
+    @Override
     public View infoBotCmdInput(String name, String keyTake, String keySkip) {
         String text = String.format(DIALOG_INPUT_CMD_TEMPLATE, name, keyTake, keySkip);
         return new InfoView(text, printer);

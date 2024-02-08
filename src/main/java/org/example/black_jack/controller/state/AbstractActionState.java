@@ -1,15 +1,9 @@
 package org.example.black_jack.controller.state;
 
-import org.example.black_jack.controller.GameController;
-import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
-import org.example.black_jack.controller.factory.view_factory.ViewFactory;
-import org.example.black_jack.model.game.Game;
+import org.example.black_jack.controller.game_controller.GameController;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
 import org.example.common.model.player.bot.Bot;
-import org.example.common.view.dialog_view.DialogView;
-
-import java.util.Iterator;
 
 public abstract class AbstractActionState extends State {  //Игроки(кроме дилера) берут карты или пропускают ходы
     protected final static String TAKE_KEY = "t";

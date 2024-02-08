@@ -1,5 +1,6 @@
-package org.example.black_jack.controller;
+package org.example.black_jack.controller.temp_test;
 
+import org.example.black_jack.controller.game_controller.GameController;
 import org.example.black_jack.controller.factory.dialog_factory.BaseDialogFactory;
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.black_jack.controller.factory.view_factory.ColorViewFactory;

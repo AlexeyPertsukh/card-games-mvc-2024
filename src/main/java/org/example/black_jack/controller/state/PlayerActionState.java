@@ -1,8 +1,7 @@
 package org.example.black_jack.controller.state;
 
-import org.example.black_jack.controller.GameController;
+import org.example.black_jack.controller.game_controller.GameController;
 
-import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
 import org.example.common.view.dialog_view.DialogView;
 

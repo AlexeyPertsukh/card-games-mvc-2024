@@ -7,6 +7,7 @@ import org.example.common.model.player.Player;
 import org.example.common.view.info_view.ColorInfoView;
 import org.example.common.view.info_view.ColorMemoInfoView;
 import org.example.common.view.info_view.InfoView;
+import org.example.common.view.info_view.MemoInfoView;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.ColorConsolePrinter;
 import org.example.common.view.printer.ColorPrinter;
@@ -20,6 +21,7 @@ import java.util.function.Function;
 public class ColorViewFactory extends AbstractViewFactory {
     private final static ColorPrinter.Color COLOR_TITTLE = ColorPrinter.Color.BLUE;
     private final static ColorPrinter.Color COLOR_END = ColorPrinter.Color.PURPLE;
+    private final static ColorPrinter.Color COLOR_GAME_RESULT = ColorPrinter.Color.CYAN;
     private final Function<Card, String> textCardMapper;
     private final Function<Card, Pic> picCardMapper;
     private final ColorPrinter printer = new ColorConsolePrinter();
@@ -59,6 +61,11 @@ public class ColorViewFactory extends AbstractViewFactory {
     public View infoBotCmdInput(String name, String keyTake, String keySkip) {
         String text = String.format(DIALOG_INPUT_CMD_TEMPLATE, name, keyTake, keySkip);
         return new InfoView(text, printer);
+    }
+
+    @Override
+    public View infoGameResult() {
+        return new ColorMemoInfoView(MESSAGE_GAME_RESULT, printer, COLOR_GAME_RESULT);
     }
 
     @Override
