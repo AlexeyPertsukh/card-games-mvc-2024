@@ -3,7 +3,6 @@ package org.example.black_jack.controller.game_controller;
 import org.example.black_jack.controller.factory.dialog_factory.DialogFactory;
 import org.example.black_jack.controller.factory.view_factory.ViewFactory;
 import org.example.black_jack.controller.game_controller.state.*;
-import org.example.black_jack.controller.state.*;
 import org.example.black_jack.model.game.PlayerData;
 import org.example.black_jack.model.game.Game;
 import org.example.common.model.player.Player;
@@ -31,7 +30,6 @@ public class GameController {
 
         state = state(indexState);
 
-
     }
 
     public Game getGame() {
@@ -52,8 +50,6 @@ public class GameController {
             state.execute();
             selectState();
         }
-
-//        viewFactory.infoEnd().show();
 
     }
 

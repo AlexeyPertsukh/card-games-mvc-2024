@@ -20,26 +20,14 @@ public class BaseDialogFactory extends AbstractDialogFactory {
     public DialogView<String> dialogStart() {
         String key = DEFAULT_CONTINUE_KEY;
         String tittle = String.format("Press '%s' to start game", key);
-        return new SelectStringDialogView(
-                printer,
-                reader,
-                tittle,
-                "",
-                key
-        );
+        return dialogInput(tittle, key);
     }
 
     @Override
     public DialogView<String> dialogBeginCardDealOver() {
         String key = DEFAULT_CONTINUE_KEY;
         String tittle = String.format("Initial card deal is over, press '%s' to continue", key);
-        return new SelectStringDialogView(
-                printer,
-                reader,
-                tittle,
-                "",
-                key
-        );
+        return dialogInput(tittle, key);
     }
 
     @Override
@@ -49,13 +37,7 @@ public class BaseDialogFactory extends AbstractDialogFactory {
                 name,
                 key
         );
-        return new SelectStringDialogView(
-                printer,
-                reader,
-                tittle,
-                DIALOG_ERROR_MESSAGE,
-                key
-        );
+        return dialogInput(tittle, key);
     }
 
     @Override
@@ -65,37 +47,30 @@ public class BaseDialogFactory extends AbstractDialogFactory {
                 keyTake,
                 keySkip
         );
-        return new SelectStringDialogView(
-                printer,
-                reader,
-                tittle,
-                DIALOG_ERROR_MESSAGE,
-                keyTake,
-                keySkip
-        );
+        return dialogInput(tittle, keyTake, keySkip);
     }
 
     @Override
     public DialogView<String> dialogDealerRevealsCard(String name) {
         String key = DEFAULT_CONTINUE_KEY;
         final String tittle = String.format(DEALER_REVEALS_CARD_TEMPLATE, key);
-        return dialogPressOne(tittle, key);
+        return dialogInput(tittle, key);
     }
 
     @Override
     public DialogView<String> dialogPressToContinue() {
         String key = DEFAULT_CONTINUE_KEY;
         final String tittle = String.format(BASIC_PRESS_TO_CONTINUE_TEMPLATE, key);
-        return dialogPressOne(tittle, key);
+        return dialogInput(tittle, key);
     }
 
-    public DialogView<String> dialogPressOne(String tittle, String key) {
+    public DialogView<String> dialogInput(String tittle, String... keys) {
         return new SelectStringDialogView(
                 printer,
                 reader,
                 tittle,
                 DIALOG_ERROR_MESSAGE,
-                key
+                keys
         );
     }
 
@@ -103,6 +78,6 @@ public class BaseDialogFactory extends AbstractDialogFactory {
     public DialogView<String> dialogIsBot(String name) {
         String key = DEFAULT_CONTINUE_KEY;
         final String tittle = String.format(DIALOG_IS_BOT, name, key);
-        return dialogPressOne(tittle, key);
+        return dialogInput(tittle, key);
     }
 }

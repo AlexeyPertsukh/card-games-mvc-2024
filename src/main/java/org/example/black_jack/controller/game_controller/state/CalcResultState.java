@@ -16,3 +16,5 @@ public class CalcResultState extends State {
         controller.showTable();
     }
 }
+
+//TODO final calculation error: 18(lose) 26(bust) 20(push)
