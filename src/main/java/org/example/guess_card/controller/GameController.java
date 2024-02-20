@@ -1,5 +1,6 @@
 package org.example.guess_card.controller;
 
+import org.example.common.model.player.Player;
 import org.example.guess_card.controller.factory.dialog_factory.DialogFactory;
 import org.example.guess_card.controller.factory.view_factory.ViewFactory;
 import org.example.guess_card.model.Game;
@@ -19,7 +20,9 @@ public class GameController {
         viewFactory.tittle().show();
         dialogFactory.dialogStart().input();
             while (!isEnd()) {
-
+                Player current = game.currentPlayer();
+                dialogFactory.dialogCommand(current.getName()).input();
+                game.switchPlayer();
             }
     }
 

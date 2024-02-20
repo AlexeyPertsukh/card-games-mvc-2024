@@ -12,9 +12,6 @@ import org.example.common.view.views.View;
 import java.util.List;
 
 public class GameController {
-
-    private static final String DIALOG_ERROR_MESSAGE = "incorrect input";
-
     private final Game game;
     private final ViewFactory viewFactory;
     private final DialogFactory dialogFactory;
