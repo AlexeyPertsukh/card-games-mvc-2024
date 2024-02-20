@@ -23,9 +23,8 @@ public class Game {
     }
 
     public void switchPlayer() {
-        if(iterator.hasNext()) {
-            iterator.next();
-        } else {
+        iterator.next();
+        if (!iterator.hasNext()) {
             iterator = new PlayerIterator();
         }
     }
