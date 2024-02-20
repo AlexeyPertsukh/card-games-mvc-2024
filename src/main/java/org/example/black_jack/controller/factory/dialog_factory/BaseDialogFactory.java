@@ -8,7 +8,6 @@ import org.example.common.view.reader.KeyboardReader;
 import org.example.common.view.reader.Reader;
 
 public class BaseDialogFactory extends AbstractDialogFactory {
-    protected static final String DEFAULT_CONTINUE_KEY = "y";
     private final Printer printer = new ConsolePrinter();
     private final Reader reader = new KeyboardReader();
 

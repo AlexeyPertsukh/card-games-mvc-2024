@@ -18,4 +18,22 @@ public class DealerShowCardState extends State {
         Deck dealerDeck = game.deck(dealer);
         viewFactory.picDeckView(dealerDeck).show();
     }
+
+    public class ArcherImp {
+        public void shoot() {
+            System.out.println("Выстрел!");
+        }
+    }
+
+    public class MedicImp {
+        public void cure() {
+            System.out.println("Лечу!");
+        }
+    }
+
+    public class Magic {
+        //public void shoot();
+        //public void cure();
+    }
+
 }

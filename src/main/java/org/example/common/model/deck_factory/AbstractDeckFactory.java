@@ -3,9 +3,10 @@ package org.example.common.model.deck_factory;
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardRank;
 import org.example.common.model.card.CardSuit;
+import org.example.common.model.deck.Deck;
 
 public abstract class AbstractDeckFactory implements DeckFactory{
-    protected org.example.common.model.deck.Deck getFrom(CardRank start) {
+    protected Deck getFrom(CardRank start) {
         org.example.common.model.deck.Deck deck = new org.example.common.model.deck.Deck();
         int startIndex = start.ordinal();
         CardRank[] ranks = CardRank.values();
@@ -24,7 +25,7 @@ public abstract class AbstractDeckFactory implements DeckFactory{
     }
 
     @Override
-    public org.example.common.model.deck.Deck shoes(int num) {
+    public Deck shoes(int num) {
         org.example.common.model.deck.Deck deck = new org.example.common.model.deck.Deck();
         for (int i = 0; i < num; i++) {
             deck.add(get());
@@ -33,7 +34,7 @@ public abstract class AbstractDeckFactory implements DeckFactory{
     }
 
     @Override
-    public org.example.common.model.deck.Deck getRandom(int num) {
+    public Deck getRandom(int num) {
         org.example.common.model.deck.Deck deck = get();
         deck.shuffle();
         return deck.take(num);

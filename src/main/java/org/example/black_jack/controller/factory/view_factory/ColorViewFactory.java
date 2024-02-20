@@ -69,6 +69,11 @@ public class ColorViewFactory extends AbstractViewFactory {
     }
 
     @Override
+    public View infoHelp() {
+        return null;//TODO
+    }
+
+    @Override
     public View playerData(List<PlayerData> data) {
         return new ColorTextPdataView(data, printer, textCardMapper);
     }

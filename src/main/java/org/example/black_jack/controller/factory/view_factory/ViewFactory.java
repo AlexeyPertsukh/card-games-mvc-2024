@@ -16,6 +16,7 @@ public interface ViewFactory {
     View infoDealerShowCards();
     View infoBotCmdInput(String name, String keyTake, String keySkip);
     View infoGameResult();
+    View infoHelp();
 
 
     View playerData(List<PlayerData> data);
