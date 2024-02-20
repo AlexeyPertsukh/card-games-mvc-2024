@@ -5,4 +5,6 @@ import java.util.function.Supplier;
 public interface Bet extends Supplier<Object> {
     @Override
     Object get();
+
+    String getDescription();
 }

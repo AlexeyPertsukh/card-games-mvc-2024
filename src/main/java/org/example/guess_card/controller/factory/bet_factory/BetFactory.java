@@ -3,6 +3,7 @@ package org.example.guess_card.controller.factory.bet_factory;
 import org.example.common.model.card.CardSuit;
 import org.example.guess_card.model.bet.Bet;
 import org.example.guess_card.model.bet.ColorBet;
+import org.example.guess_card.model.bet.PictureBet;
 
 import java.util.function.Function;
 
@@ -15,19 +16,7 @@ public class BetFactory implements Function<String, Bet> {
         }
 
         Key key = getBy(s);
-        if (isColor(key)) {
-            CardSuit.Color color = color(key);
-            return new ColorBet(color);
-        }
-        throw new IllegalArgumentException("illegal key string: " + s);
-    }
-
-    private CardSuit.Color color(Key key) {
-        switch (key) {
-            case COLOR_RED: return CardSuit.Color.RED;
-            case COLOR_BLACK: return CardSuit.Color.BLACK;
-            default: throw new IllegalArgumentException("illegal key color: " + key);
-        }
+        return key.getBet();
     }
 
     public boolean contains(String s) {
@@ -49,24 +38,28 @@ public class BetFactory implements Function<String, Bet> {
         throw new IllegalArgumentException("illegal key string: " + s);
     }
 
-    private boolean isColor(Key key) {
-        return key == Key.COLOR_BLACK || key == Key.COLOR_RED;
-    }
-
 
     public enum Key {
-        COLOR_RED("r"),
-        COLOR_BLACK("b"),
+        COLOR_RED("r", new ColorBet(CardSuit.Color.RED, "red color")),
+        COLOR_BLACK("b", new ColorBet(CardSuit.Color.BLACK,"black color")),
+        PICTURE("p", new PictureBet("picture")),
+        JOKER("j", new PictureBet("joker")),
         ;
         private final String text;
+        private final Bet bet;
 
-        Key(String text) {
+        Key(String text, Bet bet) {
             this.text = text;
+            this.bet = bet;
         }
 
         public String getText() {
             return text;
         }
 
+        public Bet getBet() {
+            return bet;
+        }
     }
+
 }
