@@ -11,7 +11,7 @@ import org.example.black_jack.model.game.GameAmerican;
 import org.example.black_jack.model.BjPointCounter;
 import org.example.black_jack.model.Rules;
 import org.example.common.model.deck.Deck;
-import org.example.common.model.deck_factory.DeckFactory54Card;
+import org.example.common.model.deck_factory.DeckFactory52Card;
 import org.example.common.model.player.Player;
 import org.example.common.model.player.bot.Ai;
 import org.example.common.model.player.bot.Bot;
@@ -56,7 +56,7 @@ public class MainMasterConfig {
         Reader reader = new KeyboardReader();
 
         PointCounter counter = new BjPointCounter();
-        Deck deck = (new DeckFactory54Card()).get();
+        Deck deck = (new DeckFactory52Card()).get();
 
         GameController controller;
         if (isManual(args)) {

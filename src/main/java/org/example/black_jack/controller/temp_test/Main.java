@@ -10,7 +10,7 @@ import org.example.black_jack.model.game.GameAmerican;
 import org.example.black_jack.model.BjPointCounter;
 import org.example.black_jack.model.Rules;
 import org.example.common.model.deck.Deck;
-import org.example.common.model.deck_factory.DeckFactory54Card;
+import org.example.common.model.deck_factory.DeckFactory52Card;
 import org.example.common.model.player.Player;
 import org.example.common.model.player.bot.Dealer;
 import org.example.common.model.point_counter.PointCounter;
@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
         Rules rules = new Rules();
         PointCounter counter = new BjPointCounter();
-        Deck deck = (new DeckFactory54Card()).get();
+        Deck deck = (new DeckFactory52Card()).get();
         deck.shuffle();
         Dealer dealer = new Dealer("Dealer",counter);
         Player first = new Player("First");

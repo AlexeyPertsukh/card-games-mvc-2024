@@ -50,10 +50,10 @@ public class BetFactory implements Function<String, Bet> {
 
 
     public enum Key {
-        COLOR_RED("r", new ColorBet(CardSuit.Color.RED, "red color")),
-        COLOR_BLACK("b", new ColorBet(CardSuit.Color.BLACK, "black color")),
-        PICTURE("p", new PictureBet("picture")),
-        JOKER("j", new PictureBet("joker")),
+        COLOR_RED("r", new ColorBet(CardSuit.Color.RED)),
+        COLOR_BLACK("b", new ColorBet(CardSuit.Color.BLACK)),
+        PICTURE("p", new PictureBet()),
+        JOKER("j", new PictureBet()),
         ;
         private final String text;
         private final Bet bet;
