@@ -5,6 +5,8 @@ import org.example.guess_card.model.bet.Bet;
 import org.example.guess_card.model.bet.ColorBet;
 import org.example.guess_card.model.bet.PictureBet;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 public class BetFactory implements Function<String, Bet> {
@@ -17,6 +19,14 @@ public class BetFactory implements Function<String, Bet> {
 
         Key key = getBy(s);
         return key.getBet();
+    }
+
+    public List<String> keys() {
+        List<String> out = new ArrayList<>();
+        for (Key key : Key.values()) {
+            out.add(key.text);
+        }
+        return out;
     }
 
     public boolean contains(String s) {
@@ -41,7 +51,7 @@ public class BetFactory implements Function<String, Bet> {
 
     public enum Key {
         COLOR_RED("r", new ColorBet(CardSuit.Color.RED, "red color")),
-        COLOR_BLACK("b", new ColorBet(CardSuit.Color.BLACK,"black color")),
+        COLOR_BLACK("b", new ColorBet(CardSuit.Color.BLACK, "black color")),
         PICTURE("p", new PictureBet("picture")),
         JOKER("j", new PictureBet("joker")),
         ;
