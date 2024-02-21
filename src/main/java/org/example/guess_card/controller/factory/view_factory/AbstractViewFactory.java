@@ -24,6 +24,7 @@ public abstract class AbstractViewFactory implements ViewFactory {
         strings.add(String.format("%s - black, %d point", BetFactory.Key.COLOR_BLACK.getCommand(), counter.colorPoint()));
         strings.add(String.format("%s - picture, %d points", BetFactory.Key.PICTURE.getCommand(), counter.picturePoint()));
         strings.add(String.format("%s - joker, %d points", BetFactory.Key.JOKER.getCommand(), counter.jokerPoint()));
+        strings.add("Color and picture do not count for joker");
         strings.add("---------");
 
         return strings.toArray(new String[0]);

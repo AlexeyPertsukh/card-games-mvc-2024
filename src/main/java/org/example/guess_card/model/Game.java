@@ -29,7 +29,6 @@ public class Game {
         }
 
         this.deck.shuffle();
-        this.deck.shuffle();
     }
 
     public Player currentPlayer() {

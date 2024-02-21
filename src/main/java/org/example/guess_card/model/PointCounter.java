@@ -38,6 +38,9 @@ public class PointCounter {
     }
 
     private int countColorBet(Card winCard, Bet bet) {
+        if(winCard.getRank()==CardRank.JOKER) {
+            return Point.NONE.value;
+        }
         return winCard.getSuit().getColor() == bet.get() ? Point.COLOR.value : Point.NONE.value;
     }
 
