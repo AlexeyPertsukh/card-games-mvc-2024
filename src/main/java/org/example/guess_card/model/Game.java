@@ -4,10 +4,12 @@ import org.example.common.model.card.Card;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
 import org.example.guess_card.model.bet.Bet;
+import org.example.guess_card.model.rules.Rules;
 
 import java.util.*;
 
 public class Game {
+    private final Rules rules;
     private final Deck deck;
     private final List<Player> players = new ArrayList<>();
     private PlayerIterator iterator;
@@ -15,7 +17,8 @@ public class Game {
     private final PointCounter counter = new PointCounter();
     private final Map<Player, Bet> bets = new HashMap<>();
 
-    public Game(Deck deck, Player... players) {
+    public Game(Rules rules, Deck deck, Player... players) {
+        this.rules = rules;
         this.deck = deck;
         this.players.addAll(List.of(players));
         iterator = new PlayerIterator();
@@ -25,7 +28,6 @@ public class Game {
         }
 
         this.deck.shuffle();
-
     }
 
     public Player currentPlayer() {
@@ -37,6 +39,13 @@ public class Game {
         if (!iterator.hasNext()) {
             iterator = new PlayerIterator();
         }
+    }
+
+    public List<GcStorage.Data> dataValues() {
+        return storage.values();
+    }
+    public GcStorage.Data currentPlayerData() {
+        return storage.get(currentPlayer());
     }
 
     public void addBetCurrentPlayer(Bet bet) {
@@ -52,6 +61,11 @@ public class Game {
         storage.get(player).addPoint(point);
 
         return card;
+    }
+
+    public boolean isCurrentPlayerWin() {
+        int point = storage.get(currentPlayer()).getPoint();
+        return rules.isWin(point);
     }
 
     private class PlayerIterator implements Iterator<Player> {

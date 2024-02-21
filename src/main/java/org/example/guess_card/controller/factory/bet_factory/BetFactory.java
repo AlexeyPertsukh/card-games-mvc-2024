@@ -3,6 +3,7 @@ package org.example.guess_card.controller.factory.bet_factory;
 import org.example.common.model.card.CardSuit;
 import org.example.guess_card.model.bet.Bet;
 import org.example.guess_card.model.bet.ColorBet;
+import org.example.guess_card.model.bet.JokerBet;
 import org.example.guess_card.model.bet.PictureBet;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class BetFactory implements Function<String, Bet> {
         COLOR_RED("r", "red", new ColorBet(CardSuit.Color.RED)),
         COLOR_BLACK("b", "black", new ColorBet(CardSuit.Color.BLACK)),
         PICTURE("p", "picture", new PictureBet()),
-        JOKER("j", "joker", new PictureBet()),
+        JOKER("j", "joker", new JokerBet()),
         ;
         private final String text;
         private final String description;

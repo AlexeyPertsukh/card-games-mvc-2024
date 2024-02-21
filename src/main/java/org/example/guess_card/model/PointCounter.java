@@ -2,6 +2,7 @@ package org.example.guess_card.model;
 
 import org.example.common.model.card.Card;
 import org.example.common.model.card.CardRank;
+import org.example.common.model.card.CardSuit;
 import org.example.guess_card.model.bet.Bet;
 import org.example.guess_card.model.bet.ColorBet;
 import org.example.guess_card.model.bet.JokerBet;

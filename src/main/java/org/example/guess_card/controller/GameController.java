@@ -6,8 +6,11 @@ import org.example.guess_card.controller.factory.bet_factory.BetFactory;
 import org.example.guess_card.controller.factory.dialog_factory.DialogFactory;
 import org.example.guess_card.controller.factory.view_factory.ViewFactory;
 import org.example.guess_card.model.Game;
+import org.example.guess_card.model.GcStorage;
 import org.example.guess_card.model.PointCounter;
 import org.example.guess_card.model.bet.Bet;
+
+import java.util.List;
 
 public class GameController {
     private final Game game;
@@ -25,7 +28,8 @@ public class GameController {
     public void go() {
         viewFactory.tittle().show();
         dialogFactory.dialogStart().input();
-            while (!isEnd()) {
+            while (true) {
+                showDataValues();
                 Player current = game.currentPlayer();
                 String key = dialogFactory.dialogCommand(current.getName()).input();
                 Bet bet = betFactory.apply(key);
@@ -33,16 +37,24 @@ public class GameController {
                 Card card = game.currentPlayerTakeCard();
                 viewFactory.card(card).show();
 
+                if(game.isCurrentPlayerWin()) {
+                    GcStorage.Data data = game.currentPlayerData();
+
+                    showDataValues();
+                    viewFactory.win(data).show();
+                    break;
+                }
 
                 game.switchPlayer();
             }
     }
 
-    private boolean isEnd() {
-        return false;
-    }
-
     private void showHelp() {
 
+    }
+
+    private void showDataValues() {
+        List<GcStorage.Data> list = game.dataValues();
+        viewFactory.data(list).show();
     }
 }

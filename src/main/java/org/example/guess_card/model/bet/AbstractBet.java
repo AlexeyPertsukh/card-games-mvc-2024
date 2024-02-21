@@ -9,6 +9,6 @@ public abstract class AbstractBet<T> implements Bet{
 
     @Override
     public T get() {
-        return null;
+        return value;
     }
 }

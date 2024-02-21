@@ -7,11 +7,7 @@ public abstract class AbstractViewFactory implements ViewFactory{
             "*******************",
     };
 
-    protected static final String[] MESSAGE_GAME_RESULT = {
-            "=================",
-            "#  GAME RESULT  #",
-            "=================",
-    };
-
+    protected static final String WIN_TEMPLATE = "WON: %s, points: %d  ";
     protected static final String END_MESSAGE = "END GAME";
+
 }
