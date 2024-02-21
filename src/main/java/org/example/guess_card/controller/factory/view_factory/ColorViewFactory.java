@@ -14,15 +14,19 @@ import org.example.common.view.views.View;
 import org.example.common.view.views.deck_view.ColorPicDeckView;
 import org.example.common.view.views.deck_view.PicDeckView;
 import org.example.guess_card.model.GcStorage;
+import org.example.guess_card.model.PointCounter;
+import org.example.guess_card.model.rules.Rules;
+import org.example.guess_card.view.data_values_view.ColorTextDataView;
 import org.example.guess_card.view.data_values_view.TextDataView;
 
 import java.util.List;
 import java.util.function.Function;
 
 public class ColorViewFactory extends AbstractViewFactory{
-    private final static ColorPrinter.Color COLOR_TITTLE = ColorPrinter.Color.BLUE;
-    private final static ColorPrinter.Color COLOR_END = ColorPrinter.Color.PURPLE;
-    private final static ColorPrinter.Color COLOR_WIN = ColorPrinter.Color.BLUE;
+    private final static ColorPrinter.Color COLOR_TITTLE = ColorPrinter.Color.YELLOW;
+    private final static ColorPrinter.Color COLOR_DATA = ColorPrinter.Color.BLUE;
+    private final static ColorPrinter.Color COLOR_WIN = ColorPrinter.Color.PURPLE;
+    private final static ColorPrinter.Color COLOR_HELP = COLOR_TITTLE;
     private final ColorPrinter colorPrinter = new ColorConsolePrinter();
     private final Function<Card, Pic> picCardMapper;
 
@@ -36,8 +40,9 @@ public class ColorViewFactory extends AbstractViewFactory{
     }
 
     @Override
-    public View help() {
-        return null;//TODO
+    public View help(Rules rules, PointCounter counter) {
+        String[] strings = textHelp(rules, counter);
+        return new ColorMemoInfoView(strings, colorPrinter, COLOR_HELP);
     }
 
     @Override
@@ -47,14 +52,14 @@ public class ColorViewFactory extends AbstractViewFactory{
 
     @Override
     public View data(List<GcStorage.Data> value) {
-        return new TextDataView(value, colorPrinter);
+        return new ColorTextDataView(value, colorPrinter, COLOR_DATA);
     }
 
     @Override
     public View win(GcStorage.Data data) {
         String name = data.getPlayer().getName();
         int point = data.getPoint();
-        String text = String.format(WIN_TEMPLATE, name, point);
+        String text = String.format(WIN_TEMPLATE, name, point).toUpperCase();
         return new ColorInfoView(text, colorPrinter, COLOR_WIN);
     }
 }

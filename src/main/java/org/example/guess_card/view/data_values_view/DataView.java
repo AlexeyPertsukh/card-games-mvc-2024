@@ -7,6 +7,7 @@ import org.example.guess_card.model.GcStorage;
 import java.util.List;
 
 public abstract class DataView extends AbstractView<List<GcStorage.Data>> {
+    protected static final String TEMPLATE = "%-20s:   %d points";
     public DataView(List<GcStorage.Data> value, Printer printer) {
         super(value, printer);
     }

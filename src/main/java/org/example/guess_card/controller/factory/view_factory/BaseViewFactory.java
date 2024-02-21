@@ -9,6 +9,8 @@ import org.example.common.view.printer.Printer;
 import org.example.common.view.views.View;
 import org.example.common.view.views.deck_view.PicDeckView;
 import org.example.guess_card.model.GcStorage;
+import org.example.guess_card.model.PointCounter;
+import org.example.guess_card.model.rules.Rules;
 import org.example.guess_card.view.data_values_view.TextDataView;
 
 import java.util.List;
@@ -28,8 +30,9 @@ public class BaseViewFactory extends AbstractViewFactory{
     }
 
     @Override
-    public View help() {
-        return null;//TODO
+    public View help(Rules rules, PointCounter counter) {
+        String[] strings = textHelp(rules, counter);
+        return new MemoInfoView(strings, printer);
     }
 
     @Override
@@ -45,7 +48,7 @@ public class BaseViewFactory extends AbstractViewFactory{
     public View win(GcStorage.Data data) {
         String name = data.getPlayer().getName();
         int point = data.getPoint();
-        String text = String.format(WIN_TEMPLATE, name, point);
+        String text = String.format(WIN_TEMPLATE, name, point).toUpperCase();
         return new InfoView(text, printer);
     }
 }

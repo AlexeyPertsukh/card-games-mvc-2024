@@ -17,13 +17,13 @@ public class BaseDialogFactory extends AbstractDialogFactory {
 
     @Override
     public DialogView<String> dialogStart() {
-        String tittle = String.format(START_DIALOG_TEMPLATE, HELP_KEY, DEFAULT_CONTINUE_KEY);
-        return dialogInput(tittle, HELP_KEY, DEFAULT_CONTINUE_KEY);
+        String tittle = String.format(BASIC_PRESS_TO_CONTINUE_TEMPLATE, DEFAULT_CONTINUE_KEY);
+        return dialogInput(tittle, DEFAULT_CONTINUE_KEY);
     }
 
     @Override
     public DialogView<String> dialogCommand(String name) {
-        String tittle = String.format(INPUT_COMMAND_TEMPLATE, name) + descriptionCommand() + " : ";
+        String tittle = String.format(INPUT_BET_TEMPLATE, name);
         String[] keysCommand = keysCommand();
         return dialogInput(tittle, keysCommand);
     }
@@ -35,17 +35,6 @@ public class BaseDialogFactory extends AbstractDialogFactory {
             list.add(key.getText());
         }
         return list.toArray(new String[0]);
-    }
-
-    private String descriptionCommand() {
-        BetFactory.Key[] keys = BetFactory.Key.values();
-        StringBuilder sb = new StringBuilder();
-        for (BetFactory.Key key : keys) {
-            String s = String.format("%s - %s, ", key.getText(), key.getDescription());
-            sb.append(s);
-        }
-        sb.delete(sb.length() - 2, sb.length());
-        return sb.toString();
     }
 
     public DialogView<String> dialogInput(String tittle, String... keys) {

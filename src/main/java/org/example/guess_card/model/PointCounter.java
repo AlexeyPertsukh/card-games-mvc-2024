@@ -57,6 +57,18 @@ public class PointCounter {
         }
     }
 
+    public int colorPoint() {
+        return Point.COLOR.value;
+    }
+
+    public int picturePoint() {
+        return Point.PICTURE.value;
+    }
+
+    public int jokerPoint() {
+        return Point.JOKER.value;
+    }
+
     private enum Point {
         NONE(0),
         COLOR(1),

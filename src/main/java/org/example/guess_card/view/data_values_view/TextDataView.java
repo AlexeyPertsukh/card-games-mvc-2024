@@ -12,11 +12,10 @@ public class TextDataView extends DataView {
 
     @Override
     public void show() {
-        String template = "%-20s:   %d POINTS";
         for (GcStorage.Data data : value) {
             String name = data.getPlayer().getName();
             int point = data.getPoint();
-            String text = String.format(template, name, point);
+            String text = String.format(TEMPLATE, name, point);
             printer.output(text);
         }
     }

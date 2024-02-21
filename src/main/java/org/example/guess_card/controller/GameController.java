@@ -9,15 +9,16 @@ import org.example.guess_card.model.Game;
 import org.example.guess_card.model.GcStorage;
 import org.example.guess_card.model.PointCounter;
 import org.example.guess_card.model.bet.Bet;
+import org.example.guess_card.model.rules.Rules;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GameController {
     private final Game game;
     private final ViewFactory viewFactory;
     private final DialogFactory dialogFactory;
     private final BetFactory betFactory = new BetFactory();
-    private final PointCounter counter = new PointCounter();
 
     public GameController(Game game, ViewFactory viewFactory, DialogFactory dialogFactory) {
         this.game = game;
@@ -26,27 +27,34 @@ public class GameController {
     }
 
     public void go() {
+        Rules rules = game.getRules();
+        PointCounter counter = game.getCounter();
+
         viewFactory.tittle().show();
-        dialogFactory.dialogStart().input();
-            while (true) {
+        viewFactory.help(rules, counter).show();
+
+         dialogFactory.dialogStart().input();
+
+
+        while (true) {
+            showDataValues();
+            Player current = game.currentPlayer();
+            String key = dialogFactory.dialogCommand(current.getName()).input();
+            Bet bet = betFactory.apply(key);
+            game.addBetCurrentPlayer(bet);
+            Card card = game.currentPlayerTakeCard();
+            viewFactory.card(card).show();
+
+            if (game.isCurrentPlayerWin()) {
+                GcStorage.Data data = game.currentPlayerData();
+
                 showDataValues();
-                Player current = game.currentPlayer();
-                String key = dialogFactory.dialogCommand(current.getName()).input();
-                Bet bet = betFactory.apply(key);
-                game.addBetCurrentPlayer(bet);
-                Card card = game.currentPlayerTakeCard();
-                viewFactory.card(card).show();
-
-                if(game.isCurrentPlayerWin()) {
-                    GcStorage.Data data = game.currentPlayerData();
-
-                    showDataValues();
-                    viewFactory.win(data).show();
-                    break;
-                }
-
-                game.switchPlayer();
+                viewFactory.win(data).show();
+                break;
             }
+
+            game.switchPlayer();
+        }
     }
 
     private void showHelp() {

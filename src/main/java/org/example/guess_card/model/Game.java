@@ -68,6 +68,14 @@ public class Game {
         return rules.isWin(point);
     }
 
+    public Rules getRules() {
+        return rules;
+    }
+
+    public PointCounter getCounter() {
+        return counter;
+    }
+
     private class PlayerIterator implements Iterator<Player> {
         private int index;
 
