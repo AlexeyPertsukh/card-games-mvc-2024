@@ -5,6 +5,7 @@ import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
 import org.example.guess_card.model.bet.Bet;
 import org.example.guess_card.model.rules.Rules;
+import org.example.guess_card.model.storage.GcStorage;
 
 import java.util.*;
 
@@ -27,6 +28,7 @@ public class Game {
             storage.put(player);
         }
 
+        this.deck.shuffle();
         this.deck.shuffle();
     }
 

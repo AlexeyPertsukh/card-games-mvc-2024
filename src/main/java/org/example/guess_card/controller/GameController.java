@@ -6,13 +6,12 @@ import org.example.guess_card.controller.factory.bet_factory.BetFactory;
 import org.example.guess_card.controller.factory.dialog_factory.DialogFactory;
 import org.example.guess_card.controller.factory.view_factory.ViewFactory;
 import org.example.guess_card.model.Game;
-import org.example.guess_card.model.GcStorage;
+import org.example.guess_card.model.storage.GcStorage;
 import org.example.guess_card.model.PointCounter;
 import org.example.guess_card.model.bet.Bet;
 import org.example.guess_card.model.rules.Rules;
 
 import java.util.List;
-import java.util.Objects;
 
 public class GameController {
     private final Game game;

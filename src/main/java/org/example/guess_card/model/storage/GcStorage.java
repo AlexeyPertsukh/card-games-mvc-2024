@@ -1,7 +1,6 @@
-package org.example.guess_card.model;
+package org.example.guess_card.model.storage;
 
 import org.example.common.model.player.Player;
-import org.example.guess_card.model.storage.AbstractStorage;
 
 public class GcStorage extends AbstractStorage<GcStorage.Data> {
     public GcStorage() {

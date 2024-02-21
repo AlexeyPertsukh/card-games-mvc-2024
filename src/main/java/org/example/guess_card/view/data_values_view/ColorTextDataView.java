@@ -1,8 +1,7 @@
 package org.example.guess_card.view.data_values_view;
 
 import org.example.common.view.printer.ColorPrinter;
-import org.example.common.view.printer.Printer;
-import org.example.guess_card.model.GcStorage;
+import org.example.guess_card.model.storage.GcStorage;
 
 import java.util.List;
 

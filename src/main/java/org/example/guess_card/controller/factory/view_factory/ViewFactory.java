@@ -1,10 +1,8 @@
 package org.example.guess_card.controller.factory.view_factory;
 
 import org.example.common.model.card.Card;
-import org.example.common.model.player.Player;
-import org.example.common.view.info_view.InfoView;
 import org.example.common.view.views.View;
-import org.example.guess_card.model.GcStorage;
+import org.example.guess_card.model.storage.GcStorage;
 import org.example.guess_card.model.PointCounter;
 import org.example.guess_card.model.rules.Rules;
 
