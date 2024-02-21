@@ -10,11 +10,11 @@ import org.example.common.view.views.deck_view.PicDeckView;
 
 import java.util.function.Function;
 
-public class BaseViewFactory extends AbstractViewFactory{
+public class ColorViewFactory extends AbstractViewFactory{
     private final Printer printer = new ConsolePrinter();
     private final Function<Card, Pic> picCardMapper;
 
-    public BaseViewFactory(Function<Card, Pic> picCardMapper) {
+    public ColorViewFactory(Function<Card, Pic> picCardMapper) {
         this.picCardMapper = picCardMapper;
     }
 

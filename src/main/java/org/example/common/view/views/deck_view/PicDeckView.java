@@ -1,6 +1,7 @@
 package org.example.common.view.views.deck_view;
 
 import org.example.common.model.card.Card;
+import org.example.common.model.deck.Deck;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.Printer;
 
@@ -9,8 +10,12 @@ import java.util.function.Function;
 
 public class PicDeckView extends DeckView<Pic> {
 
-    public PicDeckView(org.example.common.model.deck.Deck value, Printer printer, Function<Card, Pic> map) {
+    public PicDeckView(Deck value, Printer printer, Function<Card, Pic> map) {
         super(value, printer, map);
+    }
+
+    public PicDeckView(Card card, Printer printer, Function<Card, Pic> map) {
+        super(new Deck(card), printer, map);
     }
 
     @Override

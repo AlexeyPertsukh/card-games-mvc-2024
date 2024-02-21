@@ -13,6 +13,10 @@ public class Deck {
     public Deck() {
     }
 
+    public Deck(Card card) {
+        this.decks.add(card);
+    }
+
     public Deck(List<Card> decks) {
         this.decks.addAll(decks);
     }
