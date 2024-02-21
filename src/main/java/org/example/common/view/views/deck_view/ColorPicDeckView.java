@@ -2,6 +2,7 @@ package org.example.common.view.views.deck_view;
 
 import org.example.common.model.card.CardSuit;
 import org.example.common.model.card.Card;
+import org.example.common.model.deck.Deck;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.ColorPrinter;
 import org.example.common.view.views.color_mapper.SuitToPrintColorMapper;
@@ -14,8 +15,13 @@ public class ColorPicDeckView extends PicDeckView {
     private final ColorPrinter colorPrinter;
     private final Function<CardSuit.Color, ColorPrinter.Color> colorMapper = new SuitToPrintColorMapper();
 
-    public ColorPicDeckView(org.example.common.model.deck.Deck value, ColorPrinter colorPrinter, Function<Card, Pic> map) {
+    public ColorPicDeckView(Deck value, ColorPrinter colorPrinter, Function<Card, Pic> map) {
         super(value, colorPrinter, map);
+        this.colorPrinter = colorPrinter;
+    }
+
+    public ColorPicDeckView(Card card, ColorPrinter colorPrinter, Function<Card, Pic> map) {
+        super(card, colorPrinter, map);
         this.colorPrinter = colorPrinter;
     }
 
