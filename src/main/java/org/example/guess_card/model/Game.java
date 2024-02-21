@@ -54,7 +54,7 @@ public class Game {
         bets.put(currentPlayer(), bet);
     }
 
-    public Card currentPlayerTakeCard() {
+    public TakeCardResult currentPlayerTakeCard() {
         Player player = currentPlayer();
         Card card = deck.take();
         card.open();
@@ -62,7 +62,7 @@ public class Game {
         int point = counter.count(card, bet);
         storage.get(player).addPoint(point);
 
-        return card;
+        return new TakeCardResult(card, point);
     }
 
     public boolean isCurrentPlayerWin() {
@@ -94,6 +94,15 @@ public class Game {
         public Player current() {
             return players.get(index);
         }
+    }
 
+    public static class TakeCardResult {
+        public final Card card;
+        public final int addPoint;
+
+        public TakeCardResult(Card card, int addPoint) {
+            this.card = card;
+            this.addPoint = addPoint;
+        }
     }
 }

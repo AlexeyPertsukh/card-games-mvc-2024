@@ -51,4 +51,10 @@ public class BaseViewFactory extends AbstractViewFactory{
         String text = String.format(WIN_TEMPLATE, name, point).toUpperCase();
         return new InfoView(text, printer);
     }
+
+    @Override
+    public View takeResult(int addPoint) {
+        String text = String.format(RESULT_TEMPLATE, addPoint);
+        return new InfoView(text, printer);
+    }
 }

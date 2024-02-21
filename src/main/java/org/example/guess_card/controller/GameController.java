@@ -41,8 +41,9 @@ public class GameController {
             String key = dialogFactory.dialogCommand(current.getName()).input();
             Bet bet = betFactory.apply(key);
             game.addBetCurrentPlayer(bet);
-            Card card = game.currentPlayerTakeCard();
-            viewFactory.card(card).show();
+            Game.TakeCardResult result = game.currentPlayerTakeCard();
+            viewFactory.card(result.card).show();
+            viewFactory.takeResult(result.addPoint).show();
 
             if (game.isCurrentPlayerWin()) {
                 GcStorage.Data data = game.currentPlayerData();

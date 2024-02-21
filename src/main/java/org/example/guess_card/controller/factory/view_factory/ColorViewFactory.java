@@ -3,6 +3,7 @@ package org.example.guess_card.controller.factory.view_factory;
 import org.example.common.model.card.Card;
 import org.example.common.view.info_view.ColorInfoView;
 import org.example.common.view.info_view.ColorMemoInfoView;
+import org.example.common.view.info_view.InfoView;
 import org.example.common.view.pic.Pic;
 import org.example.common.view.printer.ColorConsolePrinter;
 import org.example.common.view.printer.ColorPrinter;
@@ -21,6 +22,7 @@ public class ColorViewFactory extends AbstractViewFactory{
     private final static ColorPrinter.Color COLOR_DATA = ColorPrinter.Color.BLUE;
     private final static ColorPrinter.Color COLOR_WIN = ColorPrinter.Color.PURPLE;
     private final static ColorPrinter.Color COLOR_HELP = COLOR_TITTLE;
+    private final static ColorPrinter.Color COLOR_RESULT = ColorPrinter.Color.DEFAULT;
     private final ColorPrinter colorPrinter = new ColorConsolePrinter();
     private final Function<Card, Pic> picCardMapper;
 
@@ -55,5 +57,11 @@ public class ColorViewFactory extends AbstractViewFactory{
         int point = data.getPoint();
         String text = String.format(WIN_TEMPLATE, name, point).toUpperCase();
         return new ColorInfoView(text, colorPrinter, COLOR_WIN);
+    }
+
+    @Override
+    public View takeResult(int addPoint) {
+        String text = String.format(RESULT_TEMPLATE, addPoint);
+        return new ColorInfoView(text, colorPrinter, COLOR_RESULT);
     }
 }

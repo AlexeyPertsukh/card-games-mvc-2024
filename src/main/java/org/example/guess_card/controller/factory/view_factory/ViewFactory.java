@@ -14,4 +14,5 @@ public interface ViewFactory {
     View card(Card card);
     View data(List<GcStorage.Data> value);
     View win(GcStorage.Data data);
+    View takeResult(int addPoint);
 }

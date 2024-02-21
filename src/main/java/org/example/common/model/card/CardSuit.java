@@ -7,8 +7,8 @@ public enum CardSuit {
     NONE_RED("R", RED),
     NONE_BLACK("B", BLACK),
     DIAMOND("♦", RED),
-    HEART("♥", RED),
     CLUB("♣", BLACK),
+    HEART("♥", RED),
     SPADE("♠", BLACK);
     private final String icon;
     private final Color color;
