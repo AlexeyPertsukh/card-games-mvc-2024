@@ -25,7 +25,7 @@ public class BetFactory implements Function<String, Bet> {
     public List<String> keys() {
         List<String> out = new ArrayList<>();
         for (Key key : Key.values()) {
-            out.add(key.text);
+            out.add(key.command);
         }
         return out;
     }
@@ -42,7 +42,7 @@ public class BetFactory implements Function<String, Bet> {
 
     private Key getBy(String s) {
         for (Key key : Key.values()) {
-            if (key.text.equalsIgnoreCase(s)) {
+            if (key.command.equalsIgnoreCase(s)) {
                 return key;
             }
         }
@@ -56,18 +56,18 @@ public class BetFactory implements Function<String, Bet> {
         PICTURE("p", "picture", new PictureBet()),
         JOKER("j", "joker", new JokerBet()),
         ;
-        private final String text;
+        private final String command;
         private final String description;
         private final Bet bet;
 
-        Key(String text, String description, Bet bet) {
-            this.text = text;
+        Key(String command, String description, Bet bet) {
+            this.command = command;
             this.description = description;
             this.bet = bet;
         }
 
-        public String getText() {
-            return text;
+        public String getCommand() {
+            return command;
         }
 
         public String getDescription() {

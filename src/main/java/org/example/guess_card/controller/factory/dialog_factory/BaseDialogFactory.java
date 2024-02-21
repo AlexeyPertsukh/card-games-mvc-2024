@@ -32,7 +32,7 @@ public class BaseDialogFactory extends AbstractDialogFactory {
         List<String> list = new ArrayList<>();
         BetFactory.Key[] keys = BetFactory.Key.values();
         for (BetFactory.Key key : keys) {
-            list.add(key.getText());
+            list.add(key.getCommand());
         }
         return list.toArray(new String[0]);
     }
