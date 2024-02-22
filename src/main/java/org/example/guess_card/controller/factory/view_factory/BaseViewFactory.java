@@ -1,6 +1,7 @@
 package org.example.guess_card.controller.factory.view_factory;
 
 import org.example.common.model.card.Card;
+import org.example.common.view.info_view.ColorInfoView;
 import org.example.common.view.info_view.InfoView;
 import org.example.common.view.info_view.MemoInfoView;
 import org.example.common.view.pic.Pic;
@@ -55,6 +56,12 @@ public class BaseViewFactory extends AbstractViewFactory{
     @Override
     public View takeResult(int addPoint) {
         String text = String.format(RESULT_TEMPLATE, addPoint);
+        return new InfoView(text, printer);
+    }
+
+    @Override
+    public View takeResultPointReset(int addPoint) {
+        String text = String.format(RESULT_POINT_BURN_TEMPLATE, addPoint);
         return new InfoView(text, printer);
     }
 }

@@ -64,4 +64,10 @@ public class ColorViewFactory extends AbstractViewFactory{
         String text = String.format(RESULT_TEMPLATE, addPoint);
         return new ColorInfoView(text, colorPrinter, COLOR_RESULT);
     }
+
+    @Override
+    public View takeResultPointReset(int addPoint) {
+        String text = String.format(RESULT_POINT_BURN_TEMPLATE, addPoint);
+        return new ColorInfoView(text, colorPrinter, COLOR_RESULT);
+    }
 }

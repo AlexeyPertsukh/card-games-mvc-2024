@@ -34,5 +34,6 @@ public abstract class AbstractViewFactory implements ViewFactory {
 
     protected static final String WIN_TEMPLATE = "WON: %s, points: %d  ";
     protected static final String RESULT_TEMPLATE = "add point: %d%n";
+    protected static final String RESULT_POINT_BURN_TEMPLATE = "all points burned out, add point: %d%n";
 
 }

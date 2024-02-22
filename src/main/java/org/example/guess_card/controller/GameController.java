@@ -1,6 +1,5 @@
 package org.example.guess_card.controller;
 
-import org.example.common.model.card.Card;
 import org.example.common.model.player.Player;
 import org.example.guess_card.controller.factory.bet_factory.BetFactory;
 import org.example.guess_card.controller.factory.dialog_factory.DialogFactory;
@@ -32,7 +31,7 @@ public class GameController {
         viewFactory.tittle().show();
         viewFactory.help(rules, counter).show();
 
-         dialogFactory.dialogStart().input();
+        dialogFactory.dialogStart().input();
 
 
         while (true) {
@@ -43,7 +42,12 @@ public class GameController {
             game.addBetCurrentPlayer(bet);
             Game.TakeCardResult result = game.currentPlayerTakeCard();
             viewFactory.card(result.card).show();
-            viewFactory.takeResult(result.addPoint).show();
+            int point = result.addPoint;
+            if (point < 0) {
+                viewFactory.takeResultPointReset(point).show();
+            } else {
+                viewFactory.takeResult(point).show();
+            }
 
             if (game.isCurrentPlayerWin()) {
                 GcStorage.Data data = game.currentPlayerData();

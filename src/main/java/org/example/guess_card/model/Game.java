@@ -31,6 +31,10 @@ public class Game {
         }
 
         this.deck.shuffle();
+//        deck.add(new Card(CardRank.JOKER, CardSuit.NONE_BLACK));
+//        deck.add(new Card(CardRank.JACK, CardSuit.DIAMOND));
+//        deck.add(new Card(CardRank.JACK, CardSuit.DIAMOND));
+//        deck.add(new Card(CardRank.JACK, CardSuit.DIAMOND));
     }
 
     public Player currentPlayer() {

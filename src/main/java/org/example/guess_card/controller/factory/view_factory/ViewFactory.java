@@ -15,4 +15,5 @@ public interface ViewFactory {
     View data(List<GcStorage.Data> value);
     View win(GcStorage.Data data);
     View takeResult(int addPoint);
+    View takeResultPointReset(int addPoint);
 }
