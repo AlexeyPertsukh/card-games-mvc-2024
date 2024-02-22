@@ -1,6 +1,8 @@
 package org.example.guess_card.model;
 
 import org.example.common.model.card.Card;
+import org.example.common.model.card.CardRank;
+import org.example.common.model.card.CardSuit;
 import org.example.common.model.deck.Deck;
 import org.example.common.model.player.Player;
 import org.example.guess_card.model.bet.Bet;
@@ -58,7 +60,8 @@ public class Game {
         Card card = deck.take();
         card.open();
         Bet bet = bets.get(player);
-        int point = counter.count(card, bet);
+        PointCounter.PointCounterResult result = counter.count(card, bet);
+        int point = result.isReset() ? -storage.get(currentPlayer()).getPoint() : result.point();
         storage.get(player).addPoint(point);
 
         return new TakeCardResult(card, point);
